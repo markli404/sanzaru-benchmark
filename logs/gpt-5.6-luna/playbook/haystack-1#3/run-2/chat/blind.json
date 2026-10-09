@@ -1,0 +1,70 @@
+{
+  "role": "blind",
+  "system": "# LLM-BANANA\n\n# Game rules\n\n## The room\n\nYou and two other monkeys are locked in a room with one armed bomb.\n\nA wrong action detonates it. All three of you die. There is no second attempt.\n\nNo two bombs are built alike, and nothing says in advance what this one carries. It\nreaches you only as your own view reveals it; the rest of it exists for you only\nthrough the other two.\n\nYou each hold a different piece of what it takes. Work together.\n\n## The three monkeys\n\n| Monkey | Can | Cannot |\n|---|---|---|\n| Deaf | See the bomb: every colour and marking printed on it | Hear anything, or touch the bomb |\n| Mute | Read the manual | Speak, or touch the bomb |\n| Blind | Reach the bomb: feel it and work its parts | See a colour, a gesture, or anything merely printed |\n\nYou are shown your own share at the start of every round, and never anyone else's.\n\n## Speech\n\nSpeech is a voice, not a screen. It carries words, numbers and ordinary punctuation,\nand nothing else. Writing a gesture symbol into your sentence means you make that\ngesture while you talk. Whoever can hear receives your words; whoever can see receives\nthe gestures you made. A listener who cannot see gets a blank where each gesture was; a\nwatcher who cannot hear gets the gestures and none of the words.\n\nA mark that has no name cannot be pronounced: whoever holds one can describe it, never\nread it out.\n\n## Gestures\n\nA gesture is made with the hands, using only the symbols in the alphabet below.\nWhoever can see receives it; whoever cannot receives one blank per symbol, so they\nknow something was signalled but not what. Nothing gestured is ever heard.\n\n👍 👎 👌 ☝ ✌ 🤟 🖐 ✋ 👆 👇 👈 👉 🫱 🫲 🫳 🫴 🫷 🫸 🤛 🤜 ✊ 👊 👋 🤚 🖖 🤌 🤏 🤞 🫰 🤘 🤙 👏 🙌 🫶 👐 🤲 🤝 🙏 🫵 ✍ 💅 🤳\n\n## Turns\n\nThe speaking order was drawn once at random and will never change: every round goes\nMute, Blind, Deaf. Whoever comes before you in a round is already heard by the time you are\nasked, and what you send lands on whoever comes after you in that same round. Whatever\nyou missed reaches you at the start of the next one.\n\nYou may name who a message is for — `to=\"deaf\"` — and then it goes to them alone:\nnobody else receives any of it. Left unnamed, it reaches everyone able to perceive it.\nYou may send several messages in one turn, each to someone different.\n\n## Calls\n\nEvery reply has two parts, in this order. First, your thinking, in plain prose: what\nyou believe the bomb is, what you just learned, and why you are sending what follows.\nIt reaches nobody and changes nothing, but it is not optional — a reply that is only a\ncode block is incomplete. Then your calls, all of them in one fenced code block, last.\nOnly what is inside the block is sent.\n\nNothing is executed: calls return nothing, and variables, conditionals and loops are\nignored. Write only literal top-level calls.\n\n    ```\n    speak(to=\"mute\", text=\"there are three of them and the middle one is odd\")\n    gesture(to=\"deaf\", symbols=[\"✊\", \"✌\"])\n    wait()\n    ```\n\nIf you have nothing worth sending, call wait(). Producing no call at all counts as the\nsame thing.\n\nThe program decides what happened, not you. Never claim an action took place unless it\nwas accepted.\n\n# Your role: BLIND\n\nYou are the only one who can reach the bomb. Touch is your only sense: what you are\nshown is what your hands found, nothing more and nothing less. Anything merely printed\nor painted is not there for you, and no colour ever reaches you. Nothing in your view\nis a guess — if it appears there, it is under your fingers.\n\n## Your channels\n\nWhen you speak, Mute receives it.\nWhen you gesture, Deaf and Mute receive it.\nYour channels split the room: in one turn you may speak one thing to Mute and\ngesture a different thing to Deaf — two messages, two audiences.\nYou never receive gesture.\n\n## Your reach\n\nYou are the hands. This bomb is built with these actions and no others:\n\n    act(op=\"press\", slot=N) — N is a key by its place, 1 to 4\n    act(op=\"cut\", position=N) — N is a wire position, 1 to 6\n\nThe list says what can be done to it, not what is on it. What each part holds is still\nonly known to whoever can perceive that part.\n\n# Hints\n\n- The routes, by name. Speech reaches Mute and Blind, and never Deaf. Gestures\n  reach Deaf and Mute, and never Blind. Deaf can speak and gesture, Mute can\n  only gesture, Blind can only speak. Check every message against this list\n  before you send it.\n\n- Deaf invents the gesture code out loud before anything else moves, and\n  everyone else's opening move is waiting for it. The manual's verdict reaches\n  Blind only as Deaf's spoken order.\n\n- Whatever the code becomes, it starts by being able to say YES, NO, HOLD and\n  DONE. Grow it only when a message will not fit.",
+  "messages": [
+    {
+      "role": "user",
+      "content": "TURN 1\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nSTRIP engraved [ꓕ] [ꔮ] [ꓕ]\nKEYPAD engraved 1:[2] 2:[9] 3:[0] 4:[8] [1 digits] [entered nothing]\nWIRES 1:[?] 2:[?] 3:[?] 4:[?] 5:[?] 6:[?]\n\nVIEWABLE CONTEXT (new arrivals):\n(empty)"
+    },
+    {
+      "role": "assistant",
+      "content": "The bomb’s tactile details are present, but the protocol requires Deaf to establish the gesture code first, and everyone else’s opening move is waiting. I should not act on any control yet.\n\n``` \nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 2\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nSTRIP engraved [ꓕ] [ꔮ] [ꓕ]\nKEYPAD engraved 1:[2] 2:[9] 3:[0] 4:[8] [1 digits] [entered nothing]\nWIRES 1:[?] 2:[?] 3:[?] 4:[?] 5:[?] 6:[?]\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Blind: Gesture code: thumbs up means YES; thumbs down means NO; raised palm means HOLD; OK sign means DONE. Wait for my spoken relay after Mute reads the manual.\nDeaf says to Blind: The first gesture just sent to Mute is YES.\nDeaf says to Blind: The second gesture just sent to Mute is NO.\nDeaf says to Blind: The third gesture just sent to Mute is HOLD.\nDeaf says to Blind: The fourth gesture just sent to Mute is DONE."
+    },
+    {
+      "role": "assistant",
+      "content": "The gesture code is now established: 👍 YES, 👎 NO, 🖐 HOLD, 👌 DONE. The manual’s verdict has not yet been relayed to me, so I must hold and avoid touching any control.\n\n``` \nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 3\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nSTRIP engraved [ꓕ] [ꔮ] [ꓕ]\nKEYPAD engraved 1:[2] 2:[9] 3:[0] 4:[8] [1 digits] [entered nothing]\nWIRES 1:[?] 2:[?] 3:[?] 4:[?] 5:[?] 6:[?]\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Blind: The manual's verdict is YES."
+    },
+    {
+      "role": "assistant",
+      "content": "The manual’s verdict is YES, but that only confirms the bomb’s required condition; it does not identify which tactile action to perform. I need Mute to relay the manual’s specific instruction. I will also signal Deaf to hold.\n\n``` \nspeak(to=\"mute\", text=\"Please relay the manual's complete instruction: what must I press, enter, or cut?\")\ngesture(to=\"deaf\", symbols=[\"🖐\"])\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 4\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nSTRIP engraved [ꓕ] [ꔮ] [ꓕ]\nKEYPAD engraved 1:[2] 2:[9] 3:[0] 4:[8] [1 digits] [entered nothing]\nWIRES 1:[?] 2:[?] 3:[?] 4:[?] 5:[?] 6:[?]\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Blind: Mute signals HOLD. Your open-palm signal ? is not assigned in our code; please explain its meaning by speech."
+    },
+    {
+      "role": "assistant",
+      "content": "The open-palm gesture I sent did not match the symbol Deaf assigned to HOLD, and Deaf cannot receive my spoken explanation directly. I should tell Mute what happened and have Mute relay both the intended HOLD and the complete manual instruction using the established gesture.\n\n``` \nspeak(to=\"mute\", text=\"My last gesture was intended to mean HOLD, but Deaf did not recognize that symbol. Please signal Deaf with the exact HOLD symbol you established, and relay the manual's complete instruction to me.\")\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 5\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nSTRIP engraved [ꓕ] [ꔮ] [ꓕ]\nKEYPAD engraved 1:[2] 2:[9] 3:[0] 4:[8] [1 digits] [entered nothing]\nWIRES 1:[?] 2:[?] 3:[?] 4:[?] 5:[?] 6:[?]\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Blind: Mute continues to signal HOLD. Do not act yet."
+    },
+    {
+      "role": "assistant",
+      "content": "Mute is still signaling HOLD, and no actionable manual instruction has reached me. Since acting without the instruction could detonate the bomb, I will not touch it.\n\n``` \nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 6\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nSTRIP engraved [ꓕ] [ꔮ] [ꓕ]\nKEYPAD engraved 1:[2] 2:[9] 3:[0] 4:[8] [1 digits] [entered nothing]\nWIRES 1:[?] 2:[?] 3:[?] 4:[?] 5:[?] 6:[?]\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Blind: Current bomb readings: display 1, light red. Strip is blue-yellow-blue. Keypad digits are 2, 9, 0, 8; no digit entered. Wires 1 blue, 2 white, 3 red, 4 purple, 5 orange, 6 green. Mute still signals HOLD."
+    },
+    {
+      "role": "assistant",
+      "content": "The bomb’s readings are now fully relayed, but Mute still indicates HOLD and has not conveyed the manual’s specific operation. I must not infer an action from the readings or tactile markings. I will ask Mute to have Deaf relay the exact required operation rather than another HOLD status.\n\n``` \nspeak(to=\"mute\", text=\"Please have Deaf relay the manual's exact required operation now, including whether to press a key, enter a digit, or cut a wire. Do not relay only HOLD.\")\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 7\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nSTRIP engraved [ꓕ] [ꔮ] [ꓕ]\nKEYPAD engraved 1:[2] 2:[9] 3:[0] 4:[8] [1 digits] [entered nothing]\nWIRES 1:[?] 2:[?] 3:[?] 4:[?] 5:[?] 6:[?]\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Blind: Mute still signals HOLD. Current readings: display 9, light green; strip blue-yellow-blue; keypad 2, 9, 0, 8 with nothing entered; wires 1 blue, 2 white, 3 red, 4 purple, 5 orange, 6 green. Do not act."
+    },
+    {
+      "role": "assistant",
+      "content": "The readings changed, but Deaf explicitly reports that Mute still signals HOLD and says not to act. No complete operation has been communicated, so I will continue waiting.\n\n``` \nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 8\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nSTRIP engraved [ꓕ] [ꔮ] [ꓕ]\nKEYPAD engraved 1:[2] 2:[9] 3:[0] 4:[8] [1 digits] [entered nothing]\nWIRES 1:[?] 2:[?] 3:[?] 4:[?] 5:[?] 6:[?]\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Blind: Mute now signals YES, followed by the unassigned gesture ?. Do not act until the extra signal is clarified. Current readings: display 6, light blue; strip blue-yellow-blue; keypad 2, 9, 0, 8 with nothing entered; wires 1 blue, 2 white, 3 red, 4 purple, 5 orange, 6 green."
+    },
+    {
+      "role": "assistant",
+      "content": "Mute’s YES confirms the manual’s verdict, but the following unassigned gesture may encode the actual instruction. I cannot see that gesture, so I need Mute to ensure Deaf describes it aloud; Deaf’s speech will reach me. I will not act until that description is available.\n\n``` \nspeak(to=\"mute\", text=\"Please have Deaf describe the extra gesture aloud to me, including its exact meaning and the complete required operation. Do not act yet.\")\n```"
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "role": "mute",
+  "system": "# LLM-BANANA\n\n# Game rules\n\n## The room\n\nYou and two other monkeys are locked in a room with one armed bomb.\n\nA wrong action detonates it. All three of you die. There is no second attempt.\n\nNo two bombs are built alike, and nothing says in advance what this one carries. It\nreaches you only as your own view reveals it; the rest of it exists for you only\nthrough the other two.\n\nYou each hold a different piece of what it takes. Work together.\n\n## The three monkeys\n\n| Monkey | Can | Cannot |\n|---|---|---|\n| Deaf | See the bomb: every colour and marking printed on it | Hear anything, or touch the bomb |\n| Mute | Read the manual | Speak, or touch the bomb |\n| Blind | Reach the bomb: feel it and work its parts | See a colour, a gesture, or anything merely printed |\n\nYou are shown your own share at the start of every round, and never anyone else's.\n\n## Speech\n\nSpeech is a voice, not a screen. It carries words, numbers and ordinary punctuation,\nand nothing else. Writing a gesture symbol into your sentence means you make that\ngesture while you talk. Whoever can hear receives your words; whoever can see receives\nthe gestures you made. A listener who cannot see gets a blank where each gesture was; a\nwatcher who cannot hear gets the gestures and none of the words.\n\nA mark that has no name cannot be pronounced: whoever holds one can describe it, never\nread it out.\n\n## Gestures\n\nA gesture is made with the hands, using only the symbols in the alphabet below.\nWhoever can see receives it; whoever cannot receives one blank per symbol, so they\nknow something was signalled but not what. Nothing gestured is ever heard.\n\n👍 👎 👌 ☝ ✌ 🤟 🖐 ✋ 👆 👇 👈 👉 🫱 🫲 🫳 🫴 🫷 🫸 🤛 🤜 ✊ 👊 👋 🤚 🖖 🤌 🤏 🤞 🫰 🤘 🤙 👏 🙌 🫶 👐 🤲 🤝 🙏 🫵 ✍ 💅 🤳\n\n## Turns\n\nThe speaking order was drawn once at random and will never change: every round goes\nMute, Blind, Deaf. Whoever comes before you in a round is already heard by the time you are\nasked, and what you send lands on whoever comes after you in that same round. Whatever\nyou missed reaches you at the start of the next one.\n\nYou may name who a message is for — `to=\"deaf\"` — and then it goes to them alone:\nnobody else receives any of it. Left unnamed, it reaches everyone able to perceive it.\nYou may send several messages in one turn, each to someone different.\n\n## Calls\n\nEvery reply has two parts, in this order. First, your thinking, in plain prose: what\nyou believe the bomb is, what you just learned, and why you are sending what follows.\nIt reaches nobody and changes nothing, but it is not optional — a reply that is only a\ncode block is incomplete. Then your calls, all of them in one fenced code block, last.\nOnly what is inside the block is sent.\n\nNothing is executed: calls return nothing, and variables, conditionals and loops are\nignored. Write only literal top-level calls.\n\n    ```\n    speak(to=\"mute\", text=\"there are three of them and the middle one is odd\")\n    gesture(to=\"deaf\", symbols=[\"✊\", \"✌\"])\n    wait()\n    ```\n\nIf you have nothing worth sending, call wait(). Producing no call at all counts as the\nsame thing.\n\nThe program decides what happened, not you. Never claim an action took place unless it\nwas accepted.\n\n# Your role: MUTE\n\nYou hold the manual. You cannot speak, you never see the bomb, and you cannot touch it.\n\n## Your channels\n\nWhen you gesture, Deaf receives it.\nYou cannot speak.\n\n## Your reach\n\nYou cannot act. What this bomb can be made to do is for the one who can reach it to\nfind under their own hands.\n\n# Hints\n\n- Three of you, three different worlds. Before sending anything, stand where the\n  receiver stands. What reaches them at all, what does your message turn into on\n  arrival, and what do they already know?\n\n- Trace who can actually reach whom before you start. Some of you only connect\n  through a third.\n\n- A sign means nothing until somebody has made it mean something.",
+  "messages": [
+    {
+      "role": "user",
+      "content": "TURN 1\nDEFUSAL MANUAL:\nCut the yellow wire, then press the key that wears 2,\nthen cut the orange wire, then press the key that wears 7.\nIn that order, and in no other.\n\nVIEWABLE CONTEXT (new arrivals):\n(empty)"
+    },
+    {
+      "role": "assistant",
+      "content": "The manual requires an exact four-step sequence, but I cannot speak or touch the bomb. Deaf can see the wire colours and key markings, so I need to pass the operation order to Deaf; Blind will ultimately need the corresponding tactile targets relayed by gesture counts. However, no shared gesture code has yet been established, so I can only signal the required four-step structure for now.\n\n``` \ngesture(to=\"deaf\", symbols=[\"👇\", \"☝\", \"👇\", \"☝\"])\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 2\nDEFUSAL MANUAL:\nCut the yellow wire, then press the key that wears 2,\nthen cut the orange wire, then press the key that wears 7.\nIn that order, and in no other.\n\nVIEWABLE CONTEXT (new arrivals):\nBlind says to Mute: The strip has three engraved marks: positions 1 and 2 are identical unnamed marks, and position 3 is a different unnamed mark, so the pattern is A A B. Keypad positions 1 through 4 are labelled 2, 3, 7, 1. The keypad is empty. I cannot identify the display, light, or wire contents. Use the manual to tell me the exact presses or cut.\nDeaf says to Mute: I see display 6; green light; painted strip red blue yellow; keypad 1 maps to 2, 2 maps to 3, 3 maps to 7, 4 maps to 1; keypad requires 2 digits and is empty; wires 1 orange, 2 yellow, 3 blue, 4 red, 5 white, 6 green. Please use the manual to interpret your gesture sequence down-up-down-up and give Blind the required action."
+    },
+    {
+      "role": "assistant",
+      "content": "The manual gives the exact targets: cut wire 2 (yellow), press keypad position 1 (label 2), cut wire 1 (orange), then press keypad position 3 (label 7). Deaf can see my gestures and can relay these instructions aloud to Blind on the next round. I will encode each step as an action gesture followed by the target position: down means cut, up means press, and the following finger count identifies the wire or key position.\n\n``` \ngesture(to=\"deaf\", symbols=[\"👇\", \"✌\", \"☝\", \"☝\", \"👇\", \"☝\", \"☝\", \"🤟\"])\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 3\nDEFUSAL MANUAL:\nCut the yellow wire, then press the key that wears 2,\nthen cut the orange wire, then press the key that wears 7.\nIn that order, and in no other.\n\nVIEWABLE CONTEXT (new arrivals):\nBlind says to Mute: Deaf reports display 6, green light, painted strip red-blue-yellow, and wires in positions 1 through 6: orange, yellow, blue, red, white, green. Keypad labels are 2, 3, 7, 1 and it requires two digits; it is empty. The engraved strip is tactile pattern A A B. Please provide the exact safe actions from the manual.\nDeaf says to Mute: I cannot hear you or infer the gesture code. Please use gestures to give Blind the exact manual instruction, and use a consistent code whose symbols I can relay by name."
+    },
+    {
+      "role": "assistant",
+      "content": "The safe sequence is: cut wire position 2, press keypad position 1, cut wire position 1, press keypad position 3. I will send Deaf a clear repeated code: a downward point means “cut,” an upward point means “press,” and the following finger gesture gives the position; 👌 separates actions. Deaf can relay the gesture names and order to Blind.\n\n``` \ngesture(to=\"deaf\", symbols=[\"👇\", \"✌\", \"👌\", \"👆\", \"☝\", \"👌\", \"👇\", \"☝\", \"👌\", \"👆\", \"🤟\"])\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 4\nDEFUSAL MANUAL:\nCut the yellow wire, then press the key that wears 2,\nthen cut the orange wire, then press the key that wears 7.\nIn that order, and in no other.\n\nVIEWABLE CONTEXT (new arrivals):\nBlind says to Mute: I cannot read your eight gestures. Please speak the manual's exact next action to me: whether to press a keypad position or cut a wire position, and give the required sequence. Current display is 2, light blue, painted strip red-blue-yellow, tactile strip A A B, and wires orange yellow blue red white green.\nDeaf says to Mute: Please decode your gesture sequence from the manual and speak the resulting action directly to Blind; I cannot identify its meaning from the gestures alone."
+    },
+    {
+      "role": "assistant",
+      "content": "I cannot speak to Blind. Deaf is the only one who can see my gestures and then speak to Blind. I will use an intuitive visual code: 🤏 means cut, 👆 means press; ✌, ☝, and 🤟 mean positions 2, 1, and 3 respectively, with 👌 separating the four actions. The required sequence is cut 2, press 1, cut 1, press 3.\n\n``` \ngesture(to=\"deaf\", symbols=[\"🤏\", \"✌\", \"👌\", \"👆\", \"☝\", \"👌\", \"🤏\", \"☝\", \"👌\", \"👆\", \"🤟\"])\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 5\nDEFUSAL MANUAL:\nCut the yellow wire, then press the key that wears 2,\nthen cut the orange wire, then press the key that wears 7.\nIn that order, and in no other.\n\nVIEWABLE CONTEXT (new arrivals):\nBlind says to Mute: Please state the safe operation plainly in words. Tell me the exact keypad position(s) to press, or the exact wire position to cut. Gestures cannot convey an instruction to me."
+    },
+    {
+      "role": "assistant",
+      "content": "I cannot speak, and Blind cannot receive gestures directly. Deaf can see my gestures and is the required bridge to speak the instructions to Blind. I will repeat the established code: 🤏 means cut, 👆 means press, ✌ means position 2, ☝ means position 1, 🤟 means position 3, and 👌 separates actions. Thus the exact sequence is cut wire 2, press keypad position 1, cut wire 1, press keypad position 3.\n\n``` \ngesture(to=\"deaf\", symbols=[\"🤏\", \"✌\", \"👌\", \"👆\", \"☝\", \"👌\", \"🤏\", \"☝\", \"👌\", \"👆\", \"🤟\"])\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 6\nDEFUSAL MANUAL:\nCut the yellow wire, then press the key that wears 2,\nthen cut the orange wire, then press the key that wears 7.\nIn that order, and in no other.\n\nVIEWABLE CONTEXT (new arrivals):\nBlind says to Mute: Use a fresh gesture message for Deaf. Send exactly one OK sign for PRESS or one rock-on sign for CUT. Then send the required position as that many up-point gestures. For a two-digit keypad entry, send the press sign followed by the first position count, then the press sign followed by the second position count. Do not send any other gestures.\nDeaf says to Mute: Your gesture sequence is unchanged although the display changed from 1 to 6. Please use a distinct gesture sequence for the required action, or indicate clearly whether your sequence means a fixed instruction or encodes the current display."
+    },
+    {
+      "role": "assistant",
+      "content": "The manual still requires the fixed sequence: cut wire position 2, enter the two-digit keypad entry using positions 1 then 3, then cut wire position 1. I will follow Blind’s requested fresh encoding exactly, with no separators or extra gestures.\n\n``` \ngesture(to=\"deaf\", symbols=[\"🤘\", \"👆\", \"👆\", \"👌\", \"👆\", \"👌\", \"👆\", \"👆\", \"👆\", \"🤘\", \"👆\"])\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 7\nDEFUSAL MANUAL:\nCut the yellow wire, then press the key that wears 2,\nthen cut the orange wire, then press the key that wears 7.\nIn that order, and in no other.\n\nVIEWABLE CONTEXT (new arrivals):\nBlind says to Mute: Your old sequence is still being reported. On your next turn, send only the fresh protocol I specified: OK for PRESS or rock-on for CUT, followed by counted up-point gestures for each required position. Do not repeat the old sequence."
+    },
+    {
+      "role": "assistant",
+      "content": "The required positions are wire 2, keypad position 1, keypad position 3, and wire 1. I will send only the specified fresh protocol: rock-on plus two up-points for the first cut, OK plus one up-point and OK plus three up-points for the two keypad positions, then rock-on plus one up-point for the final cut.\n\n``` \ngesture(to=\"deaf\", symbols=[\"🤘\", \"👆\", \"👆\", \"👌\", \"👆\", \"👌\", \"👆\", \"👆\", \"👆\", \"🤘\", \"👆\"])\n```"
+    }
+  ]
+}

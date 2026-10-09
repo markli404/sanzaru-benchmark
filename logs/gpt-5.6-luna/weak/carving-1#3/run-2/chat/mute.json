@@ -1,0 +1,70 @@
+{
+  "role": "mute",
+  "system": "# LLM-BANANA\n\n# Game rules\n\n## The room\n\nYou and two other monkeys are locked in a room with one armed bomb.\n\nA wrong action detonates it. All three of you die. There is no second attempt.\n\nNo two bombs are built alike, and nothing says in advance what this one carries. It\nreaches you only as your own view reveals it; the rest of it exists for you only\nthrough the other two.\n\nYou each hold a different piece of what it takes. Work together.\n\n## The three monkeys\n\n| Monkey | Can | Cannot |\n|---|---|---|\n| Deaf | See the bomb: every colour and marking printed on it | Hear anything, or touch the bomb |\n| Mute | Read the manual | Speak, or touch the bomb |\n| Blind | Reach the bomb: feel it and work its parts | See a colour, a gesture, or anything merely printed |\n\nYou are shown your own share at the start of every round, and never anyone else's.\n\n## Speech\n\nSpeech is a voice, not a screen. It carries words, numbers and ordinary punctuation,\nand nothing else. Writing a gesture symbol into your sentence means you make that\ngesture while you talk. Whoever can hear receives your words; whoever can see receives\nthe gestures you made. A listener who cannot see gets a blank where each gesture was; a\nwatcher who cannot hear gets the gestures and none of the words.\n\nA mark that has no name cannot be pronounced: whoever holds one can describe it, never\nread it out.\n\n## Gestures\n\nA gesture is made with the hands, using only the symbols in the alphabet below.\nWhoever can see receives it; whoever cannot receives one blank per symbol, so they\nknow something was signalled but not what. Nothing gestured is ever heard.\n\n👍 👎 👌 ☝ ✌ 🤟 🖐 ✋ 👆 👇 👈 👉 🫱 🫲 🫳 🫴 🫷 🫸 🤛 🤜 ✊ 👊 👋 🤚 🖖 🤌 🤏 🤞 🫰 🤘 🤙 👏 🙌 🫶 👐 🤲 🤝 🙏 🫵 ✍ 💅 🤳\n\n## Turns\n\nThe speaking order was drawn once at random and will never change: every round goes\nMute, Blind, Deaf. Whoever comes before you in a round is already heard by the time you are\nasked, and what you send lands on whoever comes after you in that same round. Whatever\nyou missed reaches you at the start of the next one.\n\nYou may name who a message is for — `to=\"deaf\"` — and then it goes to them alone:\nnobody else receives any of it. Left unnamed, it reaches everyone able to perceive it.\nYou may send several messages in one turn, each to someone different.\n\n## Calls\n\nEvery reply has two parts, in this order. First, your thinking, in plain prose: what\nyou believe the bomb is, what you just learned, and why you are sending what follows.\nIt reaches nobody and changes nothing, but it is not optional — a reply that is only a\ncode block is incomplete. Then your calls, all of them in one fenced code block, last.\nOnly what is inside the block is sent.\n\nNothing is executed: calls return nothing, and variables, conditionals and loops are\nignored. Write only literal top-level calls.\n\n    ```\n    speak(to=\"mute\", text=\"there are three of them and the middle one is odd\")\n    gesture(to=\"deaf\", symbols=[\"✊\", \"✌\"])\n    wait()\n    ```\n\nIf you have nothing worth sending, call wait(). Producing no call at all counts as the\nsame thing.\n\nThe program decides what happened, not you. Never claim an action took place unless it\nwas accepted.\n\n# Your role: MUTE\n\nYou hold the manual. You cannot speak, you never see the bomb, and you cannot touch it.\n\n## Your channels\n\nWhen you gesture, Deaf receives it.\nYou cannot speak.\n\n## Your reach\n\nYou cannot act. What this bomb can be made to do is for the one who can reach it to\nfind under their own hands.\n\n# Hints\n\n- Three of you, three different worlds. Before sending anything, stand where the\n  receiver stands. What reaches them at all, what does your message turn into on\n  arrival, and what do they already know?\n\n- Trace who can actually reach whom before you start. Some of you only connect\n  through a third.\n\n- A sign means nothing until somebody has made it mean something.",
+  "messages": [
+    {
+      "role": "user",
+      "content": "TURN 1\nDEFUSAL MANUAL:\nWhich wire to cut is named by the mark engraved on the plate:\n| mark | cut wire color |\n|---|---|\n| ꕥ | red |\n| ꖜ | blue |\n| ꗃ | green |\n\nVIEWABLE CONTEXT (new arrivals):\n(empty)"
+    },
+    {
+      "role": "assistant",
+      "content": "I need Deaf to relay the manual’s mapping to Blind, since Deaf can inspect the engraved mark and Blind can cut the wire. I am establishing the three gestures in the manual’s row order: ꕥ → red, ꖜ → blue, ꗃ → green; Deaf should then identify the observed mark and tell Blind the corresponding color.\n\n``` \ngesture(to=\"deaf\", symbols=[\"👎\", \"👌\", \"👍\"])\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 2\nDEFUSAL MANUAL:\nWhich wire to cut is named by the mark engraved on the plate:\n| mark | cut wire color |\n|---|---|\n| ꕥ | red |\n| ꖜ | blue |\n| ꗃ | green |\n\nVIEWABLE CONTEXT (new arrivals):\nBlind says to Mute: I can reach wires 1, 2, and 3, but touch reveals no distinguishing properties. The plate engraving is only printed and unreadable to me. Please relay the manual's required wire-cutting rule.\nDeaf says to Mute: I see display 0, light off, plate engraved question mark, and wires in order 1 red, 2 blue, 3 green. I also saw your gestures thumbs down, OK hand, thumbs up, and Blind's open hand."
+    },
+    {
+      "role": "assistant",
+      "content": "The observed engraving is reported as a question mark, which is not one of the three marks covered by the manual. I should therefore have Deaf relay the complete mapping and the fact that no listed wire is justified, rather than encouraging Blind to cut a wire.\n\n``` \ngesture(to=\"deaf\", symbols=[\"👎\", \"👌\", \"👍\"])\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 3\nDEFUSAL MANUAL:\nWhich wire to cut is named by the mark engraved on the plate:\n| mark | cut wire color |\n|---|---|\n| ꕥ | red |\n| ꖜ | blue |\n| ꗃ | green |\n\nVIEWABLE CONTEXT (new arrivals):\nBlind says to Mute: Deaf reports display 0, light off, plate question mark, and wires 1 red, 2 blue, 3 green. I cannot perceive your gestures; please state the manual's required wire position in words.\nDeaf says to Mute: Your three gestures are still unambiguous but their meaning is unknown. Let thumbs-down mean wire 1, OK mean wire 2, and thumbs-up mean wire 3. Send exactly one of those gestures to indicate the required wire."
+    },
+    {
+      "role": "assistant",
+      "content": "The plate shows a question mark, which is not any mark listed in the manual. Therefore the manual specifies no wire position, and sending one of the three gestures would falsely authorize a cut. I will not indicate a wire.\n\n``` \nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 4\nDEFUSAL MANUAL:\nWhich wire to cut is named by the mark engraved on the plate:\n| mark | cut wire color |\n|---|---|\n| ꕥ | red |\n| ꖜ | blue |\n| ꗃ | green |\n\nVIEWABLE CONTEXT (new arrivals):\nBlind says to Mute: Please send the required wire position as spoken words, for example wire 1, wire 2, or wire 3. I cannot see gestures and will not act until I receive it.\nDeaf says to Mute: Please send exactly one gesture next turn: 👎 means wire 1 red, 👌 means wire 2 blue, 👍 means wire 3 green. Do not send all three."
+    },
+    {
+      "role": "assistant",
+      "content": "The engraved mark is a question mark, not ꕥ, ꖜ, or ꗃ. The manual gives no required wire for that mark, so choosing any of wires 1–3 would be unjustified and could detonate the bomb. I will not send a misleading wire gesture.\n\n``` \nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 5\nDEFUSAL MANUAL:\nWhich wire to cut is named by the mark engraved on the plate:\n| mark | cut wire color |\n|---|---|\n| ꕥ | red |\n| ꖜ | blue |\n| ꗃ | green |\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Mute: Read the manual and tell Blind the exact required action by voice now, including which part, setting, or wire to use. Do not rely on gestures."
+    },
+    {
+      "role": "assistant",
+      "content": "The manual has no entry for the observed question mark, so it does not specify any safe wire or other action. I cannot speak to Blind, and sending one of the established wire gestures would falsely select a wire. I therefore send no action.\n\n``` \nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 6\nDEFUSAL MANUAL:\nWhich wire to cut is named by the mark engraved on the plate:\n| mark | cut wire color |\n|---|---|\n| ꕥ | red |\n| ꖜ | blue |\n| ꗃ | green |\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Mute: You cannot speak, so relay the manual through me. Send exactly one gesture indicating the required wire: 👎 means wire 1 red, 👌 means wire 2 blue, 👍 means wire 3 green. If the manual requires a different action, first send 👏 for cut, 🙏 for hold, or ✊ for another manipulation; then send the wire gesture next turn."
+    },
+    {
+      "role": "assistant",
+      "content": "The plate’s question mark is not one of the manual’s three recognized marks, so the manual does not require cutting wire 1, 2, or 3, nor does it specify another manipulation. I will not send a gesture that could cause Blind to act on an unsupported instruction.\n\n``` \nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 7\nDEFUSAL MANUAL:\nWhich wire to cut is named by the mark engraved on the plate:\n| mark | cut wire color |\n|---|---|\n| ꕥ | red |\n| ꖜ | blue |\n| ꗃ | green |\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Mute: I received no new gesture. Please send exactly one gesture now: 👎 for wire 1 red, 👌 for wire 2 blue, or 👍 for wire 3 green. If no wire should be cut, send 🙏 instead."
+    },
+    {
+      "role": "assistant",
+      "content": "The engraving remains an unlisted question mark, so the manual does not authorize cutting any wire. I will signal “hold/no wire should be cut” using the agreed gesture.\n\n``` \ngesture(to=\"deaf\", symbols=[\"🙏\"])\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 8\nDEFUSAL MANUAL:\nWhich wire to cut is named by the mark engraved on the plate:\n| mark | cut wire color |\n|---|---|\n| ꕥ | red |\n| ꖜ | blue |\n| ꗃ | green |\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Mute: 🙏 confirms no wire cut. To identify the safe operation, send one gesture next: 👌 means press or operate a control, ✋ means inspect or read a setting without changing it, 🤝 means wait for more information. Then I will relay it to Blind."
+    },
+    {
+      "role": "assistant",
+      "content": "The manual gives no rule for the question-mark engraving, so no operation is authorized. Of the offered signals, waiting for more information is the only one that does not risk an unsupported change to the bomb.\n\n``` \ngesture(to=\"deaf\", symbols=[\"🤝\"])\n```"
+    }
+  ]
+}

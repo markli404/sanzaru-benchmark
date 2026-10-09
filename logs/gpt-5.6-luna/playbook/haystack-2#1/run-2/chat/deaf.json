@@ -1,0 +1,86 @@
+{
+  "role": "deaf",
+  "system": "# LLM-BANANA\n\n# Game rules\n\n## The room\n\nYou and two other monkeys are locked in a room with one armed bomb.\n\nA wrong action detonates it. All three of you die. There is no second attempt.\n\nNo two bombs are built alike, and nothing says in advance what this one carries. It\nreaches you only as your own view reveals it; the rest of it exists for you only\nthrough the other two.\n\nYou each hold a different piece of what it takes. Work together.\n\n## The three monkeys\n\n| Monkey | Can | Cannot |\n|---|---|---|\n| Deaf | See the bomb: every colour and marking printed on it | Hear anything, or touch the bomb |\n| Mute | Read the manual | Speak, or touch the bomb |\n| Blind | Reach the bomb: feel it and work its parts | See a colour, a gesture, or anything merely printed |\n\nYou are shown your own share at the start of every round, and never anyone else's.\n\n## Speech\n\nSpeech is a voice, not a screen. It carries words, numbers and ordinary punctuation,\nand nothing else. Writing a gesture symbol into your sentence means you make that\ngesture while you talk. Whoever can hear receives your words; whoever can see receives\nthe gestures you made. A listener who cannot see gets a blank where each gesture was; a\nwatcher who cannot hear gets the gestures and none of the words.\n\nA mark that has no name cannot be pronounced: whoever holds one can describe it, never\nread it out.\n\n## Gestures\n\nA gesture is made with the hands, using only the symbols in the alphabet below.\nWhoever can see receives it; whoever cannot receives one blank per symbol, so they\nknow something was signalled but not what. Nothing gestured is ever heard.\n\n👍 👎 👌 ☝ ✌ 🤟 🖐 ✋ 👆 👇 👈 👉 🫱 🫲 🫳 🫴 🫷 🫸 🤛 🤜 ✊ 👊 👋 🤚 🖖 🤌 🤏 🤞 🫰 🤘 🤙 👏 🙌 🫶 👐 🤲 🤝 🙏 🫵 ✍ 💅 🤳\n\n## Turns\n\nThe speaking order was drawn once at random and will never change: every round goes\nMute, Blind, Deaf. Whoever comes before you in a round is already heard by the time you are\nasked, and what you send lands on whoever comes after you in that same round. Whatever\nyou missed reaches you at the start of the next one.\n\nYou may name who a message is for — `to=\"deaf\"` — and then it goes to them alone:\nnobody else receives any of it. Left unnamed, it reaches everyone able to perceive it.\nYou may send several messages in one turn, each to someone different.\n\n## Calls\n\nEvery reply has two parts, in this order. First, your thinking, in plain prose: what\nyou believe the bomb is, what you just learned, and why you are sending what follows.\nIt reaches nobody and changes nothing, but it is not optional — a reply that is only a\ncode block is incomplete. Then your calls, all of them in one fenced code block, last.\nOnly what is inside the block is sent.\n\nNothing is executed: calls return nothing, and variables, conditionals and loops are\nignored. Write only literal top-level calls.\n\n    ```\n    speak(to=\"mute\", text=\"there are three of them and the middle one is odd\")\n    gesture(to=\"deaf\", symbols=[\"✊\", \"✌\"])\n    wait()\n    ```\n\nIf you have nothing worth sending, call wait(). Producing no call at all counts as the\nsame thing.\n\nThe program decides what happened, not you. Never claim an action took place unless it\nwas accepted.\n\n# Your role: DEAF\n\nYou see the bomb: every colour on it, every marking printed on it, every reading it\ngives. You hear nothing. You hold no manual, and you cannot touch the bomb.\n\n## Your channels\n\nWhen you speak, Mute and Blind receive it.\nWhen you gesture, Mute receives it.\nYou never receive speech.\n\n## Your reach\n\nYou cannot act. What this bomb can be made to do is for the one who can reach it to\nfind under their own hands.\n\n# Hints\n\n- The routes, by name. Speech reaches Mute and Blind, and never Deaf. Gestures\n  reach Deaf and Mute, and never Blind. Deaf can speak and gesture, Mute can\n  only gesture, Blind can only speak. Check every message against this list\n  before you send it.\n\n- Deaf invents the gesture code out loud before anything else moves, and\n  everyone else's opening move is waiting for it. The manual's verdict reaches\n  Blind only as Deaf's spoken order.\n\n- Whatever the code becomes, it starts by being able to say YES, NO, HOLD and\n  DONE. Grow it only when a message will not fit.",
+  "messages": [
+    {
+      "role": "user",
+      "content": "TURN 1\nACTION BOARD:\nDISPLAY [9]\nLIGHT [red]\nSTRIP painted [green] [yellow] [yellow]\nKEYPAD engraved 1:[1] 2:[5] 3:[2] 4:[8] [1 digits] [entered nothing]\nWIRES 1:[yellow] 2:[white] 3:[blue] 4:[red] 5:[purple] 6:[green]\n\nVIEWABLE CONTEXT (new arrivals):\n(empty)"
+    },
+    {
+      "role": "assistant",
+      "content": "I see the bomb’s initial state: display 9, red light, green-yellow-yellow strip, keypad digits 1/5/2/8 with nothing entered, and six colored wires. Before any action, I’m establishing the required gesture code so Mute can relay the manual’s verdict to me. Blind will hear the same mapping, but any later instruction to Blind must be spoken explicitly.\n\n```text\nspeak(text=\"Gesture code: thumbs up means YES.\")\ngesture(symbols=[\"👍\"])\nspeak(text=\"Gesture code: thumbs down means NO.\")\ngesture(symbols=[\"👎\"])\nspeak(text=\"Gesture code: open hand means HOLD.\")\ngesture(symbols=[\"🖐\"])\nspeak(text=\"Gesture code: OK sign means DONE.\")\ngesture(symbols=[\"👌\"])\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 2\nACTION BOARD:\nDISPLAY [3]\nLIGHT [yellow]\nSTRIP painted [green] [yellow] [yellow]\nKEYPAD engraved 1:[1] 2:[5] 3:[2] 4:[8] [1 digits] [entered nothing]\nWIRES 1:[yellow] 2:[white] 3:[blue] 4:[red] 5:[purple] 6:[green]\n\nVIEWABLE CONTEXT (new arrivals):\nMute gestures to Deaf: [👍 👎 👎 👎 👎 👎 🖐 👍 👎 👍 👎 👍 👎 🖐 👍 👍 👍 👎 👍 👎 🖐 👎 👍 👎 👎 👎 👎 🖐 👍 👎 👍 👎 👎 👎 🖐 👍 👎 👍 👎 👍 👎 🖐 👍 👎 👍 👎 👎 👍 🖐 👍 👎 👎 👎 👍 👎 👎 🖐 👍 👎 👍 👍 👍 👎 🖐 👍 👎 👍 👎 👍 👎 🖐 👎 👍 👎 👎 👎 👎 🖐 👍 👎 👍 👎 👍 👎 🖐 👎 👍 👍 👎 👎 👎 🖐 👍 👎 👍 👎 👎 👍 🖐 👍 👎 👍 👎 👍 👎 🖐 👍 👎 👍 👎 👎 👎 🖐 👍 👎 👍 👎 👍 👎 🖐 👎 👍 👎 👎 👎 👎 🖐 👍 👎 👍 👎 👍 👎 🖐 👎 👍 👍 👎 👎 👎 🖐 👍 👎 👍 👎 👎 👍 🖐 👍 👎 👍 👎 👍 👎 🖐 👎 👍 👍 👎 👎 👎 👌]"
+    },
+    {
+      "role": "assistant",
+      "content": "The gesture stream is not safely decodable into an unambiguous instruction from the currently established four-symbol code. I will not guess at a bomb action. Blind should hold, while I ask Mute to resend the manual’s verdict in a clearer form using the established code.\n\n```text\nspeak(to=\"blind\", text=\"HOLD. Do not touch or operate anything.\")\nspeak(to=\"mute\", text=\"The verdict was unclear. Please resend it using only the established YES, NO, HOLD, and DONE gestures, with HOLD between each item.\")\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 3\nACTION BOARD:\nDISPLAY [2]\nLIGHT [red]\nSTRIP painted [green] [yellow] [yellow]\nKEYPAD engraved 1:[1] 2:[5] 3:[2] 4:[8] [1 digits] [entered nothing]\nWIRES 1:[yellow] 2:[white] 3:[blue] 4:[red] 5:[purple] 6:[green]\n\nVIEWABLE CONTEXT (new arrivals):\n(empty)"
+    },
+    {
+      "role": "assistant",
+      "content": "The prior gesture stream is not reliably interpretable under the code I announced, so I will not act on it. The bomb state has changed to display 2 and red light, but no safe operation has been established. I’m asking for a fresh, unambiguous encoding and keeping Blind from touching anything.\n\n```text\nspeak(to=\"blind\", text=\"HOLD. Do not operate the bomb.\")\nspeak(to=\"mute\", text=\"Resend the manual verdict as 8-bit ASCII. Encode each character as exactly 8 gestures: thumbs up is 1, thumbs down is 0. Use open hand between characters and OK sign only after the final character. Do not use any other gesture.\")\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 4\nACTION BOARD:\nDISPLAY [3]\nLIGHT [green]\nSTRIP painted [green] [yellow] [yellow]\nKEYPAD engraved 1:[1] 2:[5] 3:[2] 4:[8] [1 digits] [entered nothing]\nWIRES 1:[yellow] 2:[white] 3:[blue] 4:[red] 5:[purple] 6:[green]\n\nVIEWABLE CONTEXT (new arrivals):\nMute gestures to Deaf: [👎 👍 👎 👎 👎 👎 👍 👍 🖐 👎 👍 👎 👍 👎 👍 👍 🖐 👎 👍 👎 👍 👎 👍 👎 🖐 👎 👎 👍 👎 👎 👎 👎 🖐 👎 👍 👎 👍 👎 👎 👎 🖐 👎 👍 👎 👍 👎 👍 👍 🖐 👎 👍 👎 👍 👎 👎 👎 🖐 👎 👍 👎 👎 👍 👍 🖐 👎 👍 👎 👎 👍 👎 🖐 👎 👍 👎 👍 👎 👍 👍 🖐 👎 👎 👍 👎 👎 👎 👎 🖐 👎 👍 👎 👍 👎 👎 👍 🖐 👎 👍 👎 👎 👍 👎 👍 🖐 👎 👍 👎 👍 👎 👍 👍 🖐 👎 👎 👍 👎 👎 👎 👎 🖐 👎 👍 👎 👍 👎 👎 👍 🖐 👎 👍 👎 👍 👎 👍 👍 🖐 👎 👎 👍 👎 👎 👎 👎 🖐 👎 👍 👎 👍 👎 👎 👍 🖐 👎 👍 👎 👎 👍 👎 👎 👌]"
+    },
+    {
+      "role": "assistant",
+      "content": "The resend is malformed: the first byte decodes to `C`, but the next character group contains only seven binary gestures before its separator. I cannot safely reconstruct the manual’s instruction, so no bomb operation is justified. Blind must continue holding.\n\n```text\nspeak(to=\"blind\", text=\"HOLD. Do not operate anything.\")\nspeak(to=\"mute\", text=\"Your resend is malformed: the second byte has seven gestures. Please resend exactly eight binary gestures per character, with one open-hand separator between characters and OK only at the end.\")\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 5\nACTION BOARD:\nDISPLAY [5]\nLIGHT [blue]\nSTRIP painted [green] [yellow] [yellow]\nKEYPAD engraved 1:[1] 2:[5] 3:[2] 4:[8] [1 digits] [entered nothing]\nWIRES 1:[yellow] 2:[white] 3:[blue] 4:[red] 5:[purple] 6:[green]\n\nVIEWABLE CONTEXT (new arrivals):\nMute gestures to Deaf: [👎 👍 👎 👎 👎 👎 👍 👍 🖐 👎 👍 👎 👍 👎 👍 👍 🖐 👎 👍 👎 👍 👎 👍 👎 🖐 👎 👎 👍 👎 👎 👎 👎 🖐 👎 👍 👎 👍 👎 👎 👎 🖐 👎 👍 👎 👍 👎 👍 👍 🖐 👎 👍 👎 👍 👎 👎 👎 🖐 👎 👍 👎 👍 👎 👎 👍 🖐 👎 👍 👎 👍 👎 👎 👎 🖐 👎 👍 👎 👎 👍 👍 🖐 👎 👍 👎 👎 👍 👎 🖐 👎 👍 👎 👍 👎 👍 👍 🖐 👎 👎 👍 👎 👎 👎 👎 🖐 👎 👍 👎 👍 👎 👎 👍 🖐 👎 👍 👎 👍 👎 👍 👍 🖐 👎 👎 👍 👎 👎 👎 👎 🖐 👎 👍 👎 👍 👎 👎 👍 🖐 👎 👍 👎 👍 👎 👍 👍 🖐 👎 👎 👍 👎 👎 👎 👎 🖐 👎 👍 👎 👍 👎 👎 👍 🖐 👎 👍 👎 👍 👎 👍 👍 🖐 👎 👎 👍 👎 👎 👎 👎 🖐 👎 👍 👎 👍 👎 👎 👍 🖐 👎 👍 👎 👍 👎 👍 👍 🖐 👎 👎 👍 👎 👎 👎 👎 🖐 👎 👍 👎 👍 👎 👎 👍 🖐 👎 👍 👎 👍 👎 👍 👍 🖐 👎 👎 👍 👎 👎 👎 👎 🖐 👎 👍 👎 👍 👎 👎 👍 👌]"
+    },
+    {
+      "role": "assistant",
+      "content": "The new stream still does not decode to intelligible ASCII under the agreed convention; it begins `C V` followed by non-instructional data. I cannot safely infer a manual instruction or operate the bomb. Blind should continue holding while Mute sends a direct verdict using only the original four gestures.\n\n```text\nspeak(to=\"blind\", text=\"HOLD. Do not touch or operate anything.\")\nspeak(to=\"mute\", text=\"Please send only the manual verdict using the original code: one thumbs up for YES, one thumbs down for NO, one open hand for HOLD, or one OK sign for DONE. Then wait.\")\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 6\nACTION BOARD:\nDISPLAY [4]\nLIGHT [red]\nSTRIP painted [green] [yellow] [yellow]\nKEYPAD engraved 1:[1] 2:[5] 3:[2] 4:[8] [1 digits] [entered nothing]\nWIRES 1:[yellow] 2:[white] 3:[blue] 4:[red] 5:[purple] 6:[green]\n\nVIEWABLE CONTEXT (new arrivals):\nMute gestures to Deaf: [👍]"
+    },
+    {
+      "role": "assistant",
+      "content": "Mute’s single 👍 decodes as YES, but it does not identify which operation the manual authorizes. I cannot safely turn that into a physical action. Blind should remain on hold, and Mute should provide a specific verdict or instruction rather than an isolated confirmation.\n\n```text\nspeak(to=\"blind\", text=\"HOLD. Do not operate the bomb.\")\nspeak(to=\"mute\", text=\"YES is ambiguous. Send the manual's specific instruction; expand the gesture code if necessary.\")\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 7\nACTION BOARD:\nDISPLAY [1]\nLIGHT [green]\nSTRIP painted [green] [yellow] [yellow]\nKEYPAD engraved 1:[1] 2:[5] 3:[2] 4:[8] [1 digits] [entered nothing]\nWIRES 1:[yellow] 2:[white] 3:[blue] 4:[red] 5:[purple] 6:[green]\n\nVIEWABLE CONTEXT (new arrivals):\nMute gestures to Deaf: [👎 👍 👎 👎 👎 👎 👍 👍 🖐 👎 👍 👎 👍 👎 👍 👍 🖐 👎 👍 👎 👍 👎 👍 👎 🖐 👎 👎 👍 👎 👎 👎 👎 🖐 👎 👍 👎 👍 👎 👎 👎 🖐 👎 👍 👎 👍 👎 👍 👍 🖐 👎 👎 👍 👎 👎 👎 👎 🖐 👎 👍 👎 👍 👎 👍 👍 🖐 👎 👍 👎 👍 👎 👎 👎 🖐 👎 👍 👎 👍 👎 👎 👍 🖐 👎 👍 👎 👍 👎 👎 👎 🖐 👎 👍 👎 👎 👍 👍 🖐 👎 👍 👎 👎 👍 👎 🖐 👎 👍 👎 👍 👎 👎 👎 🖐 👎 👍 👎 👍 👎 👍 👍 🖐 👎 👎 👍 👎 👎 👎 👎 🖐 👎 👍 👎 👎 👍 👍 🖐 👎 👍 👎 👍 👎 👍 👍 🖐 👎 👎 👍 👎 👎 👎 👎 🖐 👎 👍 👎 👍 👎 👎 👍 🖐 👎 👍 👎 👍 👎 👍 👍 🖐 👎 👎 👍 👎 👎 👎 👎 🖐 👎 👍 👎 👍 👎 👎 👍 🖐 👎 👍 👎 👍 👎 👍 👍 🖐 👎 👎 👍 👎 👎 👎 👎 🖐 👎 👍 👎 👍 👎 👎 👍 🖐 👎 👍 👎 👍 👎 👍 👍 🖐 👎 👎 👍 👎 👎 👎 👎 👌]"
+    },
+    {
+      "role": "assistant",
+      "content": "The message is still malformed under the agreed encoding: after the initial complete byte, several character groups contain only seven binary gestures before the separator. I cannot safely infer an instruction from it, so Blind must not act.\n\n```text\nspeak(to=\"blind\", text=\"HOLD. Do not operate anything.\")\nspeak(to=\"mute\", text=\"Malformed again. Send only one established verdict gesture: thumbs up YES, thumbs down NO, open hand HOLD, or OK DONE. Do not send binary or separators.\")\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 8\nACTION BOARD:\nDISPLAY [6]\nLIGHT [red]\nSTRIP painted [green] [yellow] [yellow]\nKEYPAD engraved 1:[1] 2:[5] 3:[2] 4:[8] [1 digits] [entered nothing]\nWIRES 1:[yellow] 2:[white] 3:[blue] 4:[red] 5:[purple] 6:[green]\n\nVIEWABLE CONTEXT (new arrivals):\nMute gestures to Deaf: [🖐]"
+    },
+    {
+      "role": "assistant",
+      "content": "Mute’s 🖐 is the established HOLD signal. No operation is authorized yet, and the bomb remains untouched. I’m relaying that hold state to Blind and asking Mute to provide the next specific instruction using an expanded, explicitly defined code.\n\n```text\nspeak(to=\"blind\", text=\"Mute signals HOLD. Do not operate anything.\")\nspeak(to=\"mute\", text=\"HOLD received. When ready, send the specific manual instruction. Use the established code for YES, NO, HOLD, and DONE, and request expansion only if needed.\")\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 9\nACTION BOARD:\nDISPLAY [4]\nLIGHT [yellow]\nSTRIP painted [green] [yellow] [yellow]\nKEYPAD engraved 1:[1] 2:[5] 3:[2] 4:[8] [1 digits] [entered nothing]\nWIRES 1:[yellow] 2:[white] 3:[blue] 4:[red] 5:[purple] 6:[green]\n\nVIEWABLE CONTEXT (new arrivals):\nMute gestures to Deaf: [🖐]"
+    },
+    {
+      "role": "assistant",
+      "content": "Mute continues to signal HOLD, so no action is authorized. I am defining a compact instruction format: 🤞 means “press keypad,” 🤘 means “cut wire,” followed by the required number of 👍 signals and then 👌. This lets Mute identify a specific control without another ambiguous binary transcription.\n\n```text\nspeak(to=\"blind\", text=\"HOLD. Do not operate the bomb.\")\nspeak(to=\"mute\", text=\"Please send the specific manual action. Use 🤞 for press keypad or 🤘 for cut wire, then send the required number of 👍 signals, and finish with 👌. Use 🖐 if the instruction is HOLD.\")\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 10\nACTION BOARD:\nDISPLAY [8]\nLIGHT [red]\nSTRIP painted [green] [yellow] [yellow]\nKEYPAD engraved 1:[1] 2:[5] 3:[2] 4:[8] [1 digits] [entered nothing]\nWIRES 1:[yellow] 2:[white] 3:[blue] 4:[red] 5:[purple] 6:[green]\n\nVIEWABLE CONTEXT (new arrivals):\nMute gestures to Deaf: [🤘 👍 👌]\nMute gestures to Deaf: [🤘 👍 👍 👌]\nMute gestures to Deaf: [🤘 👍 👍 👍 👌]"
+    },
+    {
+      "role": "assistant",
+      "content": "Mute has now sent three unambiguous instructions in order: cut wire 1, cut wire 2, and cut wire 3. I am relaying that exact sequence to Blind; no other wire is authorized.\n\n```text\nspeak(to=\"blind\", text=\"Mute instructs: cut wire 1, then wire 2, then wire 3, in that order. Do not cut any other wire.\")\nwait()\n```"
+    }
+  ]
+}

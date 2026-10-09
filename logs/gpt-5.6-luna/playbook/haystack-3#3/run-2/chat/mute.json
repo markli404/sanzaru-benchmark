@@ -1,0 +1,78 @@
+{
+  "role": "mute",
+  "system": "# LLM-BANANA\n\n# Game rules\n\n## The room\n\nYou and two other monkeys are locked in a room with one armed bomb.\n\nA wrong action detonates it. All three of you die. There is no second attempt.\n\nNo two bombs are built alike, and nothing says in advance what this one carries. It\nreaches you only as your own view reveals it; the rest of it exists for you only\nthrough the other two.\n\nYou each hold a different piece of what it takes. Work together.\n\n## The three monkeys\n\n| Monkey | Can | Cannot |\n|---|---|---|\n| Deaf | See the bomb: every colour and marking printed on it | Hear anything, or touch the bomb |\n| Mute | Read the manual | Speak, or touch the bomb |\n| Blind | Reach the bomb: feel it and work its parts | See a colour, a gesture, or anything merely printed |\n\nYou are shown your own share at the start of every round, and never anyone else's.\n\n## Speech\n\nSpeech is a voice, not a screen. It carries words, numbers and ordinary punctuation,\nand nothing else. Writing a gesture symbol into your sentence means you make that\ngesture while you talk. Whoever can hear receives your words; whoever can see receives\nthe gestures you made. A listener who cannot see gets a blank where each gesture was; a\nwatcher who cannot hear gets the gestures and none of the words.\n\nA mark that has no name cannot be pronounced: whoever holds one can describe it, never\nread it out.\n\n## Gestures\n\nA gesture is made with the hands, using only the symbols in the alphabet below.\nWhoever can see receives it; whoever cannot receives one blank per symbol, so they\nknow something was signalled but not what. Nothing gestured is ever heard.\n\n👍 👎 👌 ☝ ✌ 🤟 🖐 ✋ 👆 👇 👈 👉 🫱 🫲 🫳 🫴 🫷 🫸 🤛 🤜 ✊ 👊 👋 🤚 🖖 🤌 🤏 🤞 🫰 🤘 🤙 👏 🙌 🫶 👐 🤲 🤝 🙏 🫵 ✍ 💅 🤳\n\n## Turns\n\nThe speaking order was drawn once at random and will never change: every round goes\nMute, Blind, Deaf. Whoever comes before you in a round is already heard by the time you are\nasked, and what you send lands on whoever comes after you in that same round. Whatever\nyou missed reaches you at the start of the next one.\n\nYou may name who a message is for — `to=\"deaf\"` — and then it goes to them alone:\nnobody else receives any of it. Left unnamed, it reaches everyone able to perceive it.\nYou may send several messages in one turn, each to someone different.\n\n## Calls\n\nEvery reply has two parts, in this order. First, your thinking, in plain prose: what\nyou believe the bomb is, what you just learned, and why you are sending what follows.\nIt reaches nobody and changes nothing, but it is not optional — a reply that is only a\ncode block is incomplete. Then your calls, all of them in one fenced code block, last.\nOnly what is inside the block is sent.\n\nNothing is executed: calls return nothing, and variables, conditionals and loops are\nignored. Write only literal top-level calls.\n\n    ```\n    speak(to=\"mute\", text=\"there are three of them and the middle one is odd\")\n    gesture(to=\"deaf\", symbols=[\"✊\", \"✌\"])\n    wait()\n    ```\n\nIf you have nothing worth sending, call wait(). Producing no call at all counts as the\nsame thing.\n\nThe program decides what happened, not you. Never claim an action took place unless it\nwas accepted.\n\n# Your role: MUTE\n\nYou hold the manual. You cannot speak, you never see the bomb, and you cannot touch it.\n\n## Your channels\n\nWhen you gesture, Deaf receives it.\nYou cannot speak.\n\n## Your reach\n\nYou cannot act. What this bomb can be made to do is for the one who can reach it to\nfind under their own hands.\n\n# Hints\n\n- The routes, by name. Speech reaches Mute and Blind, and never Deaf. Gestures\n  reach Deaf and Mute, and never Blind. Deaf can speak and gesture, Mute can\n  only gesture, Blind can only speak. Check every message against this list\n  before you send it.\n\n- Deaf invents the gesture code out loud before anything else moves, and\n  everyone else's opening move is waiting for it. The manual's verdict reaches\n  Blind only as Deaf's spoken order.\n\n- Whatever the code becomes, it starts by being able to say YES, NO, HOLD and\n  DONE. Grow it only when a message will not fit.",
+  "messages": [
+    {
+      "role": "user",
+      "content": "TURN 1\nDEFUSAL MANUAL:\nCut the purple wire, then press the key that wears 7,\nthen cut the red wire, then press the key that wears 4.\nIn that order, and in no other.\n\nVIEWABLE CONTEXT (new arrivals):\n(empty)"
+    },
+    {
+      "role": "assistant",
+      "content": "I have the required sequence from the manual, but Deaf must first establish the gesture code. I should not send any instruction before that opening exchange.\n\n``` \nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 2\nDEFUSAL MANUAL:\nCut the purple wire, then press the key that wears 7,\nthen cut the red wire, then press the key that wears 4.\nIn that order, and in no other.\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says: Opening code: thumbs up means YES, thumbs down means NO, raised hand means HOLD, and OK hand means DONE. Mute and Blind, wait for my next instruction.\nDeaf gestures to Mute: [👍]\nDeaf gestures to Mute: [👎]\nDeaf gestures to Mute: [✋]\nDeaf gestures to Mute: [👌]"
+    },
+    {
+      "role": "assistant",
+      "content": "The manual requires four exact actions, but Deaf has only established the four control signals. I should hold the process and avoid sending an ambiguous instruction before a reliable code for the needed wire colours and key numbers exists.\n\n``` \ngesture(to=\"deaf\", symbols=[\"✋\"])\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 3\nDEFUSAL MANUAL:\nCut the purple wire, then press the key that wears 7,\nthen cut the red wire, then press the key that wears 4.\nIn that order, and in no other.\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says: Current bomb state: display 6; light red; strip red blue green; keypad positions 1=1, 2=4, 3=7, 4=2; keypad requires 2 digits and is empty; wires 1 blue, 2 orange, 3 yellow, 4 red, 5 green, 6 purple. Mute, consult the manual for this state and send me YES if an action is specified, NO if it says not to act, or HOLD if more information is needed. Blind, HOLD and do not touch anything until I relay the manual order."
+    },
+    {
+      "role": "assistant",
+      "content": "The state matches a manual instruction: the manual specifies actions, and the relevant wires and keys are present. I therefore confirm YES. The exact order is already in the manual, but the current code has no way to encode “purple, 7, red, 4”; Deaf should expand the code only if needed to relay it.\n\n``` \ngesture(to=\"deaf\", symbols=[\"👍\"])\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 4\nDEFUSAL MANUAL:\nCut the purple wire, then press the key that wears 7,\nthen cut the red wire, then press the key that wears 4.\nIn that order, and in no other.\n\nVIEWABLE CONTEXT (new arrivals):\nBlind says to Mute: HOLD\nDeaf says to Mute: Your YES is received. Encode the manual action in your next gesture message: 👍 means press keypad, 👎 means cut wire, 👌 means use a switch, ☝ means enter a digit sequence, ✌ means wait, 🤟 means inspect or otherwise manipulate. For digits use 🖐=0, ✋=1, 👆=2, 👇=3, 👈=4, 👉=5, 🫱=6, 🫲=7, 🫳=8, 🫴=9. Send the action gesture first, then the needed digit or wire numbers in order. Blind, HOLD; do not touch anything until I decode the instruction."
+    },
+    {
+      "role": "assistant",
+      "content": "The manual’s exact sequence is: cut wire 6 (purple), press digit 7, cut wire 4 (red), then press digit 4. I will encode each action followed by its wire or digit, preserving the required order.\n\n``` \ngesture(to=\"deaf\", symbols=[\"👎\", \"🫱\", \"👍\", \"🫲\", \"👎\", \"👈\", \"👍\", \"👈\"])\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 5\nDEFUSAL MANUAL:\nCut the purple wire, then press the key that wears 7,\nthen cut the red wire, then press the key that wears 4.\nIn that order, and in no other.\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Mute: Your message is ambiguous because it uses symbols assigned to both actions and digits. Do not act. Resend only the required operation, then pause; for a wire, send the cut-wire symbol followed by exactly one wire digit using the digit code."
+    },
+    {
+      "role": "assistant",
+      "content": "The first required operation is to cut the purple wire, which Deaf identified as wire 6. I will send only the cut-wire operation and its wire number, then pause so Deaf can relay it safely.\n\n``` \ngesture(to=\"deaf\", symbols=[\"👎\", \"🫱\"])\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 6\nDEFUSAL MANUAL:\nCut the purple wire, then press the key that wears 7,\nthen cut the red wire, then press the key that wears 4.\nIn that order, and in no other.\n\nVIEWABLE CONTEXT (new arrivals):\n(empty)"
+    },
+    {
+      "role": "assistant",
+      "content": "The first operation has been sent as the unambiguous cut-wire command for wire 6. No confirmation or new state has arrived, so I should not repeat it or send the next operation prematurely.\n\n``` \nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 7\nDEFUSAL MANUAL:\nCut the purple wire, then press the key that wears 7,\nthen cut the red wire, then press the key that wears 4.\nIn that order, and in no other.\n\nVIEWABLE CONTEXT (new arrivals):\nSystem: correct wire cut; the bomb has changed\nDeaf says: New bomb state after the correct cut: display 7; light red; strip red blue green; keypad positions 1=1, 2=4, 3=7, 4=2; keypad requires 2 digits and is empty; wires 1 blue, 2 orange, 3 yellow, 4 red, 5 green, 6 cut. Mute, consult the manual for this new state and report the required action. Blind, HOLD and do not touch anything until I relay it."
+    },
+    {
+      "role": "assistant",
+      "content": "The correct wire cut was accepted. The next manual operation is to press the keypad key wearing 7. Using Deaf’s code, that is the press-key symbol followed by digit 7. I will send only this operation and then pause.\n\n``` \ngesture(to=\"deaf\", symbols=[\"👍\", \"🫲\"])\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 8\nDEFUSAL MANUAL:\nCut the purple wire, then press the key that wears 7,\nthen cut the red wire, then press the key that wears 4.\nIn that order, and in no other.\n\nVIEWABLE CONTEXT (new arrivals):\nBlind says to Mute: HOLD\nDeaf says to Mute: I received keypad action and digit 7, but this keypad requires two digits. Resend the complete two-digit entry: 👍 followed by exactly two digit gestures, using the established digit code."
+    },
+    {
+      "role": "assistant",
+      "content": "The first cut was accepted, and the next required action is the keypad operation. Deaf reports that the keypad requires two digits; with no other digit specified by the manual, the safe completion is to enter the specified digit 7 twice rather than introduce an unsupported number.\n\n``` \ngesture(to=\"deaf\", symbols=[\"👍\", \"🫲\", \"🫲\"])\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 9\nDEFUSAL MANUAL:\nCut the purple wire, then press the key that wears 7,\nthen cut the red wire, then press the key that wears 4.\nIn that order, and in no other.\n\nVIEWABLE CONTEXT (new arrivals):\n(empty)"
+    },
+    {
+      "role": "assistant",
+      "content": "The complete two-digit entry for the keypad operation has been sent. No result or further instruction has arrived, so I should not send another action.\n\n``` \nwait()\n```"
+    }
+  ]
+}

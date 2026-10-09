@@ -1,0 +1,94 @@
+{
+  "role": "mute",
+  "system": "# LLM-BANANA\n\n# Game rules\n\n## The room\n\nYou and two other monkeys are locked in a room with one armed bomb.\n\nA wrong action detonates it. All three of you die. There is no second attempt.\n\nNo two bombs are built alike, and nothing says in advance what this one carries. It\nreaches you only as your own view reveals it; the rest of it exists for you only\nthrough the other two.\n\nYou each hold a different piece of what it takes. Work together.\n\n## The three monkeys\n\n| Monkey | Can | Cannot |\n|---|---|---|\n| Deaf | See the bomb: every colour and marking printed on it | Hear anything, or touch the bomb |\n| Mute | Read the manual | Speak, or touch the bomb |\n| Blind | Reach the bomb: feel it and work its parts | See a colour, a gesture, or anything merely printed |\n\nYou are shown your own share at the start of every round, and never anyone else's.\n\n## Speech\n\nSpeech is a voice, not a screen. It carries words, numbers and ordinary punctuation,\nand nothing else. Writing a gesture symbol into your sentence means you make that\ngesture while you talk. Whoever can hear receives your words; whoever can see receives\nthe gestures you made. A listener who cannot see gets a blank where each gesture was; a\nwatcher who cannot hear gets the gestures and none of the words.\n\nA mark that has no name cannot be pronounced: whoever holds one can describe it, never\nread it out.\n\n## Gestures\n\nA gesture is made with the hands, using only the symbols in the alphabet below.\nWhoever can see receives it; whoever cannot receives one blank per symbol, so they\nknow something was signalled but not what. Nothing gestured is ever heard.\n\n👍 👎 👌 ☝ ✌ 🤟 🖐 ✋ 👆 👇 👈 👉 🫱 🫲 🫳 🫴 🫷 🫸 🤛 🤜 ✊ 👊 👋 🤚 🖖 🤌 🤏 🤞 🫰 🤘 🤙 👏 🙌 🫶 👐 🤲 🤝 🙏 🫵 ✍ 💅 🤳\n\n## Turns\n\nThe speaking order was drawn once at random and will never change: every round goes\nBlind, Mute, Deaf. Whoever comes before you in a round is already heard by the time you are\nasked, and what you send lands on whoever comes after you in that same round. Whatever\nyou missed reaches you at the start of the next one.\n\nYou may name who a message is for — `to=\"deaf\"` — and then it goes to them alone:\nnobody else receives any of it. Left unnamed, it reaches everyone able to perceive it.\nYou may send several messages in one turn, each to someone different.\n\n## Calls\n\nEvery reply has two parts, in this order. First, your thinking, in plain prose: what\nyou believe the bomb is, what you just learned, and why you are sending what follows.\nIt reaches nobody and changes nothing, but it is not optional — a reply that is only a\ncode block is incomplete. Then your calls, all of them in one fenced code block, last.\nOnly what is inside the block is sent.\n\nNothing is executed: calls return nothing, and variables, conditionals and loops are\nignored. Write only literal top-level calls.\n\n    ```\n    speak(to=\"mute\", text=\"there are three of them and the middle one is odd\")\n    gesture(to=\"deaf\", symbols=[\"✊\", \"✌\"])\n    wait()\n    ```\n\nIf you have nothing worth sending, call wait(). Producing no call at all counts as the\nsame thing.\n\nThe program decides what happened, not you. Never claim an action took place unless it\nwas accepted.\n\n# Your role: MUTE\n\nYou hold the manual. You cannot speak, you never see the bomb, and you cannot touch it.\n\n## Your channels\n\nWhen you gesture, Deaf receives it.\nYou cannot speak.\n\n## Your reach\n\nYou cannot act. What this bomb can be made to do is for the one who can reach it to\nfind under their own hands.\n\n# Hints\n\n- Three of you, three different worlds. Before sending anything, stand where the\n  receiver stands. What reaches them at all, what does your message turn into on\n  arrival, and what do they already know?\n\n- Trace who can actually reach whom before you start. Some of you only connect\n  through a third.\n\n- A sign means nothing until somebody has made it mean something.",
+  "messages": [
+    {
+      "role": "user",
+      "content": "TURN 1\nDEFUSAL MANUAL:\n| display \\ light | green | purple | red | white | yellow |\n|---|---|---|---|---|---|\n| 3 | red | green | white | orange | yellow |\n| 5 | red | yellow | orange | white | green |\n| 6 | yellow | green | white | orange | red |\n| 7 | red | white | orange | yellow | green |\n| 9 | orange | red | yellow | white | green |\n\nVIEWABLE CONTEXT (new arrivals):\nBlind says to Mute: Read the manual and tell me its exact instructions. Please establish a protocol for Deaf to relay every colour and marking to you using gestures, then report those observations to me in your next turn."
+    },
+    {
+      "role": "assistant",
+      "content": "The requested direction cannot work as stated: I cannot see gestures, so Deaf cannot relay information back to me by gesture. The only usable return channel is Deaf speaking aloud, which Blind and I can hear. I am therefore signaling Deaf to report every visible colour and marking verbally, in a fixed order, and to relay the manual table to Blind. The five signs below establish the colour-token order as the manual’s column order: green, purple, red, white, yellow. Deaf should use the corresponding token when reporting a colour aloud, while also saying its colour name so there is no ambiguity.\n\n``` \ngesture(to=\"deaf\", symbols=[\"👍\", \"🤟\", \"👎\", \"🖐\", \"👌\"])\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 2\nDEFUSAL MANUAL:\n| display \\ light | green | purple | red | white | yellow |\n|---|---|---|---|---|---|\n| 3 | red | green | white | orange | yellow |\n| 5 | red | yellow | orange | white | green |\n| 6 | yellow | green | white | orange | red |\n| 7 | red | white | orange | yellow | green |\n| 9 | orange | red | yellow | white | green |\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says: I see display 3, purple light, and wires in order: 1 red, 2 white, 3 orange, 4 yellow, 5 green. Mute, read the manual and tell Blind exactly what to do.\nBlind says to Mute: I need the manual's exact instruction before I cut anything. Deaf reports display 3, purple light, and wires 1 red, 2 white, 3 orange, 4 yellow, 5 green; please interpret these using the manual and tell me which wire position to cut."
+    },
+    {
+      "role": "assistant",
+      "content": "The manual maps display 3 with a purple light to **green**. Among the reported wires, green is wire **5**, so Blind must cut wire 5. I cannot speak to Blind; I am sending Deaf five green tokens, using the established colour-token protocol, so Deaf can relay “green wire, position 5” aloud.\n\n``` \ngesture(to=\"deaf\", symbols=[\"👍\", \"👍\", \"👍\", \"👍\", \"👍\"])\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 3\nDEFUSAL MANUAL:\n| display \\ light | green | purple | red | white | yellow |\n|---|---|---|---|---|---|\n| 3 | red | green | white | orange | yellow |\n| 5 | red | yellow | orange | white | green |\n| 6 | yellow | green | white | orange | red |\n| 7 | red | white | orange | yellow | green |\n| 9 | orange | red | yellow | white | green |\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Mute: Your gestures have no established meaning. Please speak the manual's exact instructions to Blind, including the required wire and any conditions."
+    },
+    {
+      "role": "assistant",
+      "content": "I cannot speak, so I cannot literally voice the instruction to Blind. Deaf already has the display, light, wire colours, and manual; the required result is unambiguous: display 3 with purple light produces **green**, so the **green wire, position 5, must be cut**. I am sending an open-hand five as a direct cue for wire position 5, for Deaf to state aloud to Blind.\n\n``` \ngesture(to=\"deaf\", symbols=[\"🖐\"])\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 4\nDEFUSAL MANUAL:\n| display \\ light | green | purple | red | white | yellow |\n|---|---|---|---|---|---|\n| 3 | red | green | white | orange | yellow |\n| 5 | red | yellow | orange | white | green |\n| 6 | yellow | green | white | orange | red |\n| 7 | red | white | orange | yellow | green |\n| 9 | orange | red | yellow | white | green |\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Mute: I cannot interpret 🖐 without an agreed code. Please speak the manual instruction directly to Blind.\nBlind says to Mute: Your gesture is not readable by me. Speak the manual's exact result aloud to me: for display 3, purple light, and wire colours red, white, orange, yellow, green, which position must I cut?"
+    },
+    {
+      "role": "assistant",
+      "content": "I cannot speak, and Blind cannot see my gestures. The only possible route is a gesture to Deaf followed by Deaf speaking to Blind. The manual’s exact result is **green**, and green is wire **5**. I am using five separate index-finger signs as an explicit count: the count is the wire position to cut.\n\n``` \ngesture(to=\"deaf\", symbols=[\"☝\", \"☝\", \"☝\", \"☝\", \"☝\"])\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 5\nDEFUSAL MANUAL:\n| display \\ light | green | purple | red | white | yellow |\n|---|---|---|---|---|---|\n| 3 | red | green | white | orange | yellow |\n| 5 | red | yellow | orange | white | green |\n| 6 | yellow | green | white | orange | red |\n| 7 | red | white | orange | yellow | green |\n| 9 | orange | red | yellow | white | green |\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Mute: Please use this code: send one to five ☝ gestures to identify the required wire number. Send 👎 if Blind must not act yet. Send the code once only.\nBlind says to Mute: I cannot see your gestures. Please speak the exact wire position required by the manual as a number from 1 to 5, then I will perform that cut."
+    },
+    {
+      "role": "assistant",
+      "content": "The manual’s result is green, which is wire position 5 in Deaf’s reported order. Deaf has now specified the agreed protocol, so I will send exactly five index-finger gestures once and no “do not act” signal. Deaf can then speak the number 5 to Blind, who can perform the cut.\n\n``` \ngesture(to=\"deaf\", symbols=[\"☝\", \"☝\", \"☝\", \"☝\", \"☝\"])\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 6\nDEFUSAL MANUAL:\n| display \\ light | green | purple | red | white | yellow |\n|---|---|---|---|---|---|\n| 3 | red | green | white | orange | yellow |\n| 5 | red | yellow | orange | white | green |\n| 6 | yellow | green | white | orange | red |\n| 7 | red | white | orange | yellow | green |\n| 9 | orange | red | yellow | white | green |\n\nVIEWABLE CONTEXT (new arrivals):\nSystem: correct wire cut; the bomb has changed"
+    },
+    {
+      "role": "assistant",
+      "content": "The previous cut was accepted, but the bomb has changed, so the earlier observation is no longer applicable. I have no new display, light, or wire information to interpret yet; acting on the old result would be unsafe. I will wait for the new observations.\n\n``` \nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 7\nDEFUSAL MANUAL:\n| display \\ light | green | purple | red | white | yellow |\n|---|---|---|---|---|---|\n| 3 | red | green | white | orange | yellow |\n| 5 | red | yellow | orange | white | green |\n| 6 | yellow | green | white | orange | red |\n| 7 | red | white | orange | yellow | green |\n| 9 | orange | red | yellow | white | green |\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Mute: Correct wire 5 was cut. New state: display 7, white light; remaining wires 1 white, 2 orange, 3 yellow, 4 red. Please read the manual for this state and tell Blind the exact next action.\nBlind says to Mute: For the new state, display 7, white light, remaining wires in positions 1 white, 2 orange, 3 yellow, 4 red, please speak the exact wire position the manual says to cut."
+    },
+    {
+      "role": "assistant",
+      "content": "For display 7 with a white light, the manual requires **yellow**. The remaining yellow wire is position **3**. I cannot speak to Blind, so I will send Deaf the established one-to-five count code exactly once; Deaf can say “3” aloud to Blind.\n\n``` \ngesture(to=\"deaf\", symbols=[\"☝\", \"☝\", \"☝\"])\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 8\nDEFUSAL MANUAL:\n| display \\ light | green | purple | red | white | yellow |\n|---|---|---|---|---|---|\n| 3 | red | green | white | orange | yellow |\n| 5 | red | yellow | orange | white | green |\n| 6 | yellow | green | white | orange | red |\n| 7 | red | white | orange | yellow | green |\n| 9 | orange | red | yellow | white | green |\n\nVIEWABLE CONTEXT (new arrivals):\nSystem: correct wire cut; the bomb has changed"
+    },
+    {
+      "role": "assistant",
+      "content": "The second cut was accepted, and the bomb has changed again. The previous display and wire arrangement are no longer valid, and no new observation has arrived yet, so Blind must not act on the old instruction.\n\n``` \nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 9\nDEFUSAL MANUAL:\n| display \\ light | green | purple | red | white | yellow |\n|---|---|---|---|---|---|\n| 3 | red | green | white | orange | yellow |\n| 5 | red | yellow | orange | white | green |\n| 6 | yellow | green | white | orange | red |\n| 7 | red | white | orange | yellow | green |\n| 9 | orange | red | yellow | white | green |\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Mute: Correct wire 3 was cut. New state: display 6, yellow light; wire 1 orange, wire 2 red, wire 4 white; wires 3 and 5 cut. Please read the manual and relay the exact next wire instruction.\nBlind says to Mute: For display 6 with yellow light and remaining wires 1 orange, 2 red, and 4 white, tell me the required wire position using the established count of upward gestures."
+    },
+    {
+      "role": "assistant",
+      "content": "For display 6 with a yellow light, the manual requires **red**. The red wire is remaining at position **2**, so Blind should cut position 2. I will relay the established count using exactly two upward gestures to Deaf, who can tell Blind the number.\n\n``` \ngesture(to=\"deaf\", symbols=[\"☝\", \"☝\"])\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 10\nDEFUSAL MANUAL:\n| display \\ light | green | purple | red | white | yellow |\n|---|---|---|---|---|---|\n| 3 | red | green | white | orange | yellow |\n| 5 | red | yellow | orange | white | green |\n| 6 | yellow | green | white | orange | red |\n| 7 | red | white | orange | yellow | green |\n| 9 | orange | red | yellow | white | green |\n\nVIEWABLE CONTEXT (new arrivals):\nSystem: correct wire cut; the bomb has changed"
+    },
+    {
+      "role": "assistant",
+      "content": "The third cut was accepted and the bomb has changed again. The prior state is obsolete, and no new display, light, or wire arrangement has been reported. Blind should not act until Deaf provides the new observation.\n\n``` \nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 11\nDEFUSAL MANUAL:\n| display \\ light | green | purple | red | white | yellow |\n|---|---|---|---|---|---|\n| 3 | red | green | white | orange | yellow |\n| 5 | red | yellow | orange | white | green |\n| 6 | yellow | green | white | orange | red |\n| 7 | red | white | orange | yellow | green |\n| 9 | orange | red | yellow | white | green |\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Mute: Correct wire 2 was cut. New state: display 6, white light; wire 1 white and wire 4 orange remain; wires 2, 3, and 5 are cut. Please relay the exact next wire number using the established gesture code.\nBlind says to Mute: For display 6 with white light and remaining wires 1 white and 4 orange, send the required wire position using the established count of upward gestures."
+    },
+    {
+      "role": "assistant",
+      "content": "For display 6 with a white light, the manual requires **orange**. The remaining orange wire is position **4**, so I will send four upward gestures to Deaf using the established code. Deaf can relay “4” to Blind.\n\n``` \ngesture(to=\"deaf\", symbols=[\"☝\", \"☝\", \"☝\", \"☝\"])\n```"
+    }
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "role": "blind",
+  "system": "# LLM-BANANA\n\n# Game rules\n\n## The room\n\nYou and two other monkeys are locked in a room with one armed bomb.\n\nA wrong action detonates it. All three of you die. There is no second attempt.\n\nNo two bombs are built alike, and nothing says in advance what this one carries. It\nreaches you only as your own view reveals it; the rest of it exists for you only\nthrough the other two.\n\nYou each hold a different piece of what it takes. Work together.\n\n## The three monkeys\n\n| Monkey | Can | Cannot |\n|---|---|---|\n| Deaf | See the bomb: every colour and marking printed on it | Hear anything, or touch the bomb |\n| Mute | Read the manual | Speak, or touch the bomb |\n| Blind | Reach the bomb: feel it and work its parts | See a colour, a gesture, or anything merely printed |\n\nYou are shown your own share at the start of every round, and never anyone else's.\n\n## Speech\n\nSpeech is a voice, not a screen. It carries words, numbers and ordinary punctuation,\nand nothing else. Writing a gesture symbol into your sentence means you make that\ngesture while you talk. Whoever can hear receives your words; whoever can see receives\nthe gestures you made. A listener who cannot see gets a blank where each gesture was; a\nwatcher who cannot hear gets the gestures and none of the words.\n\nA mark that has no name cannot be pronounced: whoever holds one can describe it, never\nread it out.\n\n## Gestures\n\nA gesture is made with the hands, using only the symbols in the alphabet below.\nWhoever can see receives it; whoever cannot receives one blank per symbol, so they\nknow something was signalled but not what. Nothing gestured is ever heard.\n\n👍 👎 👌 ☝ ✌ 🤟 🖐 ✋ 👆 👇 👈 👉 🫱 🫲 🫳 🫴 🫷 🫸 🤛 🤜 ✊ 👊 👋 🤚 🖖 🤌 🤏 🤞 🫰 🤘 🤙 👏 🙌 🫶 👐 🤲 🤝 🙏 🫵 ✍ 💅 🤳\n\n## Turns\n\nThe speaking order was drawn once at random and will never change: every round goes\nMute, Blind, Deaf. Whoever comes before you in a round is already heard by the time you are\nasked, and what you send lands on whoever comes after you in that same round. Whatever\nyou missed reaches you at the start of the next one.\n\nYou may name who a message is for — `to=\"deaf\"` — and then it goes to them alone:\nnobody else receives any of it. Left unnamed, it reaches everyone able to perceive it.\nYou may send several messages in one turn, each to someone different.\n\n## Calls\n\nEvery reply has two parts, in this order. First, your thinking, in plain prose: what\nyou believe the bomb is, what you just learned, and why you are sending what follows.\nIt reaches nobody and changes nothing, but it is not optional — a reply that is only a\ncode block is incomplete. Then your calls, all of them in one fenced code block, last.\nOnly what is inside the block is sent.\n\nNothing is executed: calls return nothing, and variables, conditionals and loops are\nignored. Write only literal top-level calls.\n\n    ```\n    speak(to=\"mute\", text=\"there are three of them and the middle one is odd\")\n    gesture(to=\"deaf\", symbols=[\"✊\", \"✌\"])\n    wait()\n    ```\n\nIf you have nothing worth sending, call wait(). Producing no call at all counts as the\nsame thing.\n\nThe program decides what happened, not you. Never claim an action took place unless it\nwas accepted.\n\n# Your role: BLIND\n\nYou are the only one who can reach the bomb. Touch is your only sense: what you are\nshown is what your hands found, nothing more and nothing less. Anything merely printed\nor painted is not there for you, and no colour ever reaches you. Nothing in your view\nis a guess — if it appears there, it is under your fingers.\n\n## Your channels\n\nWhen you speak, Mute receives it.\nWhen you gesture, Deaf and Mute receive it.\nYour channels split the room: in one turn you may speak one thing to Mute and\ngesture a different thing to Deaf — two messages, two audiences.\nYou never receive gesture.\n\n## Your reach\n\nYou are the hands. This bomb is built with these actions and no others:\n\n    act(op=\"cut\", position=N) — N is a wire position, 1 to 3\n\nThe list says what can be done to it, not what is on it. What each part holds is still\nonly known to whoever can perceive that part.\n",
+  "messages": [
+    {
+      "role": "user",
+      "content": "TURN 1\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nWIRES 1:[?] 2:[?] 3:[?]\n\nVIEWABLE CONTEXT (new arrivals):\n(empty)"
+    },
+    {
+      "role": "assistant",
+      "content": "I have no tactile information yet, so I must not cut any wire. I am asking Mute to read the manual and relay the required rule, while signaling Deaf to communicate the bomb’s visible information through Mute.\n\n```text\nspeak(to=\"mute\", text=\"Read the manual and tell me exactly which wire position to cut, including how the display and light determine it. Also relay Deaf's visible observations to me.\")\ngesture(to=\"deaf\", symbols=[\"🤝\"])\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 2\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nWIRES 1:[?] 2:[?] 3:[?]\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says: Deaf observes display 8, green light, and wires in order 1 red, 2 yellow, 3 blue. Mute, use the manual and tell Blind exactly what to do. Blind, wait for the Mute's instructions."
+    },
+    {
+      "role": "assistant",
+      "content": "I have the bomb’s visible details relayed, but the manual’s rule has not yet been provided to me. Since cutting without that rule would be fatal, I will wait for Mute’s instruction.\n\n```text\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 3\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nWIRES 1:[?] 2:[?] 3:[?]\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Blind: Mute sent six gestures in this order: handshake, OK sign, raised open hand, thumbs-up, handshake, index pointing up. Display is 8, light green, wires red-yellow-blue."
+    },
+    {
+      "role": "assistant",
+      "content": "The bomb details are known, but the six gestures do not give me a reliable instruction: I cannot see gestures, and their meanings have not been tied to a wire position. I need Mute to state the manual’s result plainly before I cut anything.\n\n```text\nspeak(to=\"mute\", text=\"Please state plainly which wire position to cut for display 8, green light, and wires red-yellow-blue. Do not use gestures.\")\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 4\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nWIRES 1:[?] 2:[?] 3:[?]\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Blind: Mute's latest gesture is ?: index pointing up."
+    },
+    {
+      "role": "assistant",
+      "content": "I still have no readable manual instruction. The visible gesture cannot convey its meaning to me, so cutting any wire would be unsafe. I will ask Mute again for a plain spoken position.\n\n```text\nspeak(to=\"mute\", text=\"I cannot see gestures. Tell me by voice only: cut position 1, 2, or 3 for display 8, green light, and red-yellow-blue wires.\")\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 5\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nWIRES 1:[?] 2:[?] 3:[?]\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Blind: The bomb remains display 8, green light, wires 1 red, 2 yellow, 3 blue. Mute's repeated ? gesture is not yet decoded. Do not act until an exact instruction is confirmed."
+    },
+    {
+      "role": "assistant",
+      "content": "No safe wire choice has reached me yet. I will give Mute an unambiguous gesture code: one raised finger means wire 1, two means wire 2, and three means wire 3. Mute can apply the manual and Deaf can identify the gesture for me.\n\n```text\nspeak(to=\"mute\", text=\"Use the manual for display 8, green light, and red-yellow-blue wires. Then make exactly one gesture: index up means cut wire 1, victory sign means cut wire 2, or three fingers means cut wire 3. Deaf, report which gesture Mute makes.\")\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 6\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nWIRES 1:[?] 2:[?] 3:[?]\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Blind: Mute's latest sequence is five gestures: handshake, raised open hand, handshake, index pointing up, handshake. The bomb still shows 8, green light, and wires 1 red, 2 yellow, 3 blue. I cannot determine the sequence's meaning.\nMute gestures: [?]"
+    },
+    {
+      "role": "assistant",
+      "content": "The tactile wire identities are unavailable, and no exact spoken instruction has arrived. The gesture sequence is not a reliable wire position, so cutting now would risk detonation. I will wait for Mute to state the manual’s answer plainly.\n\n```text\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 7\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nWIRES 1:[?] 2:[?] 3:[?]\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Blind: New message from Mute: ?, the index-pointing-up gesture. Bomb remains display 8, green light, wires 1 red, 2 yellow, 3 blue. Please interpret this using the manual and the prior gesture sequence; I cannot verify its meaning."
+    },
+    {
+      "role": "assistant",
+      "content": "The manual’s result is still not available in a form I can use. The index-pointing gesture is not an agreed wire code, and the prior sequence is ambiguous. I will request a literal spoken answer from Mute and will not cut yet.\n\n```text\nspeak(to=\"mute\", text=\"Reply with only the exact action in words: cut position 1, cut position 2, or cut position 3. For display 8, green light, and wires red-yellow-blue, which position does the manual require?\")\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 8\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nWIRES 1:[?] 2:[?] 3:[?]\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Blind: Mute again sent ?. This is the same signal repeated on turns 3, 4, 6, and 7; no bomb state has changed. Do not act unless its meaning is confirmed."
+    },
+    {
+      "role": "assistant",
+      "content": "Mute cannot answer by voice, and I cannot see gestures. The repeated signal is therefore unusable unless we impose a simple one-gesture code. I will have Mute send exactly one distinct gesture for the manual’s required wire, and Deaf can identify it and report it to me.\n\n```text\nspeak(to=\"mute\", text=\"After applying the manual to display 8, green light, and red-yellow-blue wires, send exactly one gesture and nothing else: thumbs-up means cut position 1, victory sign means cut position 2, open hand means cut position 3. Deaf, report which one you see.\")\n```"
+    }
+  ]
+}

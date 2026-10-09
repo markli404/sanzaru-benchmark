@@ -1,0 +1,70 @@
+{
+  "role": "blind",
+  "system": "# LLM-BANANA\n\n# Game rules\n\n## The room\n\nYou and two other monkeys are locked in a room with one armed bomb.\n\nA wrong action detonates it. All three of you die. There is no second attempt.\n\nNo two bombs are built alike, and nothing says in advance what this one carries. It\nreaches you only as your own view reveals it; the rest of it exists for you only\nthrough the other two.\n\nYou each hold a different piece of what it takes. Work together.\n\n## The three monkeys\n\n| Monkey | Can | Cannot |\n|---|---|---|\n| Deaf | See the bomb: every colour and marking printed on it | Hear anything, or touch the bomb |\n| Mute | Read the manual | Speak, or touch the bomb |\n| Blind | Reach the bomb: feel it and work its parts | See a colour, a gesture, or anything merely printed |\n\nYou are shown your own share at the start of every round, and never anyone else's.\n\n## Speech\n\nSpeech is a voice, not a screen. It carries words, numbers and ordinary punctuation,\nand nothing else. Writing a gesture symbol into your sentence means you make that\ngesture while you talk. Whoever can hear receives your words; whoever can see receives\nthe gestures you made. A listener who cannot see gets a blank where each gesture was; a\nwatcher who cannot hear gets the gestures and none of the words.\n\nA mark that has no name cannot be pronounced: whoever holds one can describe it, never\nread it out.\n\n## Gestures\n\nA gesture is made with the hands, using only the symbols in the alphabet below.\nWhoever can see receives it; whoever cannot receives one blank per symbol, so they\nknow something was signalled but not what. Nothing gestured is ever heard.\n\n👍 👎 👌 ☝ ✌ 🤟 🖐 ✋ 👆 👇 👈 👉 🫱 🫲 🫳 🫴 🫷 🫸 🤛 🤜 ✊ 👊 👋 🤚 🖖 🤌 🤏 🤞 🫰 🤘 🤙 👏 🙌 🫶 👐 🤲 🤝 🙏 🫵 ✍ 💅 🤳\n\n## Turns\n\nThe speaking order was drawn once at random and will never change: every round goes\nMute, Blind, Deaf. Whoever comes before you in a round is already heard by the time you are\nasked, and what you send lands on whoever comes after you in that same round. Whatever\nyou missed reaches you at the start of the next one.\n\nYou may name who a message is for — `to=\"deaf\"` — and then it goes to them alone:\nnobody else receives any of it. Left unnamed, it reaches everyone able to perceive it.\nYou may send several messages in one turn, each to someone different.\n\n## Calls\n\nEvery reply has two parts, in this order. First, your thinking, in plain prose: what\nyou believe the bomb is, what you just learned, and why you are sending what follows.\nIt reaches nobody and changes nothing, but it is not optional — a reply that is only a\ncode block is incomplete. Then your calls, all of them in one fenced code block, last.\nOnly what is inside the block is sent.\n\nNothing is executed: calls return nothing, and variables, conditionals and loops are\nignored. Write only literal top-level calls.\n\n    ```\n    speak(to=\"mute\", text=\"there are three of them and the middle one is odd\")\n    gesture(to=\"deaf\", symbols=[\"✊\", \"✌\"])\n    wait()\n    ```\n\nIf you have nothing worth sending, call wait(). Producing no call at all counts as the\nsame thing.\n\nThe program decides what happened, not you. Never claim an action took place unless it\nwas accepted.\n\n# Your role: BLIND\n\nYou are the only one who can reach the bomb. Touch is your only sense: what you are\nshown is what your hands found, nothing more and nothing less. Anything merely printed\nor painted is not there for you, and no colour ever reaches you. Nothing in your view\nis a guess — if it appears there, it is under your fingers.\n\n## Your channels\n\nWhen you speak, Mute receives it.\nWhen you gesture, Deaf and Mute receive it.\nYour channels split the room: in one turn you may speak one thing to Mute and\ngesture a different thing to Deaf — two messages, two audiences.\nYou never receive gesture.\n\n## Your reach\n\nYou are the hands. This bomb is built with these actions and no others:\n\n    act(op=\"cut\", position=N) — N is a wire position, 1 to 3\n\nThe list says what can be done to it, not what is on it. What each part holds is still\nonly known to whoever can perceive that part.\n\n# Hints\n\n- Three of you, three different worlds. Before sending anything, stand where the\n  receiver stands. What reaches them at all, what does your message turn into on\n  arrival, and what do they already know?\n\n- Trace who can actually reach whom before you start. Some of you only connect\n  through a third.\n\n- A sign means nothing until somebody has made it mean something.",
+  "messages": [
+    {
+      "role": "user",
+      "content": "TURN 1\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nPLATE engraved [ꖜ]\nWIRES 1:[?] 2:[?] 3:[?]\n\nVIEWABLE CONTEXT (new arrivals):\n(empty)"
+    },
+    {
+      "role": "assistant",
+      "content": "I'm the Blind monkey. I can feel the bomb's parts but everything is unknown to me right now - the display, light, and wires are all unclear, and I can't read the plate engraving (that's printed/marked, not tactile). I need information from Mute (who read the manual) and Deaf (who can see colors/markings) before I dare cut anything.\n\nSince I go last in turn order (Mute, Blind, Deaf), I haven't received anything yet this round - Mute already spoke but I don't see it in my context, meaning nothing was sent to me. I should wait and signal that I'm ready to receive instructions, but I have nothing to send yet since I have no information to share and don't want to act blindly.\n\nI'll wait this turn since I have nothing useful to report about wire positions yet, and I need to hear from Mute/Deaf first.\n\n```\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 2\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nPLATE engraved [ꖜ]\nWIRES 1:[?] 2:[?] 3:[?]\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says: Deaf here. Bomb display reads zero. Light is off. Plate is engraved but I cannot read text, only shapes if any. Three wires: wire one yellow, wire two green, wire three red."
+    },
+    {
+      "role": "assistant",
+      "content": "Now I have color information from Deaf: wire 1 is yellow, wire 2 is green, wire 3 is red. Display reads zero, light is off. But I still don't know the manual's instructions - only Mute has read that. I need Mute to tell me (or tell Deaf, who could relay via gesture... but gestures only carry symbols, not color-to-instruction mapping unless we establish a code).\n\nSince turn order is Mute, Blind, Deaf - Mute already went this round before me, but I got no message from Mute, meaning Mute either said nothing to me or nothing relevant arrived. I need to prompt Mute directly since I can only be heard by Mute (my speech goes to Mute only), and I need Mute's manual knowledge to know which wire to cut.\n\nI should ask Mute for guidance, relaying what Deaf told me about colors, since Mute can hear me but never sees the bomb.\n\n```\nspeak(to=\"mute\", text=\"Blind here. Deaf reports wire one yellow, wire two green, wire three red, display zero, light off. Which wire do I cut?\")\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 3\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nPLATE engraved [ꖜ]\nWIRES 1:[?] 2:[?] 3:[?]\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Blind: Deaf here. Standby, do not touch the bomb yet. I am decoding Mute's signals."
+    },
+    {
+      "role": "assistant",
+      "content": "Deaf is telling me to hold off - they're decoding gestures from Mute (which Deaf can see but not hear, and I can't receive gestures at all). This confirms Mute is sending gesture-based instructions to Deaf, since Mute cannot speak. I should wait patiently and not touch anything until I get clear instructions relayed through either Deaf or Mute via speech to me.\n\n```\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 4\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nPLATE engraved [ꖜ]\nWIRES 1:[?] 2:[?] 3:[?]\n\nVIEWABLE CONTEXT (new arrivals):\n(empty)"
+    },
+    {
+      "role": "assistant",
+      "content": "Nothing new arrived this turn. I'll continue waiting since I still don't have a clear instruction on which wire to cut. I don't want to act without confirmation.\n\n```\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 5\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nPLATE engraved [ꖜ]\nWIRES 1:[?] 2:[?] 3:[?]\n\nVIEWABLE CONTEXT (new arrivals):\n(empty)"
+    },
+    {
+      "role": "assistant",
+      "content": "Still nothing new. I remain in a holding pattern, waiting for either Mute or Deaf to relay a clear instruction on which wire to cut. I'll check in again to prompt movement, since silence for multiple turns suggests something may be stuck.\n\n```\nspeak(to=\"mute\", text=\"Blind here, still waiting for instruction. Deaf said you are signaling with gestures. I cannot see gestures. Please have Deaf relay your instruction to me in words, or tell me directly which wire position to cut.\")\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 6\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nPLATE engraved [ꖜ]\nWIRES 1:[?] 2:[?] 3:[?]\n\nVIEWABLE CONTEXT (new arrivals):\n(empty)"
+    },
+    {
+      "role": "assistant",
+      "content": "Still no response. I'll wait again, since I have no new information and don't want to guess blindly on a bomb.\n\n```\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 7\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nPLATE engraved [ꖜ]\nWIRES 1:[?] 2:[?] 3:[?]\n\nVIEWABLE CONTEXT (new arrivals):\n(empty)"
+    },
+    {
+      "role": "assistant",
+      "content": "Continuing to wait for a clear instruction. I'll send another prompt to keep communication alive, in case my messages aren't reaching or being acted upon.\n\n```\nspeak(to=\"mute\", text=\"Blind here. Still no instruction received. If you can hear me, please speak the wire number to cut, using color: yellow is wire one, green is wire two, red is wire three.\")\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 8\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nPLATE engraved [ꖜ]\nWIRES 1:[?] 2:[?] 3:[?]\n\nVIEWABLE CONTEXT (new arrivals):\n(empty)"
+    },
+    {
+      "role": "assistant",
+      "content": "Still nothing. I'll wait once more.\n\n```\nwait()\n```"
+    }
+  ]
+}

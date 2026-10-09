@@ -1,0 +1,70 @@
+{
+  "role": "mute",
+  "system": "# LLM-BANANA\n\n# Game rules\n\n## The room\n\nYou and two other monkeys are locked in a room with one armed bomb.\n\nA wrong action detonates it. All three of you die. There is no second attempt.\n\nNo two bombs are built alike, and nothing says in advance what this one carries. It\nreaches you only as your own view reveals it; the rest of it exists for you only\nthrough the other two.\n\nYou each hold a different piece of what it takes. Work together.\n\n## The three monkeys\n\n| Monkey | Can | Cannot |\n|---|---|---|\n| Deaf | See the bomb: every colour and marking printed on it | Hear anything, or touch the bomb |\n| Mute | Read the manual | Speak, or touch the bomb |\n| Blind | Reach the bomb: feel it and work its parts | See a colour, a gesture, or anything merely printed |\n\nYou are shown your own share at the start of every round, and never anyone else's.\n\n## Speech\n\nSpeech is a voice, not a screen. It carries words, numbers and ordinary punctuation,\nand nothing else. Writing a gesture symbol into your sentence means you make that\ngesture while you talk. Whoever can hear receives your words; whoever can see receives\nthe gestures you made. A listener who cannot see gets a blank where each gesture was; a\nwatcher who cannot hear gets the gestures and none of the words.\n\nA mark that has no name cannot be pronounced: whoever holds one can describe it, never\nread it out.\n\n## Gestures\n\nA gesture is made with the hands, using only the symbols in the alphabet below.\nWhoever can see receives it; whoever cannot receives one blank per symbol, so they\nknow something was signalled but not what. Nothing gestured is ever heard.\n\n👍 👎 👌 ☝ ✌ 🤟 🖐 ✋ 👆 👇 👈 👉 🫱 🫲 🫳 🫴 🫷 🫸 🤛 🤜 ✊ 👊 👋 🤚 🖖 🤌 🤏 🤞 🫰 🤘 🤙 👏 🙌 🫶 👐 🤲 🤝 🙏 🫵 ✍ 💅 🤳\n\n## Turns\n\nThe speaking order was drawn once at random and will never change: every round goes\nMute, Blind, Deaf. Whoever comes before you in a round is already heard by the time you are\nasked, and what you send lands on whoever comes after you in that same round. Whatever\nyou missed reaches you at the start of the next one.\n\nYou may name who a message is for — `to=\"deaf\"` — and then it goes to them alone:\nnobody else receives any of it. Left unnamed, it reaches everyone able to perceive it.\nYou may send several messages in one turn, each to someone different.\n\n## Calls\n\nEvery reply has two parts, in this order. First, your thinking, in plain prose: what\nyou believe the bomb is, what you just learned, and why you are sending what follows.\nIt reaches nobody and changes nothing, but it is not optional — a reply that is only a\ncode block is incomplete. Then your calls, all of them in one fenced code block, last.\nOnly what is inside the block is sent.\n\nNothing is executed: calls return nothing, and variables, conditionals and loops are\nignored. Write only literal top-level calls.\n\n    ```\n    speak(to=\"mute\", text=\"there are three of them and the middle one is odd\")\n    gesture(to=\"deaf\", symbols=[\"✊\", \"✌\"])\n    wait()\n    ```\n\nIf you have nothing worth sending, call wait(). Producing no call at all counts as the\nsame thing.\n\nThe program decides what happened, not you. Never claim an action took place unless it\nwas accepted.\n\n# Your role: MUTE\n\nYou hold the manual. You cannot speak, you never see the bomb, and you cannot touch it.\n\n## Your channels\n\nWhen you gesture, Deaf receives it.\nYou cannot speak.\n\n## Your reach\n\nYou cannot act. What this bomb can be made to do is for the one who can reach it to\nfind under their own hands.\n\n# Hints\n\n- The routes, by name. Speech reaches Mute and Blind, and never Deaf. Gestures\n  reach Deaf and Mute, and never Blind. Deaf can speak and gesture, Mute can\n  only gesture, Blind can only speak. Check every message against this list\n  before you send it.\n\n- Deaf invents the gesture code out loud before anything else moves, and\n  everyone else's opening move is waiting for it. The manual's verdict reaches\n  Blind only as Deaf's spoken order.\n\n- Whatever the code becomes, it starts by being able to say YES, NO, HOLD and\n  DONE. Grow it only when a message will not fit.",
+  "messages": [
+    {
+      "role": "user",
+      "content": "TURN 1\nDEFUSAL MANUAL:\nWhich wire to cut is named by the mark engraved on the plate:\n| mark | cut wire color |\n|---|---|\n| ᖉ | yellow |\n| ꕥ | blue |\n| ꗃ | red |\n\nVIEWABLE CONTEXT (new arrivals):\n(empty)"
+    },
+    {
+      "role": "assistant",
+      "content": "I have the manual’s wire-color mapping, but Deaf must establish the gesture code before anyone proceeds. I will wait for that code.\n\n``` \nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 2\nDEFUSAL MANUAL:\nWhich wire to cut is named by the mark engraved on the plate:\n| mark | cut wire color |\n|---|---|\n| ᖉ | yellow |\n| ꕥ | blue |\n| ꗃ | red |\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says: YES 👍\nDeaf says: NO 👎\nDeaf says: HOLD ✋\nDeaf says: DONE 👌"
+    },
+    {
+      "role": "assistant",
+      "content": "The code is established, but I cannot yet transmit the manual’s three color mappings unambiguously through the currently defined four signals. A premature instruction could cause Blind to cut the wrong wire, so I am signaling HOLD while preserving the no-action state.\n\n``` \ngesture(to=\"deaf\", symbols=[\"✋\"])\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 3\nDEFUSAL MANUAL:\nWhich wire to cut is named by the mark engraved on the plate:\n| mark | cut wire color |\n|---|---|\n| ᖉ | yellow |\n| ꕥ | blue |\n| ꗃ | red |\n\nVIEWABLE CONTEXT (new arrivals):\n(empty)"
+    },
+    {
+      "role": "assistant",
+      "content": "The safest route is to let Deaf identify the engraved mark verbally to Blind. That report will reach me at the start of the next round; I can then use the manual to signal the corresponding color to Deaf, who can relay the cutting order to Blind. I will not add an unagreed code or risk an ambiguous gesture now.\n\n``` \nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 4\nDEFUSAL MANUAL:\nWhich wire to cut is named by the mark engraved on the plate:\n| mark | cut wire color |\n|---|---|\n| ᖉ | yellow |\n| ꕥ | blue |\n| ꗃ | red |\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Mute: Please signal the manual verdict now: YES, NO, HOLD, or DONE."
+    },
+    {
+      "role": "assistant",
+      "content": "Deaf has not reported which mark is engraved, so the manual cannot yet select a wire color. I am signaling HOLD rather than guessing.\n\n``` \ngesture(to=\"deaf\", symbols=[\"✋\"])\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 5\nDEFUSAL MANUAL:\nWhich wire to cut is named by the mark engraved on the plate:\n| mark | cut wire color |\n|---|---|\n| ᖉ | yellow |\n| ꕥ | blue |\n| ꗃ | red |\n\nVIEWABLE CONTEXT (new arrivals):\nBlind says to Mute: No nonactivating inspection operation exists; the only action is cutting a wire, so I will not act to inspect. I find three wire positions, 1 through 3, with no tactile markings revealed, and a plate with an engraved flower-like symbol that cannot be pronounced."
+    },
+    {
+      "role": "assistant",
+      "content": "The engraved symbol is non-pronounceable, so Blind cannot identify it by touch. Deaf can see it and can describe it aloud to Blind; Blind can then report that description to me on the next round. Since no wire may be cut until the mark is identified, I signal HOLD.\n\n``` \ngesture(to=\"deaf\", symbols=[\"✋\"])\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 6\nDEFUSAL MANUAL:\nWhich wire to cut is named by the mark engraved on the plate:\n| mark | cut wire color |\n|---|---|\n| ᖉ | yellow |\n| ꕥ | blue |\n| ꗃ | red |\n\nVIEWABLE CONTEXT (new arrivals):\nBlind says to Mute: Manual verdict is still HOLD. By touch I can confirm wire positions 1, 2, and 3 and the engraved flower-like plate marking; I cannot identify wire colors, and no other tactile control information is revealed. I will not cut.\nDeaf says to Mute: Has Blind completed the tactile inspection and reported the controls to you? Signal YES or NO."
+    },
+    {
+      "role": "assistant",
+      "content": "Blind has reported the accessible tactile information, but the decisive engraved mark still has not been identified. I answer NO, indicating that the controls needed for the manual verdict have not been fully reported.\n\n``` \ngesture(to=\"deaf\", symbols=[\"👎\"])\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 7\nDEFUSAL MANUAL:\nWhich wire to cut is named by the mark engraved on the plate:\n| mark | cut wire color |\n|---|---|\n| ᖉ | yellow |\n| ꕥ | blue |\n| ꗃ | red |\n\nVIEWABLE CONTEXT (new arrivals):\n(empty)"
+    },
+    {
+      "role": "assistant",
+      "content": "The mark has still not been identified well enough to choose among yellow, blue, and red. Blind has confirmed that touch cannot reveal it, so Deaf must communicate a visual description to Blind, who can relay that description to me. Until then, I signal HOLD.\n\n``` \ngesture(to=\"deaf\", symbols=[\"✋\"])\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 8\nDEFUSAL MANUAL:\nWhich wire to cut is named by the mark engraved on the plate:\n| mark | cut wire color |\n|---|---|\n| ᖉ | yellow |\n| ꕥ | blue |\n| ꗃ | red |\n\nVIEWABLE CONTEXT (new arrivals):\nBlind says to Mute: Safe inspection has no separate operation; the only physical action is cutting a wire. Without cutting, I can locate wire positions 1, 2, and 3 and feel the plate's engraved flower-like marking. I cannot sense wire colors, the display, the light, or merely printed markings. I will not act without your verdict.\nDeaf says to Mute: Has Blind now reported any tactile controls or markings to you? Signal YES or NO."
+    },
+    {
+      "role": "assistant",
+      "content": "Blind has now reported tactile positions and the presence of the engraved marking, so the answer to Deaf’s literal question is YES. This still does not identify which of the three manual marks it is, so no cutting verdict is possible yet.\n\n``` \ngesture(to=\"deaf\", symbols=[\"👍\"])\n```"
+    }
+  ]
+}

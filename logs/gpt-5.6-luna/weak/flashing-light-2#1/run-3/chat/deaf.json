@@ -1,0 +1,70 @@
+{
+  "role": "deaf",
+  "system": "# LLM-BANANA\n\n# Game rules\n\n## The room\n\nYou and two other monkeys are locked in a room with one armed bomb.\n\nA wrong action detonates it. All three of you die. There is no second attempt.\n\nNo two bombs are built alike, and nothing says in advance what this one carries. It\nreaches you only as your own view reveals it; the rest of it exists for you only\nthrough the other two.\n\nYou each hold a different piece of what it takes. Work together.\n\n## The three monkeys\n\n| Monkey | Can | Cannot |\n|---|---|---|\n| Deaf | See the bomb: every colour and marking printed on it | Hear anything, or touch the bomb |\n| Mute | Read the manual | Speak, or touch the bomb |\n| Blind | Reach the bomb: feel it and work its parts | See a colour, a gesture, or anything merely printed |\n\nYou are shown your own share at the start of every round, and never anyone else's.\n\n## Speech\n\nSpeech is a voice, not a screen. It carries words, numbers and ordinary punctuation,\nand nothing else. Writing a gesture symbol into your sentence means you make that\ngesture while you talk. Whoever can hear receives your words; whoever can see receives\nthe gestures you made. A listener who cannot see gets a blank where each gesture was; a\nwatcher who cannot hear gets the gestures and none of the words.\n\nA mark that has no name cannot be pronounced: whoever holds one can describe it, never\nread it out.\n\n## Gestures\n\nA gesture is made with the hands, using only the symbols in the alphabet below.\nWhoever can see receives it; whoever cannot receives one blank per symbol, so they\nknow something was signalled but not what. Nothing gestured is ever heard.\n\n👍 👎 👌 ☝ ✌ 🤟 🖐 ✋ 👆 👇 👈 👉 🫱 🫲 🫳 🫴 🫷 🫸 🤛 🤜 ✊ 👊 👋 🤚 🖖 🤌 🤏 🤞 🫰 🤘 🤙 👏 🙌 🫶 👐 🤲 🤝 🙏 🫵 ✍ 💅 🤳\n\n## Turns\n\nThe speaking order was drawn once at random and will never change: every round goes\nMute, Blind, Deaf. Whoever comes before you in a round is already heard by the time you are\nasked, and what you send lands on whoever comes after you in that same round. Whatever\nyou missed reaches you at the start of the next one.\n\nYou may name who a message is for — `to=\"deaf\"` — and then it goes to them alone:\nnobody else receives any of it. Left unnamed, it reaches everyone able to perceive it.\nYou may send several messages in one turn, each to someone different.\n\n## Calls\n\nEvery reply has two parts, in this order. First, your thinking, in plain prose: what\nyou believe the bomb is, what you just learned, and why you are sending what follows.\nIt reaches nobody and changes nothing, but it is not optional — a reply that is only a\ncode block is incomplete. Then your calls, all of them in one fenced code block, last.\nOnly what is inside the block is sent.\n\nNothing is executed: calls return nothing, and variables, conditionals and loops are\nignored. Write only literal top-level calls.\n\n    ```\n    speak(to=\"mute\", text=\"there are three of them and the middle one is odd\")\n    gesture(to=\"deaf\", symbols=[\"✊\", \"✌\"])\n    wait()\n    ```\n\nIf you have nothing worth sending, call wait(). Producing no call at all counts as the\nsame thing.\n\nThe program decides what happened, not you. Never claim an action took place unless it\nwas accepted.\n\n# Your role: DEAF\n\nYou see the bomb: every colour on it, every marking printed on it, every reading it\ngives. You hear nothing. You hold no manual, and you cannot touch the bomb.\n\n## Your channels\n\nWhen you speak, Mute and Blind receive it.\nWhen you gesture, Mute receives it.\nYou never receive speech.\n\n## Your reach\n\nYou cannot act. What this bomb can be made to do is for the one who can reach it to\nfind under their own hands.\n\n# Hints\n\n- Three of you, three different worlds. Before sending anything, stand where the\n  receiver stands. What reaches them at all, what does your message turn into on\n  arrival, and what do they already know?\n\n- Trace who can actually reach whom before you start. Some of you only connect\n  through a third.\n\n- A sign means nothing until somebody has made it mean something.",
+  "messages": [
+    {
+      "role": "user",
+      "content": "TURN 1\nACTION BOARD:\nDISPLAY [0]\nLIGHT [orange]\nWIRES 1:[red] 2:[yellow] 3:[blue]\n\nVIEWABLE CONTEXT (new arrivals):\nMute gestures to Deaf: [👌 👉 🤙]\nBlind gestures to Deaf: [🙏]"
+    },
+    {
+      "role": "assistant",
+      "content": "I can see the bomb’s current state but cannot interpret the manual or operate it. I’m relaying the exact visible information to both teammates. The gestures I received have no established meaning yet, so I will not infer an instruction from them.\n\n```text\nspeak(to=\"mute\", text=\"Visible state: display reads 0. Light is orange. Wires are 1 red, 2 yellow, 3 blue. I cannot interpret the manual or touch the bomb.\")\nspeak(to=\"blind\", text=\"Visible state: display reads 0. Light is orange. Wires are 1 red, 2 yellow, 3 blue. I cannot interpret the manual or touch the bomb.\")\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 2\nACTION BOARD:\nDISPLAY [0]\nLIGHT [green]\nWIRES 1:[red] 2:[yellow] 3:[blue]\n\nVIEWABLE CONTEXT (new arrivals):\nMute gestures to Deaf: [👌 👉 🤙]\nMute gestures to Deaf: [👌 👊 ✌]\nMute gestures to Deaf: [☝ ✌ 🤟]"
+    },
+    {
+      "role": "assistant",
+      "content": "The display and wires are unchanged, but the indicator light has changed from orange to green. The gestures are visible to me, but they have no established meaning, so I cannot safely treat them as instructions. I am sending the updated state to the Blind, who can act on the bomb, and confirming it to the Mute.\n\n```text\nspeak(to=\"blind\", text=\"Update: display still 0; light is now green; wires remain 1 red, 2 yellow, 3 blue.\")\nspeak(to=\"mute\", text=\"Update confirmed: display still 0; light is now green; wires remain 1 red, 2 yellow, 3 blue.\")\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 3\nACTION BOARD:\nDISPLAY [0]\nLIGHT [red]\nWIRES 1:[red] 2:[yellow] 3:[blue]\n\nVIEWABLE CONTEXT (new arrivals):\nMute gestures to Deaf: [🖐 👎]"
+    },
+    {
+      "role": "assistant",
+      "content": "The display remains 0 and the wires remain red, yellow, blue. The light has changed from green to red. I cannot know what the Mute’s gesture means without a shared code, so I am only relaying the observed bomb state to the Blind.\n\n```text\nspeak(to=\"blind\", text=\"Update: display 0; light is red; wires remain 1 red, 2 yellow, 3 blue.\")\nspeak(to=\"mute\", text=\"I observe display 0, red light, and wires 1 red, 2 yellow, 3 blue. Please provide the manual rule for this state to Blind.\")\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 4\nACTION BOARD:\nDISPLAY [0]\nLIGHT [orange]\nWIRES 1:[red] 2:[yellow] 3:[blue]\n\nVIEWABLE CONTEXT (new arrivals):\nMute gestures to Deaf: [👌 👉 🤙]\nMute gestures to Deaf: [🖐 👎]\nBlind gestures to Deaf: [🫵]"
+    },
+    {
+      "role": "assistant",
+      "content": "The bomb has returned to the Turn 1 state: display 0, orange light, and wires red/yellow/blue. The repeated gesture sequence from the Mute may be a meaningful code, but no mapping has been established for me. The Blind’s pointing gesture likewise has no safe interpretation. I will relay the unchanged physical state and ask the Mute to give the manual’s applicable rule to the Blind.\n\n```text\nspeak(to=\"blind\", text=\"Current state: display 0; light orange; wires 1 red, 2 yellow, 3 blue. No physical change from Turn 1.\")\nspeak(to=\"mute\", text=\"Current state is display 0, orange light, wires 1 red, 2 yellow, 3 blue. Please state the manual rule and exact safe action for Blind.\")\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 5\nACTION BOARD:\nDISPLAY [0]\nLIGHT [green]\nWIRES 1:[red] 2:[yellow] 3:[blue]\n\nVIEWABLE CONTEXT (new arrivals):\nMute gestures to Deaf: [👌 👉 🤙]\nMute gestures to Deaf: [✌]"
+    },
+    {
+      "role": "assistant",
+      "content": "The display and wires remain unchanged; the light is green again. The Mute’s gestures still have no established meaning to me, so I cannot safely decode them. I’m sending the complete current state to the Blind and asking the Mute to communicate the manual’s exact rule verbally.\n\n```text\nspeak(to=\"blind\", text=\"Current state: display 0; light green; wires 1 red, 2 yellow, 3 blue.\")\nspeak(to=\"mute\", text=\"Current state is display 0, green light, wires 1 red, 2 yellow, 3 blue. Please state the manual rule and exact safe action for Blind aloud.\")\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 6\nACTION BOARD:\nDISPLAY [0]\nLIGHT [red]\nWIRES 1:[red] 2:[yellow] 3:[blue]\n\nVIEWABLE CONTEXT (new arrivals):\nMute gestures to Deaf: [🖐 👎]\nMute gestures to Deaf: [👌 👉 🤙]"
+    },
+    {
+      "role": "assistant",
+      "content": "The bomb is still display 0 with red, yellow, blue wires, and the light is red. The Mute has sent two gesture sequences, but their meaning is not established. Since the Blind cannot see them, I will describe the symbols aloud and ask the Mute to convert the manual’s instruction into spoken words.\n\n```text\nspeak(to=\"blind\", text=\"Current state: display 0; red light; wires 1 red, 2 yellow, 3 blue. Mute signalled two sequences: OK, right-pointing, shaka; then raised palm, thumbs down.\")\nspeak(to=\"mute\", text=\"I see your gestures but do not know their code. Please speak the manual rule and exact safe action for Blind in words, not gestures.\")\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 7\nACTION BOARD:\nDISPLAY [0]\nLIGHT [orange]\nWIRES 1:[red] 2:[yellow] 3:[blue]\n\nVIEWABLE CONTEXT (new arrivals):\nMute gestures to Deaf: [🖐 👎]"
+    },
+    {
+      "role": "assistant",
+      "content": "The bomb remains at display 0 with wires 1 red, 2 yellow, and 3 blue; the light is now orange. I can see the Mute’s two gestures, but their meaning is still unestablished. I will describe the observed gesture to the Blind and report the current state to both.\n\n```text\nspeak(to=\"blind\", text=\"Current state: display 0; orange light; wires 1 red, 2 yellow, 3 blue. Mute signalled: raised palm, thumbs down.\")\nspeak(to=\"mute\", text=\"Current state: display 0; orange light; wires 1 red, 2 yellow, 3 blue. I saw your raised-palm then thumbs-down gesture.\")\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 8\nACTION BOARD:\nDISPLAY [0]\nLIGHT [green]\nWIRES 1:[red] 2:[yellow] 3:[blue]\n\nVIEWABLE CONTEXT (new arrivals):\nMute gestures to Deaf: [✌]\nBlind gestures to Deaf: [☝]"
+    },
+    {
+      "role": "assistant",
+      "content": "The bomb remains display 0 with wires 1 red, 2 yellow, and 3 blue; the light is green. The Mute’s ✌ gesture has no established meaning for me. I can also see that the Blind signalled ☝, but I cannot infer an instruction from it. I’m reporting both signals and the current state so the Mute can provide a spoken manual instruction to the Blind.\n\n```text\nspeak(to=\"blind\", text=\"Current state: display 0; green light; wires 1 red, 2 yellow, 3 blue. Mute signalled two-finger V. I signalled no interpretation. I also saw you signal one raised index finger.\")\nspeak(to=\"mute\", text=\"Current state: display 0; green light; wires 1 red, 2 yellow, 3 blue. I see your two-finger V gesture and Blind's one raised index finger. Please speak the manual's exact safe action to Blind.\")\n```"
+    }
+  ]
+}

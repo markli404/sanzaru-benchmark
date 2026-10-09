@@ -1,0 +1,166 @@
+{
+  "role": "deaf",
+  "system": "# LLM-BANANA\n\n# Game rules\n\n## The room\n\nYou and two other monkeys are locked in a room with one armed bomb.\n\nA wrong action detonates it. All three of you die. There is no second attempt.\n\nNo two bombs are built alike, and nothing says in advance what this one carries. It\nreaches you only as your own view reveals it; the rest of it exists for you only\nthrough the other two.\n\nYou each hold a different piece of what it takes. Work together.\n\n## The three monkeys\n\n| Monkey | Can | Cannot |\n|---|---|---|\n| Deaf | See the bomb: every colour and marking printed on it | Hear anything, or touch the bomb |\n| Mute | Read the manual | Speak, or touch the bomb |\n| Blind | Reach the bomb: feel it and work its parts | See a colour, a gesture, or anything merely printed |\n\nYou are shown your own share at the start of every round, and never anyone else's.\n\n## Speech\n\nSpeech is a voice, not a screen. It carries words, numbers and ordinary punctuation,\nand nothing else. Writing a gesture symbol into your sentence means you make that\ngesture while you talk. Whoever can hear receives your words; whoever can see receives\nthe gestures you made. A listener who cannot see gets a blank where each gesture was; a\nwatcher who cannot hear gets the gestures and none of the words.\n\nA mark that has no name cannot be pronounced: whoever holds one can describe it, never\nread it out.\n\n## Gestures\n\nA gesture is made with the hands, using only the symbols in the alphabet below.\nWhoever can see receives it; whoever cannot receives one blank per symbol, so they\nknow something was signalled but not what. Nothing gestured is ever heard.\n\n👍 👎 👌 ☝ ✌ 🤟 🖐 ✋ 👆 👇 👈 👉 🫱 🫲 🫳 🫴 🫷 🫸 🤛 🤜 ✊ 👊 👋 🤚 🖖 🤌 🤏 🤞 🫰 🤘 🤙 👏 🙌 🫶 👐 🤲 🤝 🙏 🫵 ✍ 💅 🤳\n\n## Turns\n\nThe speaking order was drawn once at random and will never change: every round goes\nMute, Blind, Deaf. Whoever comes before you in a round is already heard by the time you are\nasked, and what you send lands on whoever comes after you in that same round. Whatever\nyou missed reaches you at the start of the next one.\n\nYou may name who a message is for — `to=\"deaf\"` — and then it goes to them alone:\nnobody else receives any of it. Left unnamed, it reaches everyone able to perceive it.\nYou may send several messages in one turn, each to someone different.\n\n## Calls\n\nEvery reply has two parts, in this order. First, your thinking, in plain prose: what\nyou believe the bomb is, what you just learned, and why you are sending what follows.\nIt reaches nobody and changes nothing, but it is not optional — a reply that is only a\ncode block is incomplete. Then your calls, all of them in one fenced code block, last.\nOnly what is inside the block is sent.\n\nNothing is executed: calls return nothing, and variables, conditionals and loops are\nignored. Write only literal top-level calls.\n\n    ```\n    speak(to=\"mute\", text=\"there are three of them and the middle one is odd\")\n    gesture(to=\"deaf\", symbols=[\"✊\", \"✌\"])\n    wait()\n    ```\n\nIf you have nothing worth sending, call wait(). Producing no call at all counts as the\nsame thing.\n\nThe program decides what happened, not you. Never claim an action took place unless it\nwas accepted.\n\n# Your role: DEAF\n\nYou see the bomb: every colour on it, every marking printed on it, every reading it\ngives. You hear nothing. You hold no manual, and you cannot touch the bomb.\n\n## Your channels\n\nWhen you speak, Mute and Blind receive it.\nWhen you gesture, Mute receives it.\nYou never receive speech.\n\n## Your reach\n\nYou cannot act. What this bomb can be made to do is for the one who can reach it to\nfind under their own hands.\n\n# Hints\n\n- Three of you, three different worlds. Before sending anything, stand where the\n  receiver stands. What reaches them at all, what does your message turn into on\n  arrival, and what do they already know?\n\n- Trace who can actually reach whom before you start. Some of you only connect\n  through a third.\n\n- A sign means nothing until somebody has made it mean something.",
+  "messages": [
+    {
+      "role": "user",
+      "content": "TURN 1\nACTION BOARD:\nDISPLAY [1]\nLIGHT [orange]\nWIRES 1:[white] 2:[blue] 3:[orange] 4:[red] 5:[purple] 6:[yellow] 7:[green]\n\nVIEWABLE CONTEXT (new arrivals):\n(empty)"
+    },
+    {
+      "role": "assistant",
+      "content": "I need to establish contact and share what I see. Since Blind can't perceive gestures or writing, I can only reach Blind through speech directly (which lands on Blind and Mute in this turn since I speak last, but actually I'm last in order - Mute, Blind, Deaf - so nobody hears me this round from within the round, but they'll get it next round). Let me report clearly what's on the display.\n\nI should describe the bomb state precisely: display shows 1, light is orange, and there are 7 wires with specific colors in specific positions. This is critical info for Mute (who has the manual and needs to match instructions to wire colors/positions) and Blind (who will need to act on wires but can't see colors, so must rely on my count/position description).\n\nLet me speak this clearly, using position numbers since Blind can feel wire positions even if not colors.\n\n```\nspeak(text=\"Display shows the number 1. Light is orange. There are 7 wires in order: position 1 white, position 2 blue, position 3 orange, position 4 red, position 5 purple, position 6 yellow, position 7 green.\")\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 2\nACTION BOARD:\nDISPLAY [1]\nLIGHT [orange]\nWIRES 1:[white] 2:[blue] 3:[orange] 4:[red] 5:[purple] 6:[yellow] 7:[green]\n\nVIEWABLE CONTEXT (new arrivals):\nMute gestures to Deaf: [☝ ☝ ☝ ☝ ☝ ☝ ☝]"
+    },
+    {
+      "role": "assistant",
+      "content": "Mute has gestured 7 blanks-worth of symbol ☝ repeated seven times to me. Since I can see gestures, I receive the actual symbols: seven ☝ in a row. This likely corresponds to something about the 7 wires — perhaps Mute is asking me to confirm each wire one by one, or indicating \"look at wire\" for each of the 7 positions, or counting up 1 through 7 as a sequence marker.\n\nSince ☝ often means \"point up\" / \"one\" / \"this one\", repeated seven times might just be Mute acknowledging or asking me to enumerate each wire again individually, or it could be Mute's way of saying \"wire 1, wire 2, ... wire 7\" wanting confirmation per position rather than all at once (maybe manual requires per-wire query).\n\nI already gave full info last turn. I'll wait to see if Blind or Mute asks something more specific, but since it's my turn now I should respond usefully. I'll re-confirm the wire list per-position since that seems to be what's being requested, and also mention I'm ready for specific questions.\n\n```\nspeak(text=\"Confirming again in order: wire 1 white, wire 2 blue, wire 3 orange, wire 4 red, wire 5 purple, wire 6 yellow, wire 7 green. Display is 1, light is orange. If you need me to check something specific on the bomb, tell me and I will describe it.\")\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 3\nACTION BOARD:\nDISPLAY [1]\nLIGHT [orange]\nWIRES 1:[white] 2:[blue] 3:[orange] 4:[red] 5:[purple] 6:[yellow] 7:[green]\n\nVIEWABLE CONTEXT (new arrivals):\nMute gestures to Deaf: [☝ ☝ ☝ ☝ ☝ ☝ ☝ 👍]"
+    },
+    {
+      "role": "assistant",
+      "content": "Mute now gestured seven ☝ symbols plus a 👍 at the end. This still looks like counting through 7 items followed by a thumbs-up, possibly meaning \"yes, confirmed\" or \"that's correct, proceed\" — acknowledging my wire list was correct and matches the manual somehow. Or it could be building toward a specific instruction using gesture as a fallback since Mute cannot speak to me... wait, Mute CAN speak, and speech reaches me. But Mute hasn't spoken - only gestured. That's odd since gestures to me don't carry words, only shapes.\n\nActually, rereading: Mute cannot touch the bomb but CAN speak (only Blind and Deaf cannot speak... wait let me check: Mute \"Cannot: Speak, or touch the bomb\". So Mute cannot speak at all! Mute can only gesture. That changes everything - Mute must communicate via gestures alone, which I can see but Blind cannot.\n\nSo Mute is trying to tell me something using gestures, since gesture is Mute's only channel. Seven ☝ then 👍 might be Mute confirming \"yes, all 7 wires match\" or building a number/selection. Since I can't ask questions back easily except via speech to Mute (which Mute cannot hear either - Mute has no hearing restriction listed... wait, only Deaf cannot hear. Mute isn't stated to be unable to hear. Let me check: Mute \"Cannot: Speak, or touch\". So Mute CAN hear and CAN see gestures presumably not stated, but Mute reads the manual - sight not restricted for Mute either.\n\nSo Mute can hear me, see gestures from Deaf presumably, but cannot speak or touch. So I can speak to Mute and Mute understands, but Mute must reply only in gestures.\n\nGiven seven ☝ plus thumbs-up, likely means: \"wires 1 through 7, all confirmed/correct\" — an acknowledgment. I'll ask Mute a direct yes/no question they can answer with single gestures, to make communication efficient.\n\n```\nspeak(to=\"mute\", text=\"Understood, thumbs up received. Does the manual say to cut a specific wire by position number? If yes, gesture the number as that many taps of one symbol, or use finger-count gestures 1 through 7 for the position.\")\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 4\nACTION BOARD:\nDISPLAY [1]\nLIGHT [orange]\nWIRES 1:[white] 2:[blue] 3:[orange] 4:[red] 5:[purple] 6:[yellow] 7:[green]\n\nVIEWABLE CONTEXT (new arrivals):\nMute gestures to Deaf: [☝ ☝ ☝ ☝ ☝ ☝ ☝]"
+    },
+    {
+      "role": "assistant",
+      "content": "Mute repeated seven ☝ gestures again, without the thumbs up this time. This is consistent - maybe each ☝ corresponds to one wire position being read down the manual, and Mute is telling me \"check position 1, check position 2...\" sequentially as a ritual, or simply this is Mute's way of representing \"7\" (holding up one finger seven times = counting to seven) confirming the wire count matches the manual's expected count of 7.\n\nSince Blind cannot see gestures, all this exchange between me and Mute is invisible to Blind - which is fine since Blind needs to act on wires by touch and needs word instructions.\n\nI think Mute is stuck communicating complex info only via gestures which are very limited (just symbols, no compound meaning). I should try a more direct approach: ask yes/no questions using distinct single gestures for yes/no, since Mute already used 👍 for confirmation once.\n\nLet me propose a protocol: I'll ask if manual instruction depends on the light color (orange) - Mute can answer with 👍 or 👎.\n\n```\nspeak(to=\"mute\", text=\"Let's use one gesture per answer. Thumbs up for yes, thumbs down for no. Does the correct action depend on the light color being orange?\")\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 5\nACTION BOARD:\nDISPLAY [1]\nLIGHT [orange]\nWIRES 1:[white] 2:[blue] 3:[orange] 4:[red] 5:[purple] 6:[yellow] 7:[green]\n\nVIEWABLE CONTEXT (new arrivals):\nMute gestures to Deaf: [👍]"
+    },
+    {
+      "role": "assistant",
+      "content": "Mute confirmed with 👍 that the correct action depends on the light color being orange. Good, that's a useful data point. Now I need to narrow down further - likely the manual has a lookup table keyed by light color and/or display number, pointing to a wire color or position to cut.\n\nLet me continue with targeted yes/no questions to extract the specific instruction: which wire color or position to cut.\n\n```\nspeak(to=\"mute\", text=\"Thumbs up for yes, thumbs down for no. Does the display number 1 also matter for choosing the action?\")\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 6\nACTION BOARD:\nDISPLAY [1]\nLIGHT [orange]\nWIRES 1:[white] 2:[blue] 3:[orange] 4:[red] 5:[purple] 6:[yellow] 7:[green]\n\nVIEWABLE CONTEXT (new arrivals):\nMute gestures to Deaf: [👍]\nMute gestures to Deaf: [☝ ☝ ☝ ☝ ☝ ☝ ☝]"
+    },
+    {
+      "role": "assistant",
+      "content": "Mute confirmed display number 1 also matters (👍), and again sent seven ☝ gestures. This repeated pattern of seven ☝ seems significant - perhaps it's not a count of 7 but Mute trying to spell out or indicate something specific each time, maybe pointing at \"wire\" concept seven times isn't it... \n\nWait - maybe the seven ☝ isn't about counting to 7, but each ☝ represents \"yes\" to each of my wire color statements in Turn 1/2, i.e., Mute confirming each of the 7 wires I listed matches something in the manual. That is, Mute may be running through a checklist and each ☝ acknowledges one wire in sequence as consistent/expected by manual.\n\nGiven the repetition happens right after I ask new questions, maybe it's unrelated background/parallel confirmation, or maybe Mute has limited gesture vocabulary and is trying to communicate a number - like \"7\" meaning wire position 7, by holding up finger 7 times isn't standard but repeating ☝ 7 times could mean \"the number seven\" (unary counting).\n\nLet me test this theory directly.\n\n```\nspeak(to=\"mute\", text=\"Thumbs up for yes, thumbs down for no. When you gesture the pointing finger seven times in a row, do you mean the number seven, as in wire position seven?\")\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 7\nACTION BOARD:\nDISPLAY [1]\nLIGHT [orange]\nWIRES 1:[white] 2:[blue] 3:[orange] 4:[red] 5:[purple] 6:[yellow] 7:[green]\n\nVIEWABLE CONTEXT (new arrivals):\nMute gestures to Deaf: [👍]"
+    },
+    {
+      "role": "assistant",
+      "content": "Mute confirmed: the repeated ☝ seven times means \"wire position seven\" (green wire). Combined with earlier confirmations that both light color (orange) and display number (1) matter for selecting the action, this strongly suggests the manual instruction is: with light=orange and display=1, cut wire position 7 (green).\n\nI should verify this conclusion explicitly before relaying to Blind, since a wrong cut kills everyone.\n\n```\nspeak(to=\"mute\", text=\"Thumbs up for yes, thumbs down for no. So to confirm: given light orange and display 1, the manual says to cut wire position seven, which is green?\")\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 8\nACTION BOARD:\nDISPLAY [1]\nLIGHT [orange]\nWIRES 1:[white] 2:[blue] 3:[orange] 4:[red] 5:[purple] 6:[yellow] 7:[green]\n\nVIEWABLE CONTEXT (new arrivals):\nMute gestures to Deaf: [👍]"
+    },
+    {
+      "role": "assistant",
+      "content": "Confirmed: cut wire position 7 (green). Now I need to relay this instruction to Blind, since Blind can hear my speech (Blind cannot see, but can hear). This is the critical final step.\n\n```\nspeak(to=\"blind\", text=\"Cut wire number seven, counting from one end of the row to the other. It is the seventh wire in the sequence. Cut only that one.\")\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 9\nACTION BOARD:\nDISPLAY [8]\nLIGHT [blue]\nWIRES 1:[white] 2:[blue] 3:[orange] 4:[red] 5:[purple] 6:[yellow] 7:[CUT]\n\nVIEWABLE CONTEXT (new arrivals):\nSystem: correct wire cut; the bomb has changed"
+    },
+    {
+      "role": "assistant",
+      "content": "The bomb changed - wire 7 was correctly cut, but now the board shows a new state: display is now 8, light is now blue, and wire 7 shows CUT with the remaining wires unchanged. This looks like a new stage/round with new parameters. I need to report this fresh state to Mute so they can consult the manual again for the new display/light combination.\n\n```\nspeak(text=\"Update: wire seven was cut successfully. New state now shown: display is 8, light is blue. Remaining wires: 1 white, 2 blue, 3 orange, 4 red, 5 purple, 6 yellow, 7 is cut/gone. Six wires remain.\")\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 10\nACTION BOARD:\nDISPLAY [8]\nLIGHT [blue]\nWIRES 1:[white] 2:[blue] 3:[orange] 4:[red] 5:[purple] 6:[yellow] 7:[CUT]\n\nVIEWABLE CONTEXT (new arrivals):\nMute gestures to Deaf: [☝ ☝ ☝ ☝]"
+    },
+    {
+      "role": "assistant",
+      "content": "Mute gestured ☝ four times, likely meaning wire position 4 (red), following our established convention where repeated ☝ n times = position n.\n\nI should confirm this interpretation before relaying, since the stakes are high, and also confirm whether display=8 and light=blue both matter again like before.\n\n```\nspeak(to=\"mute\", text=\"Thumbs up for yes, thumbs down for no. Four pointing fingers means wire position four, the red wire, is the one to cut now?\")\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 11\nACTION BOARD:\nDISPLAY [8]\nLIGHT [blue]\nWIRES 1:[white] 2:[blue] 3:[orange] 4:[red] 5:[purple] 6:[yellow] 7:[CUT]\n\nVIEWABLE CONTEXT (new arrivals):\nMute gestures to Deaf: [👍]"
+    },
+    {
+      "role": "assistant",
+      "content": "Confirmed: cut wire position 4 (red). Relaying to Blind now.\n\n```\nspeak(to=\"blind\", text=\"Cut wire number four next. Counting the remaining wires from the original start of the row, wire four is the one to cut. It is the red one, but go by position count: four.\")\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 12\nACTION BOARD:\nDISPLAY [3]\nLIGHT [white]\nWIRES 1:[white] 2:[blue] 3:[orange] 4:[CUT] 5:[purple] 6:[yellow] 7:[CUT]\n\nVIEWABLE CONTEXT (new arrivals):\nSystem: correct wire cut; the bomb has changed"
+    },
+    {
+      "role": "assistant",
+      "content": "Wire 4 was cut correctly. New state: display is 3, light is white. Reporting to Mute.\n\n```\nspeak(text=\"Update: wire four was cut successfully. New state now shown: display is 3, light is white. Remaining wires: 1 white, 2 blue, 3 orange, 4 is cut, 5 purple, 6 yellow, 7 is cut. Five wires remain.\")\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 13\nACTION BOARD:\nDISPLAY [3]\nLIGHT [white]\nWIRES 1:[white] 2:[blue] 3:[orange] 4:[CUT] 5:[purple] 6:[yellow] 7:[CUT]\n\nVIEWABLE CONTEXT (new arrivals):\nMute gestures to Deaf: [☝ ☝ ☝]"
+    },
+    {
+      "role": "assistant",
+      "content": "Mute gestured ☝ three times, likely meaning wire position 3 (orange). Let me confirm before relaying.\n\n```\nspeak(to=\"mute\", text=\"Thumbs up for yes, thumbs down for no. Three pointing fingers means wire position three, the orange wire, is the one to cut now?\")\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 14\nACTION BOARD:\nDISPLAY [3]\nLIGHT [white]\nWIRES 1:[white] 2:[blue] 3:[orange] 4:[CUT] 5:[purple] 6:[yellow] 7:[CUT]\n\nVIEWABLE CONTEXT (new arrivals):\nMute gestures to Deaf: [👍]"
+    },
+    {
+      "role": "assistant",
+      "content": "Confirmed: cut wire position 3 (orange). Relaying to Blind.\n\n```\nspeak(to=\"blind\", text=\"Cut wire number three next. Counting from the original start of the row, wire three is the one to cut. It is the orange one, but go by position count: three.\")\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 15\nACTION BOARD:\nDISPLAY [9]\nLIGHT [yellow]\nWIRES 1:[white] 2:[blue] 3:[CUT] 4:[CUT] 5:[purple] 6:[yellow] 7:[CUT]\n\nVIEWABLE CONTEXT (new arrivals):\nSystem: correct wire cut; the bomb has changed"
+    },
+    {
+      "role": "assistant",
+      "content": "Wire 3 was cut correctly. New state: display is 9, light is yellow. Reporting to Mute.\n\n```\nspeak(text=\"Update: wire three was cut successfully. New state now shown: display is 9, light is yellow. Remaining wires: 1 white, 2 blue, 3 is cut, 4 is cut, 5 purple, 6 yellow, 7 is cut. Three wires remain: position 1 white, position 2 blue, position 5 purple, position 6 yellow.\")\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 16\nACTION BOARD:\nDISPLAY [9]\nLIGHT [yellow]\nWIRES 1:[white] 2:[blue] 3:[CUT] 4:[CUT] 5:[purple] 6:[yellow] 7:[CUT]\n\nVIEWABLE CONTEXT (new arrivals):\nMute gestures to Deaf: [☝ ☝]"
+    },
+    {
+      "role": "assistant",
+      "content": "Mute gestured ☝ two times, likely meaning wire position 2 (blue). Let me confirm before relaying, especially important now since fewer wires remain and a mistake would be costly.\n\n```\nspeak(to=\"mute\", text=\"Thumbs up for yes, thumbs down for no. Two pointing fingers means wire position two, the blue wire, is the one to cut now?\")\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 17\nACTION BOARD:\nDISPLAY [9]\nLIGHT [yellow]\nWIRES 1:[white] 2:[blue] 3:[CUT] 4:[CUT] 5:[purple] 6:[yellow] 7:[CUT]\n\nVIEWABLE CONTEXT (new arrivals):\nMute gestures to Deaf: [👍]"
+    },
+    {
+      "role": "assistant",
+      "content": "Confirmed: cut wire position 2 (blue). Relaying to Blind.\n\n```\nspeak(to=\"blind\", text=\"Cut wire number two next. Counting from the original start of the row, wire two is the one to cut. It is the blue one, but go by position count: two.\")\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 18\nACTION BOARD:\nDISPLAY [4]\nLIGHT [green]\nWIRES 1:[white] 2:[CUT] 3:[CUT] 4:[CUT] 5:[purple] 6:[yellow] 7:[CUT]\n\nVIEWABLE CONTEXT (new arrivals):\nSystem: correct wire cut; the bomb has changed"
+    },
+    {
+      "role": "assistant",
+      "content": "Wire 2 was cut correctly. New state: display is 4, light is green. Reporting to Mute.\n\n```\nspeak(text=\"Update: wire two was cut successfully. New state now shown: display is 4, light is green. Remaining wires: 1 white, 5 purple, 6 yellow. Only three wires remain now.\")\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 19\nACTION BOARD:\nDISPLAY [4]\nLIGHT [green]\nWIRES 1:[white] 2:[CUT] 3:[CUT] 4:[CUT] 5:[purple] 6:[yellow] 7:[CUT]\n\nVIEWABLE CONTEXT (new arrivals):\nMute gestures to Deaf: [☝]"
+    },
+    {
+      "role": "assistant",
+      "content": "Mute gestured ☝ once, likely meaning wire position 1 (white). Let me confirm before relaying, as always.\n\n```\nspeak(to=\"mute\", text=\"Thumbs up for yes, thumbs down for no. One pointing finger means wire position one, the white wire, is the one to cut now?\")\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 20\nACTION BOARD:\nDISPLAY [4]\nLIGHT [green]\nWIRES 1:[white] 2:[CUT] 3:[CUT] 4:[CUT] 5:[purple] 6:[yellow] 7:[CUT]\n\nVIEWABLE CONTEXT (new arrivals):\nMute gestures to Deaf: [👍]"
+    },
+    {
+      "role": "assistant",
+      "content": "Confirmed: cut wire position 1 (white). Relaying to Blind.\n\n```\nspeak(to=\"blind\", text=\"Cut wire number one next. Counting from the original start of the row, wire one is the one to cut. It is the white one, but go by position count: one.\")\nwait()\n```"
+    }
+  ]
+}

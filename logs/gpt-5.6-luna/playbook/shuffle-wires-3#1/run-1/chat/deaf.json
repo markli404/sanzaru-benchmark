@@ -1,0 +1,198 @@
+{
+  "role": "deaf",
+  "system": "# LLM-BANANA\n\n# Game rules\n\n## The room\n\nYou and two other monkeys are locked in a room with one armed bomb.\n\nA wrong action detonates it. All three of you die. There is no second attempt.\n\nNo two bombs are built alike, and nothing says in advance what this one carries. It\nreaches you only as your own view reveals it; the rest of it exists for you only\nthrough the other two.\n\nYou each hold a different piece of what it takes. Work together.\n\n## The three monkeys\n\n| Monkey | Can | Cannot |\n|---|---|---|\n| Deaf | See the bomb: every colour and marking printed on it | Hear anything, or touch the bomb |\n| Mute | Read the manual | Speak, or touch the bomb |\n| Blind | Reach the bomb: feel it and work its parts | See a colour, a gesture, or anything merely printed |\n\nYou are shown your own share at the start of every round, and never anyone else's.\n\n## Speech\n\nSpeech is a voice, not a screen. It carries words, numbers and ordinary punctuation,\nand nothing else. Writing a gesture symbol into your sentence means you make that\ngesture while you talk. Whoever can hear receives your words; whoever can see receives\nthe gestures you made. A listener who cannot see gets a blank where each gesture was; a\nwatcher who cannot hear gets the gestures and none of the words.\n\nA mark that has no name cannot be pronounced: whoever holds one can describe it, never\nread it out.\n\n## Gestures\n\nA gesture is made with the hands, using only the symbols in the alphabet below.\nWhoever can see receives it; whoever cannot receives one blank per symbol, so they\nknow something was signalled but not what. Nothing gestured is ever heard.\n\n👍 👎 👌 ☝ ✌ 🤟 🖐 ✋ 👆 👇 👈 👉 🫱 🫲 🫳 🫴 🫷 🫸 🤛 🤜 ✊ 👊 👋 🤚 🖖 🤌 🤏 🤞 🫰 🤘 🤙 👏 🙌 🫶 👐 🤲 🤝 🙏 🫵 ✍ 💅 🤳\n\n## Turns\n\nThe speaking order was drawn once at random and will never change: every round goes\nBlind, Mute, Deaf. Whoever comes before you in a round is already heard by the time you are\nasked, and what you send lands on whoever comes after you in that same round. Whatever\nyou missed reaches you at the start of the next one.\n\nYou may name who a message is for — `to=\"deaf\"` — and then it goes to them alone:\nnobody else receives any of it. Left unnamed, it reaches everyone able to perceive it.\nYou may send several messages in one turn, each to someone different.\n\n## Calls\n\nEvery reply has two parts, in this order. First, your thinking, in plain prose: what\nyou believe the bomb is, what you just learned, and why you are sending what follows.\nIt reaches nobody and changes nothing, but it is not optional — a reply that is only a\ncode block is incomplete. Then your calls, all of them in one fenced code block, last.\nOnly what is inside the block is sent.\n\nNothing is executed: calls return nothing, and variables, conditionals and loops are\nignored. Write only literal top-level calls.\n\n    ```\n    speak(to=\"mute\", text=\"there are three of them and the middle one is odd\")\n    gesture(to=\"deaf\", symbols=[\"✊\", \"✌\"])\n    wait()\n    ```\n\nIf you have nothing worth sending, call wait(). Producing no call at all counts as the\nsame thing.\n\nThe program decides what happened, not you. Never claim an action took place unless it\nwas accepted.\n\n# Your role: DEAF\n\nYou see the bomb: every colour on it, every marking printed on it, every reading it\ngives. You hear nothing. You hold no manual, and you cannot touch the bomb.\n\n## Your channels\n\nWhen you speak, Mute and Blind receive it.\nWhen you gesture, Mute receives it.\nYou never receive speech.\n\n## Your reach\n\nYou cannot act. What this bomb can be made to do is for the one who can reach it to\nfind under their own hands.\n\n# Hints\n\n- The routes, by name. Speech reaches Mute and Blind, and never Deaf. Gestures\n  reach Deaf and Mute, and never Blind. Deaf can speak and gesture, Mute can\n  only gesture, Blind can only speak. Check every message against this list\n  before you send it.\n\n- Deaf invents the gesture code out loud before anything else moves, and\n  everyone else's opening move is waiting for it. The manual's verdict reaches\n  Blind only as Deaf's spoken order.\n\n- Whatever the code becomes, it starts by being able to say YES, NO, HOLD and\n  DONE. Grow it only when a message will not fit.",
+  "messages": [
+    {
+      "role": "user",
+      "content": "TURN 1\nACTION BOARD:\nDISPLAY [3]\nLIGHT [purple]\nWIRES 1:[red] 2:[white] 3:[orange] 4:[yellow] 5:[green]\n\nVIEWABLE CONTEXT (new arrivals):\n(empty)"
+    },
+    {
+      "role": "assistant",
+      "content": "I am establishing the shared gesture code before any bomb action: 👍 means YES, 👎 means NO, ✋ means HOLD, and 👌 means DONE. I will also report the visible bomb state to Blind, since Blind cannot see it.\n\n```text\nspeak(text=\"Gesture code: thumbs up means YES, thumbs down means NO, raised palm means HOLD, and OK means DONE. The bomb shows display 3, purple light, and five wires in order: red, white, orange, yellow, green.\")\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 2\nACTION BOARD:\nDISPLAY [3]\nLIGHT [purple]\nWIRES 1:[red] 2:[white] 3:[orange] 4:[yellow] 5:[green]\n\nVIEWABLE CONTEXT (new arrivals):\nMute gestures to Deaf: [👎 👎 👎 👎 👍 👌]"
+    },
+    {
+      "role": "assistant",
+      "content": "Mute’s six gestures decode as NO, NO, NO, NO, YES, DONE. Treating these as the manual’s verdict for wires 1 through 5, only wire 5 is approved. I am telling Blind to cut the green fifth wire, and not the others.\n\n```text\nspeak(to=\"blind\", text=\"Manual verdict: wires 1, 2, 3, and 4 are NO; wire 5 is YES; DONE. Cut only wire 5, the green wire.\")\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 3\nACTION BOARD:\nDISPLAY [7]\nLIGHT [white]\nWIRES 1:[white] 2:[orange] 3:[yellow] 4:[red] 5:[CUT]\n\nVIEWABLE CONTEXT (new arrivals):\nSystem: correct wire cut; the bomb has changed"
+    },
+    {
+      "role": "assistant",
+      "content": "The previous cut was confirmed correct, and the bomb has reset to a new state: display 7, white light, and wires white, orange, yellow, red, with wire 5 already cut. I am giving this complete state to Mute so the manual can determine the next action, and to Blind so they know the current physical layout.\n\n```text\nspeak(to=\"mute\", text=\"New state after the correct cut: display 7, white light; wire 1 white, wire 2 orange, wire 3 yellow, wire 4 red, wire 5 already cut. Send the manual verdict using YES, NO, HOLD, and DONE.\")\nspeak(to=\"blind\", text=\"New state: display 7, white light; wires 1 white, 2 orange, 3 yellow, 4 red, and wire 5 is already cut. Await the manual verdict.\")\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 4\nACTION BOARD:\nDISPLAY [7]\nLIGHT [white]\nWIRES 1:[white] 2:[orange] 3:[yellow] 4:[red] 5:[CUT]\n\nVIEWABLE CONTEXT (new arrivals):\nMute gestures to Deaf: [👎 👎 👍 👌]"
+    },
+    {
+      "role": "assistant",
+      "content": "Mute’s verdict is NO for wires 1 and 2, YES for wire 3, followed by DONE. The correct action is therefore to cut wire 3, the yellow wire. I am instructing Blind accordingly.\n\n```text\nspeak(to=\"blind\", text=\"Manual verdict: wire 1 NO, wire 2 NO, wire 3 YES, wire 4 DONE. Cut only wire 3, the yellow wire.\")\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 5\nACTION BOARD:\nDISPLAY [6]\nLIGHT [yellow]\nWIRES 1:[orange] 2:[red] 3:[CUT] 4:[white] 5:[CUT]\n\nVIEWABLE CONTEXT (new arrivals):\nSystem: correct wire cut; the bomb has changed"
+    },
+    {
+      "role": "assistant",
+      "content": "The second cut was confirmed correct. The bomb has changed to display 6 with a yellow light; wire 3 remains cut, wire 5 remains cut, and the live wires are 1 orange, 2 red, and 4 white. I am sending the full state to Mute for the manual verdict and to Blind for physical orientation.\n\n```text\nspeak(to=\"mute\", text=\"New state after the correct cut: display 6, yellow light; wire 1 orange, wire 2 red, wire 3 already cut, wire 4 white, wire 5 already cut. Send the manual verdict using YES, NO, HOLD, and DONE.\")\nspeak(to=\"blind\", text=\"New state: display 6, yellow light; wire 1 orange, wire 2 red, wire 3 cut, wire 4 white, wire 5 cut. Await the manual verdict.\")\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 6\nACTION BOARD:\nDISPLAY [6]\nLIGHT [yellow]\nWIRES 1:[orange] 2:[red] 3:[CUT] 4:[white] 5:[CUT]\n\nVIEWABLE CONTEXT (new arrivals):\nMute gestures to Deaf: [🖐 👌]"
+    },
+    {
+      "role": "assistant",
+      "content": "The second gesture is 👌, which is DONE in our code. The first gesture is 🖐, not the defined HOLD symbol ✋, so I cannot safely treat it as a verdict. I am instructing Blind to hold and asking Mute to resend the first result with the exact established symbol.\n\n```text\nspeak(to=\"blind\", text=\"HOLD. Do not cut anything yet. Mute's second signal is DONE, but the first was an undefined gesture.\")\nspeak(to=\"mute\", text=\"Your first gesture was 🖐, but HOLD is defined as ✋. Please resend the first verdict using the exact HOLD symbol ✋ or another established symbol.\")\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 7\nACTION BOARD:\nDISPLAY [6]\nLIGHT [yellow]\nWIRES 1:[orange] 2:[red] 3:[CUT] 4:[white] 5:[CUT]\n\nVIEWABLE CONTEXT (new arrivals):\nMute gestures to Deaf: [✋ 👌]"
+    },
+    {
+      "role": "assistant",
+      "content": "Mute has now sent the established HOLD signal followed by DONE. The manual therefore calls for no wire cut in this state; Blind should keep the bomb unchanged.\n\n```text\nspeak(to=\"blind\", text=\"Manual verdict: HOLD, then DONE. Do not cut any wire; leave the bomb unchanged.\")\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 8\nACTION BOARD:\nDISPLAY [6]\nLIGHT [yellow]\nWIRES 1:[orange] 2:[red] 3:[CUT] 4:[white] 5:[CUT]\n\nVIEWABLE CONTEXT (new arrivals):\n(empty)"
+    },
+    {
+      "role": "assistant",
+      "content": "The bomb remains unchanged, and no new manual verdict has arrived. Since the last verdict was HOLD, Blind should continue taking no physical action.\n\n```text\nspeak(to=\"blind\", text=\"No new verdict. Continue HOLD: do not touch or cut any wire.\")\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 9\nACTION BOARD:\nDISPLAY [6]\nLIGHT [yellow]\nWIRES 1:[orange] 2:[red] 3:[CUT] 4:[white] 5:[CUT]\n\nVIEWABLE CONTEXT (new arrivals):\n(empty)"
+    },
+    {
+      "role": "assistant",
+      "content": "No new information has arrived, and the bomb remains in the held state. I am maintaining the previous HOLD instruction; Blind must not alter any wire.\n\n```text\nspeak(to=\"blind\", text=\"Still HOLD. No wire action.\")\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 10\nACTION BOARD:\nDISPLAY [6]\nLIGHT [yellow]\nWIRES 1:[orange] 2:[red] 3:[CUT] 4:[white] 5:[CUT]\n\nVIEWABLE CONTEXT (new arrivals):\n(empty)"
+    },
+    {
+      "role": "assistant",
+      "content": "The bomb is still unchanged, with no new manual message. The established verdict was HOLD followed by DONE, so no wire has been authorized. I will maintain the safe hold and ask Mute to resend if the manual has a different verdict.\n\n```text\nspeak(to=\"blind\", text=\"Continue HOLD. Do not cut or manipulate any wire.\")\nspeak(to=\"mute\", text=\"The bomb remains unchanged after HOLD DONE. If the manual authorizes a wire, resend the verdict using the established gestures.\")\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 11\nACTION BOARD:\nDISPLAY [6]\nLIGHT [yellow]\nWIRES 1:[orange] 2:[red] 3:[CUT] 4:[white] 5:[CUT]\n\nVIEWABLE CONTEXT (new arrivals):\nMute gestures to Deaf: [✋ 👌]"
+    },
+    {
+      "role": "assistant",
+      "content": "Mute has resent the same verdict: HOLD, then DONE. I should not reinterpret HOLD as “do nothing”; Blind must apply the manual’s HOLD operation, then complete it with DONE, using the bomb’s tactile controls. No wire is authorized.\n\n```text\nspeak(to=\"blind\", text=\"Manual verdict is HOLD, then DONE. Perform the required tactile HOLD operation, then the DONE operation; do not cut any wire.\")\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 12\nACTION BOARD:\nDISPLAY [6]\nLIGHT [yellow]\nWIRES 1:[orange] 2:[red] 3:[CUT] 4:[white] 5:[CUT]\n\nVIEWABLE CONTEXT (new arrivals):\n(empty)"
+    },
+    {
+      "role": "assistant",
+      "content": "No new manual information has arrived. The last confirmed instruction is HOLD followed by DONE, with no wire cut authorized. I will not invent a tactile procedure beyond that; Blind should await a clearer manual result.\n\n```text\nspeak(to=\"blind\", text=\"No new information. Last confirmed verdict remains HOLD, then DONE; no wire is authorized. Await a clearer manual instruction.\")\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 13\nACTION BOARD:\nDISPLAY [6]\nLIGHT [yellow]\nWIRES 1:[orange] 2:[red] 3:[CUT] 4:[white] 5:[CUT]\n\nVIEWABLE CONTEXT (new arrivals):\nMute gestures to Deaf: [✋ 👌]"
+    },
+    {
+      "role": "assistant",
+      "content": "Mute has again confirmed HOLD followed by DONE. This is the complete current manual instruction, not a wire selection. Blind should carry out the bomb’s tactile hold-and-complete operation and must not cut either remaining wire.\n\n```text\nspeak(to=\"blind\", text=\"Confirmed again: HOLD, then DONE. Execute the tactile hold-and-complete operation required by the bomb; do not cut wire 1 or wire 2.\")\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 14\nACTION BOARD:\nDISPLAY [6]\nLIGHT [yellow]\nWIRES 1:[orange] 2:[red] 3:[CUT] 4:[white] 5:[CUT]\n\nVIEWABLE CONTEXT (new arrivals):\n(empty)"
+    },
+    {
+      "role": "assistant",
+      "content": "No new information has arrived, and no action has been accepted. The repeated HOLD–DONE signal does not identify a wire or describe a safe tactile operation, so I will not invent one. I am asking Mute to clarify the verdict using the established wire-by-wire YES/NO format.\n\n```text\nspeak(to=\"mute\", text=\"Please clarify: if a wire is authorized, send one YES or NO for each live wire in order, then DONE. If HOLD is instead a literal tactile operation, send HOLD followed by DONE and provide any additional required gesture code.\")\nspeak(to=\"blind\", text=\"No new information and no action accepted. Do not cut or manipulate anything until Mute clarifies whether HOLD is a literal tactile operation or a wire-verdict result.\")\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 15\nACTION BOARD:\nDISPLAY [6]\nLIGHT [yellow]\nWIRES 1:[orange] 2:[red] 3:[CUT] 4:[white] 5:[CUT]\n\nVIEWABLE CONTEXT (new arrivals):\nMute gestures to Deaf: [✋ 👌]"
+    },
+    {
+      "role": "assistant",
+      "content": "The latest message repeats the confirmed verdict HOLD, DONE. It still authorizes no wire cut, and no additional tactile operation has been specified. Blind should continue holding the current state without touching the live wires.\n\n```text\nspeak(to=\"blind\", text=\"Repeated verdict: HOLD, then DONE. No wire cut is authorized. Keep the current state and do not touch the live wires.\")\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 16\nACTION BOARD:\nDISPLAY [6]\nLIGHT [yellow]\nWIRES 1:[orange] 2:[red] 3:[CUT] 4:[white] 5:[CUT]\n\nVIEWABLE CONTEXT (new arrivals):\n(empty)"
+    },
+    {
+      "role": "assistant",
+      "content": "No new verdict or state change has arrived. The last confirmed signal was HOLD followed by DONE, and no wire has been authorized. Blind should leave the bomb untouched.\n\n```text\nspeak(to=\"blind\", text=\"No new information. Maintain HOLD; do not cut or manipulate any wire.\")\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 17\nACTION BOARD:\nDISPLAY [6]\nLIGHT [yellow]\nWIRES 1:[orange] 2:[red] 3:[CUT] 4:[white] 5:[CUT]\n\nVIEWABLE CONTEXT (new arrivals):\n(empty)"
+    },
+    {
+      "role": "assistant",
+      "content": "The bomb remains unchanged and no new verdict has arrived. I will not reinterpret the repeated HOLD–DONE signal or risk an unauthorized manipulation. I am maintaining the safe state and asking Mute for a more specific wire verdict.\n\n```text\nspeak(to=\"mute\", text=\"No state change. Please send a specific YES or NO for each live wire 1, 2, and 4, followed by DONE; do not use HOLD unless the manual explicitly requires it.\")\nspeak(to=\"blind\", text=\"No new verdict. Keep the bomb unchanged; do not cut or manipulate any wire.\")\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 18\nACTION BOARD:\nDISPLAY [6]\nLIGHT [yellow]\nWIRES 1:[orange] 2:[red] 3:[CUT] 4:[white] 5:[CUT]\n\nVIEWABLE CONTEXT (new arrivals):\nMute gestures to Deaf: [👎 👎 👎 👌]"
+    },
+    {
+      "role": "assistant",
+      "content": "Mute has now provided a specific verdict for the three live wires requested: wire 1 NO, wire 2 NO, wire 4 NO, followed by DONE. Therefore no remaining wire may be cut. I am instructing Blind to leave the bomb unchanged.\n\n```text\nspeak(to=\"blind\", text=\"Specific manual verdict: wire 1 NO, wire 2 NO, wire 4 NO, DONE. Do not cut any remaining wire; leave the bomb unchanged.\")\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 19\nACTION BOARD:\nDISPLAY [6]\nLIGHT [yellow]\nWIRES 1:[orange] 2:[red] 3:[CUT] 4:[white] 5:[CUT]\n\nVIEWABLE CONTEXT (new arrivals):\n(empty)"
+    },
+    {
+      "role": "assistant",
+      "content": "The last specific verdict rejected all three remaining wires, so no safe wire cut is identified. The bomb is unchanged and no new information has arrived. Blind should continue without touching the bomb while awaiting a new manual verdict.\n\n```text\nspeak(to=\"blind\", text=\"No new information. The last verdict was NO for wires 1, 2, and 4; do not cut or manipulate any wire.\")\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 20\nACTION BOARD:\nDISPLAY [6]\nLIGHT [yellow]\nWIRES 1:[orange] 2:[red] 3:[CUT] 4:[white] 5:[CUT]\n\nVIEWABLE CONTEXT (new arrivals):\n(empty)"
+    },
+    {
+      "role": "assistant",
+      "content": "The bomb remains unchanged and no new verdict has arrived. The last specific verdict rejected all live wires, so Blind must not cut anything. I am asking Mute to provide the manual’s next instruction rather than repeating the stale result.\n\n```text\nspeak(to=\"mute\", text=\"No state change after the last verdict. Please send the next manual instruction, using the established code; if it concerns wire selection, report all five positions and DONE.\")\nspeak(to=\"blind\", text=\"No new information. Do not cut or manipulate any wire; await the next manual instruction.\")\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 21\nACTION BOARD:\nDISPLAY [6]\nLIGHT [yellow]\nWIRES 1:[orange] 2:[red] 3:[CUT] 4:[white] 5:[CUT]\n\nVIEWABLE CONTEXT (new arrivals):\nMute gestures to Deaf: [👎 👎 👎 👎 👎 👌]"
+    },
+    {
+      "role": "assistant",
+      "content": "Mute reports NO for every wire position, followed by DONE. Thus no wire is authorized for this state; Blind should not cut any wire and should leave the bomb unchanged.\n\n```text\nspeak(to=\"blind\", text=\"Manual verdict: wire 1 NO, wire 2 NO, wire 3 NO, wire 4 NO, wire 5 NO, DONE. Do not cut any wire; leave the bomb unchanged.\")\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 22\nACTION BOARD:\nDISPLAY [6]\nLIGHT [yellow]\nWIRES 1:[orange] 2:[red] 3:[CUT] 4:[white] 5:[CUT]\n\nVIEWABLE CONTEXT (new arrivals):\n(empty)"
+    },
+    {
+      "role": "assistant",
+      "content": "No new information or state change has arrived. The latest manual verdict rejected every wire, so Blind must continue without cutting or manipulating the bomb.\n\n```text\nspeak(to=\"blind\", text=\"No new information. Latest verdict was NO for every wire; do not cut or manipulate the bomb.\")\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 23\nACTION BOARD:\nDISPLAY [6]\nLIGHT [yellow]\nWIRES 1:[orange] 2:[red] 3:[CUT] 4:[white] 5:[CUT]\n\nVIEWABLE CONTEXT (new arrivals):\n(empty)"
+    },
+    {
+      "role": "assistant",
+      "content": "The bomb remains unchanged, and the latest confirmed manual message rejected every wire. No new instruction has arrived, so I will not authorize any physical action.\n\n```text\nspeak(to=\"blind\", text=\"No new information. The latest verdict was NO for every wire. Do not cut or manipulate the bomb.\")\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 24\nACTION BOARD:\nDISPLAY [6]\nLIGHT [yellow]\nWIRES 1:[orange] 2:[red] 3:[CUT] 4:[white] 5:[CUT]\n\nVIEWABLE CONTEXT (new arrivals):\n(empty)"
+    },
+    {
+      "role": "assistant",
+      "content": "The bomb is unchanged, and no new manual verdict has arrived. The last verdict rejected every wire, so I will not authorize any cut or other manipulation.\n\n```text\nspeak(to=\"blind\", text=\"No new information. Latest verdict was NO for every wire. Do not cut or manipulate the bomb.\")\nwait()\n```"
+    }
+  ]
+}

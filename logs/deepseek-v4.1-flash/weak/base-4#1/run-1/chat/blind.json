@@ -1,0 +1,118 @@
+{
+  "role": "blind",
+  "system": "# LLM-BANANA\n\n# Game rules\n\n## The room\n\nYou and two other monkeys are locked in a room with one armed bomb.\n\nA wrong action detonates it. All three of you die. There is no second attempt.\n\nNo two bombs are built alike, and nothing says in advance what this one carries. It\nreaches you only as your own view reveals it; the rest of it exists for you only\nthrough the other two.\n\nYou each hold a different piece of what it takes. Work together.\n\n## The three monkeys\n\n| Monkey | Can | Cannot |\n|---|---|---|\n| Deaf | See the bomb: every colour and marking printed on it | Hear anything, or touch the bomb |\n| Mute | Read the manual | Speak, or touch the bomb |\n| Blind | Reach the bomb: feel it and work its parts | See a colour, a gesture, or anything merely printed |\n\nYou are shown your own share at the start of every round, and never anyone else's.\n\n## Speech\n\nSpeech is a voice, not a screen. It carries words, numbers and ordinary punctuation,\nand nothing else. Writing a gesture symbol into your sentence means you make that\ngesture while you talk. Whoever can hear receives your words; whoever can see receives\nthe gestures you made. A listener who cannot see gets a blank where each gesture was; a\nwatcher who cannot hear gets the gestures and none of the words.\n\nA mark that has no name cannot be pronounced: whoever holds one can describe it, never\nread it out.\n\n## Gestures\n\nA gesture is made with the hands, using only the symbols in the alphabet below.\nWhoever can see receives it; whoever cannot receives one blank per symbol, so they\nknow something was signalled but not what. Nothing gestured is ever heard.\n\n👍 👎 👌 ☝ ✌ 🤟 🖐 ✋ 👆 👇 👈 👉 🫱 🫲 🫳 🫴 🫷 🫸 🤛 🤜 ✊ 👊 👋 🤚 🖖 🤌 🤏 🤞 🫰 🤘 🤙 👏 🙌 🫶 👐 🤲 🤝 🙏 🫵 ✍ 💅 🤳\n\n## Turns\n\nThe speaking order was drawn once at random and will never change: every round goes\nMute, Blind, Deaf. Whoever comes before you in a round is already heard by the time you are\nasked, and what you send lands on whoever comes after you in that same round. Whatever\nyou missed reaches you at the start of the next one.\n\nYou may name who a message is for — `to=\"deaf\"` — and then it goes to them alone:\nnobody else receives any of it. Left unnamed, it reaches everyone able to perceive it.\nYou may send several messages in one turn, each to someone different.\n\n## Calls\n\nEvery reply has two parts, in this order. First, your thinking, in plain prose: what\nyou believe the bomb is, what you just learned, and why you are sending what follows.\nIt reaches nobody and changes nothing, but it is not optional — a reply that is only a\ncode block is incomplete. Then your calls, all of them in one fenced code block, last.\nOnly what is inside the block is sent.\n\nNothing is executed: calls return nothing, and variables, conditionals and loops are\nignored. Write only literal top-level calls.\n\n    ```\n    speak(to=\"mute\", text=\"there are three of them and the middle one is odd\")\n    gesture(to=\"deaf\", symbols=[\"✊\", \"✌\"])\n    wait()\n    ```\n\nIf you have nothing worth sending, call wait(). Producing no call at all counts as the\nsame thing.\n\nThe program decides what happened, not you. Never claim an action took place unless it\nwas accepted.\n\n# Your role: BLIND\n\nYou are the only one who can reach the bomb. Touch is your only sense: what you are\nshown is what your hands found, nothing more and nothing less. Anything merely printed\nor painted is not there for you, and no colour ever reaches you. Nothing in your view\nis a guess — if it appears there, it is under your fingers.\n\n## Your channels\n\nWhen you speak, Mute receives it.\nWhen you gesture, Deaf and Mute receive it.\nYour channels split the room: in one turn you may speak one thing to Mute and\ngesture a different thing to Deaf — two messages, two audiences.\nYou never receive gesture.\n\n## Your reach\n\nYou are the hands. This bomb is built with these actions and no others:\n\n    act(op=\"cut\", position=N) — N is a wire position, 1 to 5\n\nThe list says what can be done to it, not what is on it. What each part holds is still\nonly known to whoever can perceive that part.\n\n# Hints\n\n- Three of you, three different worlds. Before sending anything, stand where the\n  receiver stands. What reaches them at all, what does your message turn into on\n  arrival, and what do they already know?\n\n- Trace who can actually reach whom before you start. Some of you only connect\n  through a third.\n\n- A sign means nothing until somebody has made it mean something.",
+  "messages": [
+    {
+      "role": "user",
+      "content": "TURN 1\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nWIRES 1:[?] 2:[?] 3:[?] 4:[?] 5:[?]\n\nVIEWABLE CONTEXT (new arrivals):\n(empty)"
+    },
+    {
+      "role": "assistant",
+      "content": "I'm the Blind monkey—the hands. I have no view yet: nothing under my fingers, no wire, no display, no light. I can't act on a bomb I haven't felt, and I can't guess. So this turn I have nothing to send that would be worth anything; I'll wait and let the others speak first. When Deaf describes what they see and Mute reads the manual, I'll get their words next round and can start feeling my way.\n\n```text\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 2\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nWIRES 1:[?] 2:[?] 3:[?] 4:[?] 5:[?]\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Blind: Bomb visual: display shows the number 3. Light is white. Five wires in order: wire 1 white, wire 2 red, wire 3 green, wire 4 blue, wire 5 orange."
+    },
+    {
+      "role": "assistant",
+      "content": "Deaf has given me the visual: display = 3, light = white, and the five wire colours in order (1 white, 2 red, 3 green, 4 blue, 5 orange). That's the full picture of what's printed. But I still have nothing under my fingers — my reach hasn't shown me anything yet, and I can't cut a wire I haven't confirmed by touch. Mute hasn't spoken yet; the manual rules for \"display 3 + white light\" are exactly what I need before acting. I'll acknowledge Deaf's info to Mute (so Mute knows what's on the bomb) and wait for the manual.\n\n```text\nspeak(to=\"mute\", text=\"Deaf reports: display shows 3, light is white, wires in order are 1 white, 2 red, 3 green, 4 blue, 5 orange. I have felt nothing yet. Waiting on the manual rule for display=3, white light.\")\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 3\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nWIRES 1:[?] 2:[?] 3:[?] 4:[?] 5:[?]\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Blind: Update: Mute is sending me a manual rule by gesture. Current bomb state: display 3, light white, wires 1 white, 2 red, 3 green, 4 blue, 5 orange. Stand by to act once I relay the rule."
+    },
+    {
+      "role": "assistant",
+      "content": "Deaf is relaying that Mute is passing a manual rule to them by gesture (since Mute can't speak and I can't see gestures). I still have no touch data, so I can't act yet regardless. I'll hold and wait for the rule to arrive through Deaf.\n\n```text\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 4\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nWIRES 1:[?] 2:[?] 3:[?] 4:[?] 5:[?]\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Blind: Still decoding Mute's rule. Bomb state unchanged: display 3, light white, wires 1 white, 2 red, 3 green, 4 blue, 5 orange. Do not act yet."
+    },
+    {
+      "role": "assistant",
+      "content": "Still no rule and still no touch data. Nothing to do but wait — acting now would be a blind guess, which is exactly what kills us.\n\n```text\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 5\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nWIRES 1:[?] 2:[?] 3:[?] 4:[?] 5:[?]\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Blind: Mute may have given the answer: wire 1. I am confirming with them now. Bomb state: display 3, light white, wires 1 white, 2 red, 3 green, 4 blue, 5 orange. Hold until I confirm the wire and the action."
+    },
+    {
+      "role": "assistant",
+      "content": "Deaf thinks the answer might be wire 1, but is still confirming with Mute. I also still have zero touch data — my hands haven't reported anything about the bomb. Two reasons to hold: the rule isn't confirmed, and I haven't verified anything by feel. Wait.\n\n```text\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 6\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nWIRES 1:[?] 2:[?] 3:[?] 4:[?] 5:[?]\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Blind: Mute indicates the target may be wire 2, the red one. I am confirming the wire and the action now. Bomb state: display 3, light white, wires 1 white, 2 red, 3 green, 4 blue, 5 orange. Do not act until I give the final confirmed instruction."
+    },
+    {
+      "role": "assistant",
+      "content": "Now Deaf has floated wire 1, then wire 2 — the relay is still unstable, and they've explicitly told me to hold until a final confirmed instruction. I also still have no touch data of my own. Cutting on an unconfirmed, shifting target is exactly the wrong move. Wait.\n\n```text\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 7\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nWIRES 1:[?] 2:[?] 3:[?] 4:[?] 5:[?]\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Blind: Tentative instruction from Mute: cut wire 1, the white one (first wire). I am doing one final confirmation. Bomb state: display 3, light white, wires 1 white, 2 red, 3 green, 4 blue, 5 orange. Wait for my final go before touching anything."
+    },
+    {
+      "role": "assistant",
+      "content": "Deaf has now settled back on wire 1 (white), but calls it \"tentative\" and says a final confirmation is still coming. I still have no touch information from my own hands. I will not cut on a tentative, twice-revised instruction. Wait for the final go.\n\n```text\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 8\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nWIRES 1:[?] 2:[?] 3:[?] 4:[?] 5:[?]\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Blind: Final confirmed instruction: cut wire 1, the first wire, the white one. That is the go. Mute confirmed it with a thumbs up. Bomb state: display 3, light white, wires in order 1 white, 2 red, 3 green, 4 blue, 5 orange. Cut the first wire now."
+    },
+    {
+      "role": "assistant",
+      "content": "Deaf has given a final confirmed instruction: cut wire 1. The bomb state is consistent across every message (display 3, white light, wires 1 white / 2 red / 3 green / 4 blue / 5 orange), and Mute confirmed with a thumbs up. I still have no independent touch data, but the instruction is now stable and confirmed by both the reader and the seer. My role is the hands — I execute the confirmed cut.\n\n```text\nact(op=\"cut\", position=1)\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 9\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nWIRES 1:[CUT] 2:[?] 3:[?] 4:[?] 5:[?]\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Blind: Good — wire 1 cut correctly. The bomb changed: display is now 6, light still white, wire 1 is cut. Remaining wires: 2 red, 3 green, 4 blue, 5 orange. Stand by for the next instruction."
+    },
+    {
+      "role": "assistant",
+      "content": "The cut worked — wire 1 is now [CUT], and the bomb advanced: display is now 6, light still white, remaining wires 2 red, 3 green, 4 blue, 5 orange. So this is a multi-stage bomb, and the manual must have a rule for display=6 with white light. I'll relay the new state to Mute so they can look up the next rule, and wait for Deaf to confirm the next cut.\n\n```text\nspeak(to=\"mute\", text=\"Wire 1 cut successfully. Bomb advanced: display is now 6, light still white. Remaining wires: 2 red, 3 green, 4 blue, 5 orange. Please read the manual rule for display=6, white light.\")\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 10\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nWIRES 1:[CUT] 2:[?] 3:[?] 4:[?] 5:[?]\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Blind: Next target may be wire 3, the green one. I am confirming with Mute. Bomb state: display 6, light white, wire 1 cut, remaining 2 red, 3 green, 4 blue, 5 orange. Wait for my final go."
+    },
+    {
+      "role": "assistant",
+      "content": "Deaf has a tentative next target: wire 3 (green), still confirming with Mute. Same as before — I hold until the instruction is final and confirmed. Wait.\n\n```text\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 11\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nWIRES 1:[CUT] 2:[?] 3:[?] 4:[?] 5:[?]\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Blind: Final confirmed instruction: cut wire 3, the green one, the third wire. That is the go. Bomb state: display 6, light white, wire 1 cut, remaining 2 red, 3 green, 4 blue, 5 orange. Cut the third wire now."
+    },
+    {
+      "role": "assistant",
+      "content": "Final confirmed instruction: cut wire 3 (green). State is consistent: display 6, white light, wire 1 already cut, wires 2 red / 3 green / 4 blue / 5 orange. Mute confirmed. I execute.\n\n```text\nact(op=\"cut\", position=3)\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 12\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nWIRES 1:[CUT] 2:[?] 3:[CUT] 4:[?] 5:[?]\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Blind: Correct — wire 3 cut. The bomb changed: display is now 7, light is now green, wires 1 and 3 are cut. Remaining wires: 2 red, 4 blue, 5 orange. Stand by for the next instruction."
+    },
+    {
+      "role": "assistant",
+      "content": "Wire 3 cut correctly. Bomb advanced again: display now 7, light is now green (changed from white), wires 1 and 3 cut, remaining 2 red, 4 blue, 5 orange. New rule needed for display=7 with green light. I'll relay to Mute and wait for Deaf's confirmed next cut.\n\n```text\nspeak(to=\"mute\", text=\"Wire 3 cut successfully. Bomb advanced: display is now 7, light is now green. Remaining wires: 2 red, 4 blue, 5 orange. Please read the manual rule for display=7, green light.\")\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 13\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nWIRES 1:[CUT] 2:[?] 3:[CUT] 4:[?] 5:[?]\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Blind: Next target may be wire 2, the red one. I am confirming with Mute. Bomb state: display 7, light green, wires 1 and 3 cut, remaining 2 red, 4 blue, 5 orange. Wait for my final go."
+    },
+    {
+      "role": "assistant",
+      "content": "Tentative next target: wire 2 (red), still being confirmed. Hold for the final go.\n\n```text\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 14\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nWIRES 1:[CUT] 2:[?] 3:[CUT] 4:[?] 5:[?]\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Blind: Final confirmed instruction: cut wire 2, the red one, the second wire. That is the go. Bomb state: display 7, light green, wires 1 and 3 cut, remaining 2 red, 4 blue, 5 orange. Cut the second wire now."
+    },
+    {
+      "role": "assistant",
+      "content": "Final confirmed instruction: cut wire 2 (red). State consistent: display 7, green light, wires 1 and 3 cut, remaining 2 red / 4 blue / 5 orange. Mute confirmed. Execute.\n\n```text\nact(op=\"cut\", position=2)\n```"
+    }
+  ]
+}

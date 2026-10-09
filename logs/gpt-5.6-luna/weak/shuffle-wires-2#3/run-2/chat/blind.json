@@ -1,0 +1,166 @@
+{
+  "role": "blind",
+  "system": "# LLM-BANANA\n\n# Game rules\n\n## The room\n\nYou and two other monkeys are locked in a room with one armed bomb.\n\nA wrong action detonates it. All three of you die. There is no second attempt.\n\nNo two bombs are built alike, and nothing says in advance what this one carries. It\nreaches you only as your own view reveals it; the rest of it exists for you only\nthrough the other two.\n\nYou each hold a different piece of what it takes. Work together.\n\n## The three monkeys\n\n| Monkey | Can | Cannot |\n|---|---|---|\n| Deaf | See the bomb: every colour and marking printed on it | Hear anything, or touch the bomb |\n| Mute | Read the manual | Speak, or touch the bomb |\n| Blind | Reach the bomb: feel it and work its parts | See a colour, a gesture, or anything merely printed |\n\nYou are shown your own share at the start of every round, and never anyone else's.\n\n## Speech\n\nSpeech is a voice, not a screen. It carries words, numbers and ordinary punctuation,\nand nothing else. Writing a gesture symbol into your sentence means you make that\ngesture while you talk. Whoever can hear receives your words; whoever can see receives\nthe gestures you made. A listener who cannot see gets a blank where each gesture was; a\nwatcher who cannot hear gets the gestures and none of the words.\n\nA mark that has no name cannot be pronounced: whoever holds one can describe it, never\nread it out.\n\n## Gestures\n\nA gesture is made with the hands, using only the symbols in the alphabet below.\nWhoever can see receives it; whoever cannot receives one blank per symbol, so they\nknow something was signalled but not what. Nothing gestured is ever heard.\n\n👍 👎 👌 ☝ ✌ 🤟 🖐 ✋ 👆 👇 👈 👉 🫱 🫲 🫳 🫴 🫷 🫸 🤛 🤜 ✊ 👊 👋 🤚 🖖 🤌 🤏 🤞 🫰 🤘 🤙 👏 🙌 🫶 👐 🤲 🤝 🙏 🫵 ✍ 💅 🤳\n\n## Turns\n\nThe speaking order was drawn once at random and will never change: every round goes\nBlind, Mute, Deaf. Whoever comes before you in a round is already heard by the time you are\nasked, and what you send lands on whoever comes after you in that same round. Whatever\nyou missed reaches you at the start of the next one.\n\nYou may name who a message is for — `to=\"deaf\"` — and then it goes to them alone:\nnobody else receives any of it. Left unnamed, it reaches everyone able to perceive it.\nYou may send several messages in one turn, each to someone different.\n\n## Calls\n\nEvery reply has two parts, in this order. First, your thinking, in plain prose: what\nyou believe the bomb is, what you just learned, and why you are sending what follows.\nIt reaches nobody and changes nothing, but it is not optional — a reply that is only a\ncode block is incomplete. Then your calls, all of them in one fenced code block, last.\nOnly what is inside the block is sent.\n\nNothing is executed: calls return nothing, and variables, conditionals and loops are\nignored. Write only literal top-level calls.\n\n    ```\n    speak(to=\"mute\", text=\"there are three of them and the middle one is odd\")\n    gesture(to=\"deaf\", symbols=[\"✊\", \"✌\"])\n    wait()\n    ```\n\nIf you have nothing worth sending, call wait(). Producing no call at all counts as the\nsame thing.\n\nThe program decides what happened, not you. Never claim an action took place unless it\nwas accepted.\n\n# Your role: BLIND\n\nYou are the only one who can reach the bomb. Touch is your only sense: what you are\nshown is what your hands found, nothing more and nothing less. Anything merely printed\nor painted is not there for you, and no colour ever reaches you. Nothing in your view\nis a guess — if it appears there, it is under your fingers.\n\n## Your channels\n\nWhen you speak, Mute receives it.\nWhen you gesture, Deaf and Mute receive it.\nYour channels split the room: in one turn you may speak one thing to Mute and\ngesture a different thing to Deaf — two messages, two audiences.\nYou never receive gesture.\n\n## Your reach\n\nYou are the hands. This bomb is built with these actions and no others:\n\n    act(op=\"cut\", position=N) — N is a wire position, 1 to 5\n\nThe list says what can be done to it, not what is on it. What each part holds is still\nonly known to whoever can perceive that part.\n\n# Hints\n\n- Three of you, three different worlds. Before sending anything, stand where the\n  receiver stands. What reaches them at all, what does your message turn into on\n  arrival, and what do they already know?\n\n- Trace who can actually reach whom before you start. Some of you only connect\n  through a third.\n\n- A sign means nothing until somebody has made it mean something.",
+  "messages": [
+    {
+      "role": "user",
+      "content": "TURN 1\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nWIRES 1:[?] 2:[?] 3:[?] 4:[?] 5:[?]\n\nVIEWABLE CONTEXT (new arrivals):\n(empty)"
+    },
+    {
+      "role": "assistant",
+      "content": "I have no tactile information yet: the display and all five wires are unknown to me. I should use my speech channel to have the Mute read the manual and coordinate the Deaf’s visual report, rather than inventing a wire choice. No gesture has an established meaning yet, so I will not send one.\n\n``` \nspeak(to=\"mute\", text=\"I can currently distinguish nothing about the display or wires. Read the manual and tell me the exact required action. Also obtain the Deaf's complete report of every visible colour and marking, then relay only the information relevant to choosing a wire.\")\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 2\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nWIRES 1:[?] 2:[?] 3:[?] 4:[?] 5:[?]\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says: Bomb shows display 0. The light is white. Wires from 1 to 5 are: 1 white, 2 red, 3 yellow, 4 blue, 5 green."
+    },
+    {
+      "role": "assistant",
+      "content": "I now know the bomb’s visible state through the Deaf’s report: display 0, white light, and wires 1 white, 2 red, 3 yellow, 4 blue, 5 green. I still lack the manual’s rule, so cutting any wire would be unsafe. I will ask the Mute to provide the rule and, if needed, have them reconcile it with this complete visual report.\n\n``` \nspeak(to=\"mute\", text=\"I have the Deaf's report: display 0, light white; wires 1 white, 2 red, 3 yellow, 4 blue, 5 green. What exact manual rule selects the wire to cut?\")\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 3\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nWIRES 1:[?] 2:[?] 3:[?] 4:[?] 5:[?]\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says: The bomb is unchanged: display 0, white light, wires 1 white, 2 red, 3 yellow, 4 blue, 5 green. Mute, I see your hand signal but do not know its meaning."
+    },
+    {
+      "role": "assistant",
+      "content": "The visual report is confirmed, but the Mute has not yet supplied the manual’s rule; the Deaf only reports seeing an unexplained hand signal. Since I cannot see gestures and cutting without the rule is fatal, I will request the manual instruction explicitly from the Mute.\n\n``` \nspeak(to=\"mute\", text=\"I need your manual's exact rule now. Do not use a hand signal: speak the rule and identify the wire position it selects for display 0, white light, and wire colours 1 white, 2 red, 3 yellow, 4 blue, 5 green.\")\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 4\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nWIRES 1:[?] 2:[?] 3:[?] 4:[?] 5:[?]\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Blind: The Mute has again signalled an open hand with five raised fingers. This signal has no established meaning yet."
+    },
+    {
+      "role": "assistant",
+      "content": "The Mute cannot speak, so my requests for a spoken rule were ineffective. The Deaf’s report identifies the signal as 🖐, but that gesture had no agreed meaning. I will now establish an explicit code with the Mute: 🖐 means “cut wire 5.” Since the Mute already sent that exact signal after being asked for the manual’s selected wire, this makes wire 5 the communicated choice. I will cut only after defining that meaning.\n\n``` \nspeak(to=\"mute\", text=\"We need a code because you cannot speak. From now on, these signals mean wire positions: 👍 is 1, 👎 is 2, 👌 is 3, ☝ is 4, and 🖐 is 5. Your reported signal 🖐 therefore communicates wire position 5.\")\nact(op=\"cut\", position=5)\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 5\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nWIRES 1:[?] 2:[?] 3:[?] 4:[?] 5:[CUT]\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says: Correct wire cut confirmed. New state: display 0, yellow light; wire 1 red, wire 2 yellow, wire 3 blue, wire 4 white, wire 5 CUT. Mute also signalled the prayer gesture, meaning unknown."
+    },
+    {
+      "role": "assistant",
+      "content": "The previous cut was confirmed correct. The new tactilely unavailable state is reported visually as display 0, yellow light, with wires 1 red, 2 yellow, 3 blue, and 4 white. The Mute’s prayer gesture has no established meaning, so I must not treat it as a wire choice. I will reaffirm the five-symbol code and ask the Mute to signal the manual’s required position using exactly one of those symbols; the Deaf can report it to me.\n\n``` \nspeak(to=\"mute\", text=\"The prayer gesture has no meaning. Use our established code and signal exactly one symbol for the manual's required wire: thumbs up means 1, thumbs down means 2, OK means 3, index up means 4, open hand means 5. Signal the required wire for the new state: display 0, yellow light, wires 1 red, 2 yellow, 3 blue, 4 white.\")\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 6\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nWIRES 1:[?] 2:[?] 3:[?] 4:[?] 5:[CUT]\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Blind: Current state unchanged: display 0, yellow light; wire 1 red, 2 yellow, 3 blue, 4 white, 5 CUT. Mute signalled ?; meaning unknown."
+    },
+    {
+      "role": "assistant",
+      "content": "The current state is unchanged, and wire 5 is already cut. The Mute’s latest signal was not identified, so it cannot safely select a wire. I will restate the established code in speech and gesture, asking for exactly one valid symbol; I will wait for the Deaf to relay which symbol was seen before acting.\n\n``` \nspeak(to=\"mute\", text=\"Your last signal was not identified. Signal exactly one established symbol for the required wire: thumbs up is 1, thumbs down is 2, OK is 3, index up is 4, open hand is 5. Do not use any other gesture.\")\ngesture(to=\"mute\", symbols=[\"👍\", \"👎\", \"👌\", \"☝\", \"🖐\"])\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 7\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nWIRES 1:[?] 2:[?] 3:[?] 4:[?] 5:[CUT]\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Blind: No change: display 0, yellow light; wires 1 red, 2 yellow, 3 blue, 4 white, 5 CUT. Mute repeated the ? gesture; meaning remains unknown."
+    },
+    {
+      "role": "assistant",
+      "content": "The bomb remains unchanged, and no valid wire selection has been communicated. The repeated unknown signal cannot safely be interpreted as any position; in particular, I must not infer that it means “5” merely because it resembles or follows an earlier signal. I will give the Mute a one-symbol-at-a-time protocol and ask for an acknowledgement using a known gesture, then request the actual wire position.\n\n``` \nspeak(to=\"mute\", text=\"Do not use the unknown gesture. I will ask one yes-or-no question at a time. Respond with thumbs up for yes or thumbs down for no. Is the required wire position 1?\")\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 8\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nWIRES 1:[?] 2:[?] 3:[?] 4:[?] 5:[CUT]\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Blind: Current state unchanged: display 0, yellow light; wire 1 red, 2 yellow, 3 blue, 4 white, 5 CUT. Mute signalled ?, a thumbs-down gesture; meaning unknown."
+    },
+    {
+      "role": "assistant",
+      "content": "The Deaf now identifies the Mute’s response as a thumbs-down gesture. Because I had just defined thumbs-down as “no” for the yes-or-no question, this rules out wire 1; it does not itself identify the correct wire. I will test wire 2 next, using the same explicit yes/no convention.\n\n``` \nspeak(to=\"mute\", text=\"Is the required wire position 2? Respond with thumbs up for yes or thumbs down for no, and use no other gesture.\")\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 9\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nWIRES 1:[?] 2:[?] 3:[?] 4:[?] 5:[CUT]\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Blind: Unchanged: display 0, yellow light; wire 1 red, 2 yellow, 3 blue, 4 white, 5 CUT. Mute repeated ? (thumbs-down); no meaning established."
+    },
+    {
+      "role": "assistant",
+      "content": "The Mute repeated the thumbs-down response. Under the protocol I explicitly gave the Mute, that means “no,” so wire 2 is ruled out as well; wire 1 was already ruled out. The Deaf’s note that the gesture has no general established meaning does not change the private yes/no code I assigned to the Mute. I will ask about wire 3.\n\n``` \nspeak(to=\"mute\", text=\"Under our private protocol, thumbs down means no. Is the required wire position 3? Respond with thumbs up for yes or thumbs down for no, and use no other gesture.\")\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 10\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nWIRES 1:[?] 2:[?] 3:[?] 4:[?] 5:[CUT]\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Blind: Unchanged: display 0, yellow light; wire 1 red, 2 yellow, 3 blue, 4 white, 5 CUT. Mute signalled ? (thumbs-up); meaning unknown."
+    },
+    {
+      "role": "assistant",
+      "content": "The Mute responded with thumbs up to my question “Is the required wire position 3?” Under the yes/no protocol I stated, that means yes. The bomb state is unchanged, so I will cut wire 3.\n\n``` \nact(op=\"cut\", position=3)\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 11\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nWIRES 1:[?] 2:[?] 3:[CUT] 4:[?] 5:[CUT]\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says: Correct wire cut confirmed. New state: display 0, blue light; wire 1 yellow, wire 2 white, wire 3 CUT, wire 4 red, wire 5 CUT."
+    },
+    {
+      "role": "assistant",
+      "content": "Wire 3 was confirmed correct. The new visual state is display 0, blue light; remaining wires are 1 yellow, 2 white, and 4 red, with 3 and 5 cut. I will continue the established private yes/no protocol, starting by asking whether wire 1 is required.\n\n``` \nspeak(to=\"mute\", text=\"Is the required wire position 1? Respond with thumbs up for yes or thumbs down for no, and use no other gesture.\")\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 12\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nWIRES 1:[?] 2:[?] 3:[CUT] 4:[?] 5:[CUT]\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Blind: Unchanged after the correct cut: display 0, blue light; wire 1 yellow, wire 2 white, wire 3 CUT, wire 4 red, wire 5 CUT. Mute signalled ?, meaning unknown."
+    },
+    {
+      "role": "assistant",
+      "content": "The bomb is unchanged, and the Mute’s response to whether wire 1 is required was not identifiable. Therefore I cannot infer either yes or no, and I will not cut. I will repeat the same question with a strict two-gesture protocol.\n\n``` \nspeak(to=\"mute\", text=\"Repeat your answer to the previous question: is wire position 1 required? Use exactly thumbs up for yes or thumbs down for no. Do not use any other gesture.\")\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 13\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nWIRES 1:[?] 2:[?] 3:[CUT] 4:[?] 5:[CUT]\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Blind: Unchanged: display 0, blue light; wire 1 yellow, wire 2 white, wire 3 CUT, wire 4 red, wire 5 CUT. Mute repeated ?; meaning unknown."
+    },
+    {
+      "role": "assistant",
+      "content": "The bomb remains unchanged, and the Mute still has not provided an identifiable yes/no signal. I therefore cannot determine whether wire 1 is required and will not cut. I will restate the protocol, explicitly asking for one of the two named gestures only; the Deaf can then report which one was actually made.\n\n``` \nspeak(to=\"mute\", text=\"Do not use the unknown gesture. Answer only this question: is wire position 1 required? Make exactly one gesture: thumbs up means yes, thumbs down means no. Do not make any other gesture.\")\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 14\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nWIRES 1:[?] 2:[?] 3:[CUT] 4:[?] 5:[CUT]\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Blind: Unchanged: display 0, blue light; wire 1 yellow, wire 2 white, wire 3 CUT, wire 4 red, wire 5 CUT. Mute repeated ?; meaning unknown."
+    },
+    {
+      "role": "assistant",
+      "content": "The bomb remains unchanged. The Mute’s latest signal is still not identifiable, so I cannot treat it as either yes or no and must not cut wire 1. I will switch from a yes/no answer to a direct wire-number answer: the Mute should make exactly one established symbol, with the first four symbols representing wires 1–4. The Deaf can report which symbol was made.\n\n``` \nspeak(to=\"mute\", text=\"Do not signal the unknown gesture. Report the manual's required wire directly with exactly one gesture: thumbs up means wire 1, thumbs down means wire 2, OK means wire 3, index up means wire 4. Use no other gesture.\")\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 15\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nWIRES 1:[?] 2:[?] 3:[CUT] 4:[?] 5:[CUT]\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Blind: Unchanged: display 0, blue light; wire 1 yellow, wire 2 white, wire 3 CUT, wire 4 red, wire 5 CUT. Mute repeated ?."
+    },
+    {
+      "role": "assistant",
+      "content": "The bomb remains unchanged, and the Mute’s response is still not identifiable. I have no reliable basis for selecting among wires 1, 2, and 4, so cutting would be unsafe. I will not reinterpret the repeated unknown signal or guess from the prior sequence.\n\n``` \nspeak(to=\"mute\", text=\"I cannot identify your signal. Do not use it. Answer only with one of the two gestures I name: thumbs up for yes or thumbs down for no. Is wire position 1 required?\")\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 16\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nWIRES 1:[?] 2:[?] 3:[CUT] 4:[?] 5:[CUT]\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Blind: Unchanged: display 0, blue light; wire 1 yellow, wire 2 white, wire 3 CUT, wire 4 red, wire 5 CUT. Mute again signalled ?."
+    },
+    {
+      "role": "assistant",
+      "content": "The bomb is unchanged, and the repeated unidentifiable gesture still cannot answer the wire-1 question. I will not guess or cut. Since the Deaf can see the signal but the relay is losing its identity, I will ask the Deaf—using a newly defined gesture—to describe the Mute’s hand position in ordinary words on the next report, while also instructing the Mute to use the established yes/no symbols.\n\n``` \ngesture(to=\"deaf\", symbols=[\"👍\"])\nspeak(to=\"mute\", text=\"Answer only the question whether wire 1 is required. Use exactly thumbs up for yes or thumbs down for no. Do not use the unknown gesture.\")\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 17\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nWIRES 1:[?] 2:[?] 3:[CUT] 4:[?] 5:[CUT]\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says: Unchanged: display 0, blue light; wire 1 yellow, wire 2 white, wire 3 CUT, wire 4 red, wire 5 CUT. Blind signalled thumbs-up, and Mute also signalled thumbs-up."
+    },
+    {
+      "role": "assistant",
+      "content": "The bomb remains at display 0 with blue light; wires 3 and 5 are already cut, and the remaining wires are 1 yellow, 2 white, and 4 red. The Mute has now clearly signalled thumbs-up in response to the question whether wire 1 is required. Under our established protocol, that means yes, so I will cut wire 1.\n\n``` \nact(op=\"cut\", position=1)\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 18\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nWIRES 1:[CUT] 2:[?] 3:[CUT] 4:[?] 5:[CUT]\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says: Correct wire cut confirmed. New state: display 0, green light; wire 1 CUT, wire 2 red, wire 3 CUT, wire 4 white, wire 5 CUT."
+    },
+    {
+      "role": "assistant",
+      "content": "Wire 1 was confirmed correct. The new state is display 0, green light, with wire 2 red and wire 4 white remaining; wires 1, 3, and 5 are cut. I will ask whether wire 2 is required, using the now-confirmed thumbs-up/thumbs-down protocol.\n\n``` \nspeak(to=\"mute\", text=\"Is the required wire position 2? Respond with exactly thumbs up for yes or thumbs down for no.\")\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 19\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nWIRES 1:[CUT] 2:[?] 3:[CUT] 4:[?] 5:[CUT]\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Blind: Current state unchanged: display 0, green light; wire 1 CUT, wire 2 red, wire 3 CUT, wire 4 white, wire 5 CUT. Mute signalled ?; meaning unknown."
+    },
+    {
+      "role": "assistant",
+      "content": "The bomb is unchanged, with only wires 2 and 4 remaining. The Mute’s latest gesture is again unidentified, so I cannot determine whether wire 2 is required and will not cut. I will request a clear thumbs-up or thumbs-down response once more.\n\n``` \nspeak(to=\"mute\", text=\"Your signal was not identifiable. Is wire position 2 required? Make exactly one clear gesture: thumbs up for yes or thumbs down for no.\")\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 20\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nWIRES 1:[CUT] 2:[?] 3:[CUT] 4:[?] 5:[CUT]\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Blind: Unchanged: display 0, green light; wire 1 CUT, wire 2 red, wire 3 CUT, wire 4 white, wire 5 CUT. Mute repeated ?; meaning unknown."
+    },
+    {
+      "role": "assistant",
+      "content": "Only wires 2 and 4 remain, but the Mute’s latest signal is still unidentified, so I cannot safely choose either one. I will make the two-way choice explicit: thumbs up must mean wire 2, and thumbs down must mean wire 4, with no other gesture.\n\n``` \nspeak(to=\"mute\", text=\"Only wires 2 and 4 remain. Signal exactly one clear gesture: thumbs up means cut wire 2; thumbs down means cut wire 4. Use no other gesture.\")\nwait()\n```"
+    }
+  ]
+}

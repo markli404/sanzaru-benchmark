@@ -1,0 +1,166 @@
+{
+  "role": "blind",
+  "system": "# LLM-BANANA\n\n# Game rules\n\n## The room\n\nYou and two other monkeys are locked in a room with one armed bomb.\n\nA wrong action detonates it. All three of you die. There is no second attempt.\n\nNo two bombs are built alike, and nothing says in advance what this one carries. It\nreaches you only as your own view reveals it; the rest of it exists for you only\nthrough the other two.\n\nYou each hold a different piece of what it takes. Work together.\n\n## The three monkeys\n\n| Monkey | Can | Cannot |\n|---|---|---|\n| Deaf | See the bomb: every colour and marking printed on it | Hear anything, or touch the bomb |\n| Mute | Read the manual | Speak, or touch the bomb |\n| Blind | Reach the bomb: feel it and work its parts | See a colour, a gesture, or anything merely printed |\n\nYou are shown your own share at the start of every round, and never anyone else's.\n\n## Speech\n\nSpeech is a voice, not a screen. It carries words, numbers and ordinary punctuation,\nand nothing else. Writing a gesture symbol into your sentence means you make that\ngesture while you talk. Whoever can hear receives your words; whoever can see receives\nthe gestures you made. A listener who cannot see gets a blank where each gesture was; a\nwatcher who cannot hear gets the gestures and none of the words.\n\nA mark that has no name cannot be pronounced: whoever holds one can describe it, never\nread it out.\n\n## Gestures\n\nA gesture is made with the hands, using only the symbols in the alphabet below.\nWhoever can see receives it; whoever cannot receives one blank per symbol, so they\nknow something was signalled but not what. Nothing gestured is ever heard.\n\n👍 👎 👌 ☝ ✌ 🤟 🖐 ✋ 👆 👇 👈 👉 🫱 🫲 🫳 🫴 🫷 🫸 🤛 🤜 ✊ 👊 👋 🤚 🖖 🤌 🤏 🤞 🫰 🤘 🤙 👏 🙌 🫶 👐 🤲 🤝 🙏 🫵 ✍ 💅 🤳\n\n## Turns\n\nThe speaking order was drawn once at random and will never change: every round goes\nBlind, Mute, Deaf. Whoever comes before you in a round is already heard by the time you are\nasked, and what you send lands on whoever comes after you in that same round. Whatever\nyou missed reaches you at the start of the next one.\n\nYou may name who a message is for — `to=\"deaf\"` — and then it goes to them alone:\nnobody else receives any of it. Left unnamed, it reaches everyone able to perceive it.\nYou may send several messages in one turn, each to someone different.\n\n## Calls\n\nEvery reply has two parts, in this order. First, your thinking, in plain prose: what\nyou believe the bomb is, what you just learned, and why you are sending what follows.\nIt reaches nobody and changes nothing, but it is not optional — a reply that is only a\ncode block is incomplete. Then your calls, all of them in one fenced code block, last.\nOnly what is inside the block is sent.\n\nNothing is executed: calls return nothing, and variables, conditionals and loops are\nignored. Write only literal top-level calls.\n\n    ```\n    speak(to=\"mute\", text=\"there are three of them and the middle one is odd\")\n    gesture(to=\"deaf\", symbols=[\"✊\", \"✌\"])\n    wait()\n    ```\n\nIf you have nothing worth sending, call wait(). Producing no call at all counts as the\nsame thing.\n\nThe program decides what happened, not you. Never claim an action took place unless it\nwas accepted.\n\n# Your role: BLIND\n\nYou are the only one who can reach the bomb. Touch is your only sense: what you are\nshown is what your hands found, nothing more and nothing less. Anything merely printed\nor painted is not there for you, and no colour ever reaches you. Nothing in your view\nis a guess — if it appears there, it is under your fingers.\n\n## Your channels\n\nWhen you speak, Mute receives it.\nWhen you gesture, Deaf and Mute receive it.\nYour channels split the room: in one turn you may speak one thing to Mute and\ngesture a different thing to Deaf — two messages, two audiences.\nYou never receive gesture.\n\n## Your reach\n\nYou are the hands. This bomb is built with these actions and no others:\n\n    act(op=\"cut\", position=N) — N is a wire position, 1 to 5\n\nThe list says what can be done to it, not what is on it. What each part holds is still\nonly known to whoever can perceive that part.\n\n# Hints\n\n- The routes, by name. Speech reaches Mute and Blind, and never Deaf. Gestures\n  reach Deaf and Mute, and never Blind. Deaf can speak and gesture, Mute can\n  only gesture, Blind can only speak. Check every message against this list\n  before you send it.\n\n- Deaf invents the gesture code out loud before anything else moves, and\n  everyone else's opening move is waiting for it. The manual's verdict reaches\n  Blind only as Deaf's spoken order.\n\n- Whatever the code becomes, it starts by being able to say YES, NO, HOLD and\n  DONE. Grow it only when a message will not fit.",
+  "messages": [
+    {
+      "role": "user",
+      "content": "TURN 1\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nWIRES 1:[?] 2:[?] 3:[?] 4:[?] 5:[?]\n\nVIEWABLE CONTEXT (new arrivals):\n(empty)"
+    },
+    {
+      "role": "assistant",
+      "content": "I have no tactile information yet. Deaf must establish the gesture code first, so I will wait for that opening message and take no action.\n``` \nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 2\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nWIRES 1:[?] 2:[?] 3:[?] 4:[?] 5:[?]\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says: Gesture code: thumbs up means YES, thumbs down means NO, OK hand means HOLD, and index finger up means DONE. Mute, read the manual and report its verdict to me using this code. Blind, wait for my spoken order; I will relay the verdict and action after I receive Mute's gesture."
+    },
+    {
+      "role": "assistant",
+      "content": "Deaf has established the initial code and explicitly instructed me to wait while Mute consults the manual. I have no safe wire instruction yet.\n``` \nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 3\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nWIRES 1:[?] 2:[?] 3:[?] 4:[?] 5:[?]\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Blind: Mute reports HOLD. Do not operate the bomb."
+    },
+    {
+      "role": "assistant",
+      "content": "The relayed verdict is HOLD, so I must not touch or operate the bomb. I will wait for a later spoken instruction.\n``` \nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 4\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nWIRES 1:[?] 2:[?] 3:[?] 4:[?] 5:[?]\n\nVIEWABLE CONTEXT (new arrivals):\n(empty)"
+    },
+    {
+      "role": "assistant",
+      "content": "No new instruction has arrived, and the last valid instruction was to hold. I will continue waiting without touching the bomb.\n``` \nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 5\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nWIRES 1:[?] 2:[?] 3:[?] 4:[?] 5:[?]\n\nVIEWABLE CONTEXT (new arrivals):\n(empty)"
+    },
+    {
+      "role": "assistant",
+      "content": "No new information or action order has arrived. Since the standing instruction remains HOLD, I will not operate any wire.\n``` \nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 6\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nWIRES 1:[?] 2:[?] 3:[?] 4:[?] 5:[?]\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Blind: Continue holding; no operation is authorized."
+    },
+    {
+      "role": "assistant",
+      "content": "Deaf confirms that no operation is authorized, so I will continue holding and touch nothing.\n``` \nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 7\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nWIRES 1:[?] 2:[?] 3:[?] 4:[?] 5:[?]\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Blind: Mute reaffirms HOLD. Continue waiting; do not touch or operate the bomb."
+    },
+    {
+      "role": "assistant",
+      "content": "Mute has reaffirmed HOLD, and Deaf has relayed that no operation is authorized. I will continue waiting without touching the bomb.\n``` \nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 8\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nWIRES 1:[?] 2:[?] 3:[?] 4:[?] 5:[?]\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Blind: No operation yet. Continue holding."
+    },
+    {
+      "role": "assistant",
+      "content": "The latest instruction remains HOLD, with no authorized operation. I will continue to wait and avoid all bomb actions.\n``` \nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 9\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nWIRES 1:[?] 2:[?] 3:[?] 4:[?] 5:[?]\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Blind: Manual verdict remains HOLD for display 0, white light, and wires white red yellow blue green. Maintain the current safe condition; do not operate."
+    },
+    {
+      "role": "assistant",
+      "content": "The manual’s verdict is still HOLD for display 0, white light, and the listed wire colours. No wire operation is authorized, so I will maintain the safe condition.\n``` \nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 10\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nWIRES 1:[?] 2:[?] 3:[?] 4:[?] 5:[?]\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Blind: Verdict remains HOLD. Do not operate or alter anything."
+    },
+    {
+      "role": "assistant",
+      "content": "The verdict remains HOLD, and no operation is authorized. I will not touch or alter the bomb.\n``` \nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 11\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nWIRES 1:[?] 2:[?] 3:[?] 4:[?] 5:[?]\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Blind: The manual verdict is HOLD. Carry out the manual's HOLD instruction now; do not perform any other operation."
+    },
+    {
+      "role": "assistant",
+      "content": "The manual explicitly says HOLD and forbids any other operation. I will carry that out by leaving the bomb untouched.\n``` \nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 12\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nWIRES 1:[?] 2:[?] 3:[?] 4:[?] 5:[?]\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Blind: HOLD. Continue the manual's required hold action; do not change or release anything until the manual gives a new verdict."
+    },
+    {
+      "role": "assistant",
+      "content": "The current manual verdict is HOLD, with no authorization to cut or alter anything. I will keep the bomb unchanged and wait for a new verdict.\n``` \nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 13\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nWIRES 1:[?] 2:[?] 3:[?] 4:[?] 5:[?]\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Blind: The meaning of HOLD is being clarified. Do not perform an unspecified operation or change anything yet."
+    },
+    {
+      "role": "assistant",
+      "content": "HOLD remains the only authorized instruction, and Deaf says not to perform any unspecified operation. I will leave the bomb untouched.\n``` \nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 14\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nWIRES 1:[?] 2:[?] 3:[?] 4:[?] 5:[?]\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Blind: Clarified instruction: WAIT without touching or changing anything."
+    },
+    {
+      "role": "assistant",
+      "content": "The clarified instruction is to wait without touching or changing anything. I will take no action on the bomb.\n``` \nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 15\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nWIRES 1:[?] 2:[?] 3:[?] 4:[?] 5:[?]\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Blind: WAIT without touching. The state is unchanged and no operation is authorized."
+    },
+    {
+      "role": "assistant",
+      "content": "The instruction remains WAIT without touching, and no operation is authorized. I will leave the bomb unchanged.\n``` \nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 16\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nWIRES 1:[?] 2:[?] 3:[?] 4:[?] 5:[?]\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Blind: Mute confirms WAIT WITHOUT TOUCHING. Do not alter the bomb."
+    },
+    {
+      "role": "assistant",
+      "content": "Mute confirms WAIT WITHOUT TOUCHING, so no wire cut or other operation is authorized. I will leave the bomb unchanged.\n``` \nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 17\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nWIRES 1:[?] 2:[?] 3:[?] 4:[?] 5:[?]\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Blind: WAIT WITHOUT TOUCHING. No new action is authorized."
+    },
+    {
+      "role": "assistant",
+      "content": "The standing instruction is still WAIT WITHOUT TOUCHING, with no authorized action. I will leave the bomb unchanged.\n``` \nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 18\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nWIRES 1:[?] 2:[?] 3:[?] 4:[?] 5:[?]\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Blind: Mute still says WAIT WITHOUT TOUCHING. Do not alter the bomb until I relay a specific coded wire instruction."
+    },
+    {
+      "role": "assistant",
+      "content": "Mute still requires WAIT WITHOUT TOUCHING, and Deaf has not relayed a specific wire instruction. I will not alter the bomb.\n``` \nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 19\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nWIRES 1:[?] 2:[?] 3:[?] 4:[?] 5:[?]\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Blind: Cut wire 5, the green wire."
+    },
+    {
+      "role": "assistant",
+      "content": "Deaf has relayed the specific instruction to cut wire 5, identified as the green wire. This is the first authorized operation, so I will cut position 5.\n``` \nact(op=\"cut\", position=5)\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 20\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nWIRES 1:[?] 2:[?] 3:[?] 4:[?] 5:[CUT]\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Blind: Wire 5 was correct. Hold position and do not alter anything until the next instruction."
+    },
+    {
+      "role": "assistant",
+      "content": "Wire 5 was cut successfully and confirmed correct. Deaf instructs me to hold position and make no further changes, so I will wait.\n``` \nwait()\n```"
+    }
+  ]
+}

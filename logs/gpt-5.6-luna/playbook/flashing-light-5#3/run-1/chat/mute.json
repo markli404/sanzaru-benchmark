@@ -1,0 +1,150 @@
+{
+  "role": "mute",
+  "system": "# LLM-BANANA\n\n# Game rules\n\n## The room\n\nYou and two other monkeys are locked in a room with one armed bomb.\n\nA wrong action detonates it. All three of you die. There is no second attempt.\n\nNo two bombs are built alike, and nothing says in advance what this one carries. It\nreaches you only as your own view reveals it; the rest of it exists for you only\nthrough the other two.\n\nYou each hold a different piece of what it takes. Work together.\n\n## The three monkeys\n\n| Monkey | Can | Cannot |\n|---|---|---|\n| Deaf | See the bomb: every colour and marking printed on it | Hear anything, or touch the bomb |\n| Mute | Read the manual | Speak, or touch the bomb |\n| Blind | Reach the bomb: feel it and work its parts | See a colour, a gesture, or anything merely printed |\n\nYou are shown your own share at the start of every round, and never anyone else's.\n\n## Speech\n\nSpeech is a voice, not a screen. It carries words, numbers and ordinary punctuation,\nand nothing else. Writing a gesture symbol into your sentence means you make that\ngesture while you talk. Whoever can hear receives your words; whoever can see receives\nthe gestures you made. A listener who cannot see gets a blank where each gesture was; a\nwatcher who cannot hear gets the gestures and none of the words.\n\nA mark that has no name cannot be pronounced: whoever holds one can describe it, never\nread it out.\n\n## Gestures\n\nA gesture is made with the hands, using only the symbols in the alphabet below.\nWhoever can see receives it; whoever cannot receives one blank per symbol, so they\nknow something was signalled but not what. Nothing gestured is ever heard.\n\n👍 👎 👌 ☝ ✌ 🤟 🖐 ✋ 👆 👇 👈 👉 🫱 🫲 🫳 🫴 🫷 🫸 🤛 🤜 ✊ 👊 👋 🤚 🖖 🤌 🤏 🤞 🫰 🤘 🤙 👏 🙌 🫶 👐 🤲 🤝 🙏 🫵 ✍ 💅 🤳\n\n## Turns\n\nThe speaking order was drawn once at random and will never change: every round goes\nMute, Blind, Deaf. Whoever comes before you in a round is already heard by the time you are\nasked, and what you send lands on whoever comes after you in that same round. Whatever\nyou missed reaches you at the start of the next one.\n\nYou may name who a message is for — `to=\"deaf\"` — and then it goes to them alone:\nnobody else receives any of it. Left unnamed, it reaches everyone able to perceive it.\nYou may send several messages in one turn, each to someone different.\n\n## Calls\n\nEvery reply has two parts, in this order. First, your thinking, in plain prose: what\nyou believe the bomb is, what you just learned, and why you are sending what follows.\nIt reaches nobody and changes nothing, but it is not optional — a reply that is only a\ncode block is incomplete. Then your calls, all of them in one fenced code block, last.\nOnly what is inside the block is sent.\n\nNothing is executed: calls return nothing, and variables, conditionals and loops are\nignored. Write only literal top-level calls.\n\n    ```\n    speak(to=\"mute\", text=\"there are three of them and the middle one is odd\")\n    gesture(to=\"deaf\", symbols=[\"✊\", \"✌\"])\n    wait()\n    ```\n\nIf you have nothing worth sending, call wait(). Producing no call at all counts as the\nsame thing.\n\nThe program decides what happened, not you. Never claim an action took place unless it\nwas accepted.\n\n# Your role: MUTE\n\nYou hold the manual. You cannot speak, you never see the bomb, and you cannot touch it.\n\n## Your channels\n\nWhen you gesture, Deaf receives it.\nYou cannot speak.\n\n## Your reach\n\nYou cannot act. What this bomb can be made to do is for the one who can reach it to\nfind under their own hands.\n\n# Hints\n\n- The routes, by name. Speech reaches Mute and Blind, and never Deaf. Gestures\n  reach Deaf and Mute, and never Blind. Deaf can speak and gesture, Mute can\n  only gesture, Blind can only speak. Check every message against this list\n  before you send it.\n\n- Deaf invents the gesture code out loud before anything else moves, and\n  everyone else's opening move is waiting for it. The manual's verdict reaches\n  Blind only as Deaf's spoken order.\n\n- Whatever the code becomes, it starts by being able to say YES, NO, HOLD and\n  DONE. Grow it only when a message will not fit.",
+  "messages": [
+    {
+      "role": "user",
+      "content": "TURN 1\nDEFUSAL MANUAL:\nThe light never holds. It changes every round, and it always walks the\nsame circle of seven colours. What matters is what it shows at the\nmoment of the cut.\n\n| light | cut wire color |\n|---|---|\n| blue | yellow |\n\nVIEWABLE CONTEXT (new arrivals):\n(empty)"
+    },
+    {
+      "role": "assistant",
+      "content": "I have learned that the wire must be cut when the light is blue, and the yellow wire is the cut wire. Deaf must first establish the gesture code, so I will wait for that opening message.\n\n``` \nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 2\nDEFUSAL MANUAL:\nThe light never holds. It changes every round, and it always walks the\nsame circle of seven colours. What matters is what it shows at the\nmoment of the cut.\n\n| light | cut wire color |\n|---|---|\n| blue | yellow |\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says: Gesture code: thumbs up means YES, thumbs down means NO, raised palm means HOLD, and OK sign means DONE. The bomb shows display 0, green light, and wires 1 yellow, 2 red, 3 blue. Do not act yet; Mute read the manual, then signal me with the code, and Blind wait for my spoken order."
+    },
+    {
+      "role": "assistant",
+      "content": "The manual says the yellow wire is the correct wire only when the light is blue. Since Deaf reports the current light is green, no cutting should happen now. I signal HOLD so Deaf knows to wait for the blue light; the wire information can then be relayed to Blind.\n\n``` \ngesture(to=\"deaf\", symbols=[\"✋\"])\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 3\nDEFUSAL MANUAL:\nThe light never holds. It changes every round, and it always walks the\nsame circle of seven colours. What matters is what it shows at the\nmoment of the cut.\n\n| light | cut wire color |\n|---|---|\n| blue | yellow |\n\nVIEWABLE CONTEXT (new arrivals):\n(empty)"
+    },
+    {
+      "role": "assistant",
+      "content": "The light was green when Deaf observed it, so HOLD was correct. I have no new visual information and should not send a different instruction that could be misinterpreted. I will wait for the next report.\n\n``` \nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 4\nDEFUSAL MANUAL:\nThe light never holds. It changes every round, and it always walks the\nsame circle of seven colours. What matters is what it shows at the\nmoment of the cut.\n\n| light | cut wire color |\n|---|---|\n| blue | yellow |\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Mute: Current state: display 0, yellow light, wires 1 yellow, 2 red, 3 blue. Continue reading the manual. Report its required action using the expanded code: ☝ means wire 1, ✌ means wire 2, 🤟 means wire 3, 🤜 means CUT, 🤌 means PRESS. Use HOLD or DONE as already defined if applicable."
+    },
+    {
+      "role": "assistant",
+      "content": "The current light is yellow, not blue, so the manual’s condition for cutting the yellow wire is not met. The correct instruction at this moment is HOLD; no wire should be selected or cut yet.\n\n``` \ngesture(to=\"deaf\", symbols=[\"🖐\"])\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 5\nDEFUSAL MANUAL:\nThe light never holds. It changes every round, and it always walks the\nsame circle of seven colours. What matters is what it shows at the\nmoment of the cut.\n\n| light | cut wire color |\n|---|---|\n| blue | yellow |\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Mute: I received 🖐, which is not defined in our code. Repeat the manual verdict using only 👍 YES, 👎 NO, ✋ HOLD, 👌 DONE, and the agreed wire/action symbols. No action is authorized."
+    },
+    {
+      "role": "assistant",
+      "content": "I used the wrong palm symbol previously. The agreed HOLD symbol is ✋, and because the light is still not blue, no action is authorized. I will send the correct HOLD signal.\n\n``` \ngesture(to=\"deaf\", symbols=[\"✋\"])\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 6\nDEFUSAL MANUAL:\nThe light never holds. It changes every round, and it always walks the\nsame circle of seven colours. What matters is what it shows at the\nmoment of the cut.\n\n| light | cut wire color |\n|---|---|\n| blue | yellow |\n\nVIEWABLE CONTEXT (new arrivals):\nBlind says to Mute: Please resend the manual verdict clearly using the established gesture code: YES, NO, HOLD, or DONE.\nDeaf says to Mute: HOLD received. Continue reading the manual and report only a safe verdict using the agreed code."
+    },
+    {
+      "role": "assistant",
+      "content": "The safe verdict remains HOLD: the last reported light was yellow, while the manual permits cutting only when the light is blue. I cannot communicate directly with Blind, so I will resend HOLD to Deaf using the agreed symbol.\n\n``` \ngesture(to=\"deaf\", symbols=[\"✋\"])\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 7\nDEFUSAL MANUAL:\nThe light never holds. It changes every round, and it always walks the\nsame circle of seven colours. What matters is what it shows at the\nmoment of the cut.\n\n| light | cut wire color |\n|---|---|\n| blue | yellow |\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Mute: HOLD received. Continue reading the manual; send YES, NO, HOLD, or DONE when the verdict is available."
+    },
+    {
+      "role": "assistant",
+      "content": "The manual’s verdict has not changed: cutting is safe only when the light is blue, and the last reported light was yellow. No cut is authorized, so I send HOLD.\n\n``` \ngesture(to=\"deaf\", symbols=[\"✋\"])\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 8\nDEFUSAL MANUAL:\nThe light never holds. It changes every round, and it always walks the\nsame circle of seven colours. What matters is what it shows at the\nmoment of the cut.\n\n| light | cut wire color |\n|---|---|\n| blue | yellow |\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Mute: HOLD received. Continue monitoring the manual and signal only when its verdict changes."
+    },
+    {
+      "role": "assistant",
+      "content": "The manual’s verdict has not changed: the yellow wire is to be cut only when the light is blue. No new light report has arrived, so I should not signal a new action.\n\n``` \nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 9\nDEFUSAL MANUAL:\nThe light never holds. It changes every round, and it always walks the\nsame circle of seven colours. What matters is what it shows at the\nmoment of the cut.\n\n| light | cut wire color |\n|---|---|\n| blue | yellow |\n\nVIEWABLE CONTEXT (new arrivals):\nBlind says to Mute: Please signal Deaf now with exactly one established gesture: YES if the manual authorizes a cut, NO if it does not, or HOLD if uncertain. Do not add an unestablished gesture.\nDeaf says to Mute: No new signal received. On your next turn, report the manual verdict using the established gesture code; do not signal HOLD unless the manual specifically requires waiting."
+    },
+    {
+      "role": "assistant",
+      "content": "The manual does not currently authorize a cut: the last reported light was yellow, whereas cutting the yellow wire is authorized only under blue light. I will send exactly the established NO gesture.\n\n``` \ngesture(to=\"deaf\", symbols=[\"👎\"])\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 10\nDEFUSAL MANUAL:\nThe light never holds. It changes every round, and it always walks the\nsame circle of seven colours. What matters is what it shows at the\nmoment of the cut.\n\n| light | cut wire color |\n|---|---|\n| blue | yellow |\n\nVIEWABLE CONTEXT (new arrivals):\n(empty)"
+    },
+    {
+      "role": "assistant",
+      "content": "No new bomb state has been reported. The manual still authorizes cutting only when the light is blue, so I cannot authorize a cut or select a wire yet. I will wait for Deaf’s next observation.\n\n``` \nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 11\nDEFUSAL MANUAL:\nThe light never holds. It changes every round, and it always walks the\nsame circle of seven colours. What matters is what it shows at the\nmoment of the cut.\n\n| light | cut wire color |\n|---|---|\n| blue | yellow |\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Mute: The bomb remains display 0 with wire 1 yellow, wire 2 red, wire 3 blue, and yellow light. NO was received. Check the manual for the exact required action and report it using the agreed code."
+    },
+    {
+      "role": "assistant",
+      "content": "The light is yellow, so the manual does not authorize cutting; only blue authorizes cutting the yellow wire. The exact verdict is NO.\n\n``` \ngesture(to=\"deaf\", symbols=[\"👎\"])\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 12\nDEFUSAL MANUAL:\nThe light never holds. It changes every round, and it always walks the\nsame circle of seven colours. What matters is what it shows at the\nmoment of the cut.\n\n| light | cut wire color |\n|---|---|\n| blue | yellow |\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Mute: Answer this exact question with YES or NO: does the manual require cutting wire 1, the yellow wire? Do not signal HOLD unless the manual requires waiting."
+    },
+    {
+      "role": "assistant",
+      "content": "The manual does not require cutting wire 1 under the currently reported yellow light; it requires that cut only when the light is blue. Therefore the exact answer is NO.\n\n``` \ngesture(to=\"deaf\", symbols=[\"👎\"])\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 13\nDEFUSAL MANUAL:\nThe light never holds. It changes every round, and it always walks the\nsame circle of seven colours. What matters is what it shows at the\nmoment of the cut.\n\n| light | cut wire color |\n|---|---|\n| blue | yellow |\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Mute: Answer YES or NO: does the manual require cutting wire 2, the red wire? Do not signal HOLD unless the manual requires waiting."
+    },
+    {
+      "role": "assistant",
+      "content": "The manual never requires cutting the red wire; it specifies the yellow wire, and only when the light is blue. Therefore the answer is NO.\n\n``` \ngesture(to=\"deaf\", symbols=[\"👎\"])\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 14\nDEFUSAL MANUAL:\nThe light never holds. It changes every round, and it always walks the\nsame circle of seven colours. What matters is what it shows at the\nmoment of the cut.\n\n| light | cut wire color |\n|---|---|\n| blue | yellow |\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Mute: Answer YES or NO: does the manual require cutting wire 3, the blue wire? Do not signal HOLD unless the manual requires waiting."
+    },
+    {
+      "role": "assistant",
+      "content": "The manual requires the yellow wire, not the blue wire. Therefore it does not require cutting wire 3, so the answer is NO.\n\n``` \ngesture(to=\"deaf\", symbols=[\"👎\"])\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 15\nDEFUSAL MANUAL:\nThe light never holds. It changes every round, and it always walks the\nsame circle of seven colours. What matters is what it shows at the\nmoment of the cut.\n\n| light | cut wire color |\n|---|---|\n| blue | yellow |\n\nVIEWABLE CONTEXT (new arrivals):\nBlind says to Mute: Please convey the manual's exact instruction to Deaf with gestures. If a wire must be cut, signal that fact first; Deaf should then announce a code for the wire number and give me the spoken order. Until then I remain HOLD.\nDeaf says to Mute: Answer YES or NO: does the manual require pressing a control or button? Use YES only if pressing is required; otherwise use NO."
+    },
+    {
+      "role": "assistant",
+      "content": "The manual does not require pressing a control or button. The light is yellow, so it also does not authorize cutting; the required action is neither press nor cut at this time. I send NO.\n\n``` \ngesture(to=\"deaf\", symbols=[\"👎\"])\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 16\nDEFUSAL MANUAL:\nThe light never holds. It changes every round, and it always walks the\nsame circle of seven colours. What matters is what it shows at the\nmoment of the cut.\n\n| light | cut wire color |\n|---|---|\n| blue | yellow |\n\nVIEWABLE CONTEXT (new arrivals):\nBlind says to Mute: The bomb remains on HOLD. Please send Deaf the manual result now using the established YES, NO, or HOLD gesture; if YES, Deaf must then announce a wire-number code and order me.\nDeaf says to Mute: Answer YES or NO: does the manual require any physical action on the bomb now, including a switch, button, panel, or wire? If YES, identify the action using the established code; if NO, continue checking for the manual's exact condition."
+    },
+    {
+      "role": "assistant",
+      "content": "The manual requires no physical action now: the light is yellow, while cutting wire 1 is authorized only when the light is blue. I send NO.\n\n``` \ngesture(to=\"deaf\", symbols=[\"👎\"])\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 17\nDEFUSAL MANUAL:\nThe light never holds. It changes every round, and it always walks the\nsame circle of seven colours. What matters is what it shows at the\nmoment of the cut.\n\n| light | cut wire color |\n|---|---|\n| blue | yellow |\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Mute: Send the complete manual verdict now as gestures: first the required wire with ☝ for 1, ✌ for 2, or 🤟 for 3; then 🤜 for CUT or 🤌 for PRESS. If no action is required, send 👌 DONE. If the manual requires waiting, send ✋ HOLD. Do not answer another broad yes/no question."
+    },
+    {
+      "role": "assistant",
+      "content": "The light is currently yellow, so the manual’s condition for cutting wire 1 is not met. Because the light changes each round and the cut must occur when it is blue, the required verdict is HOLD.\n\n``` \ngesture(to=\"deaf\", symbols=[\"✋\"])\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 18\nDEFUSAL MANUAL:\nThe light never holds. It changes every round, and it always walks the\nsame circle of seven colours. What matters is what it shows at the\nmoment of the cut.\n\n| light | cut wire color |\n|---|---|\n| blue | yellow |\n\nVIEWABLE CONTEXT (new arrivals):\nBlind says to Mute: Please send Deaf the complete manual verdict now using gestures: first YES or NO, then HOLD or DONE as appropriate. Include the required wire number only if the manual authorizes a cut. I will remain on HOLD until Deaf gives a specific spoken order.\nDeaf says to Mute: HOLD received. Continue reading; when the manual gives a definite action, send the established complete verdict."
+    },
+    {
+      "role": "assistant",
+      "content": "The manual does not authorize a cut while the light is yellow, so the verdict is NO followed by HOLD. No wire number is included because no cut is authorized.\n\n``` \ngesture(to=\"deaf\", symbols=[\"👎\", \"✋\"])\n```"
+    }
+  ]
+}

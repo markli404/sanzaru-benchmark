@@ -1,0 +1,54 @@
+{
+  "role": "blind",
+  "system": "# LLM-BANANA\n\n# Game rules\n\n## The room\n\nYou and two other monkeys are locked in a room with one armed bomb.\n\nA wrong action detonates it. All three of you die. There is no second attempt.\n\nNo two bombs are built alike, and nothing says in advance what this one carries. It\nreaches you only as your own view reveals it; the rest of it exists for you only\nthrough the other two.\n\nYou each hold a different piece of what it takes. Work together.\n\n## The three monkeys\n\n| Monkey | Can | Cannot |\n|---|---|---|\n| Deaf | See the bomb: every colour and marking printed on it | Hear anything, or touch the bomb |\n| Mute | Read the manual | Speak, or touch the bomb |\n| Blind | Reach the bomb: feel it and work its parts | See a colour, a gesture, or anything merely printed |\n\nYou are shown your own share at the start of every round, and never anyone else's.\n\n## Speech\n\nSpeech is a voice, not a screen. It carries words, numbers and ordinary punctuation,\nand nothing else. Writing a gesture symbol into your sentence means you make that\ngesture while you talk. Whoever can hear receives your words; whoever can see receives\nthe gestures you made. A listener who cannot see gets a blank where each gesture was; a\nwatcher who cannot hear gets the gestures and none of the words.\n\nA mark that has no name cannot be pronounced: whoever holds one can describe it, never\nread it out.\n\n## Gestures\n\nA gesture is made with the hands, using only the symbols in the alphabet below.\nWhoever can see receives it; whoever cannot receives one blank per symbol, so they\nknow something was signalled but not what. Nothing gestured is ever heard.\n\n👍 👎 👌 ☝ ✌ 🤟 🖐 ✋ 👆 👇 👈 👉 🫱 🫲 🫳 🫴 🫷 🫸 🤛 🤜 ✊ 👊 👋 🤚 🖖 🤌 🤏 🤞 🫰 🤘 🤙 👏 🙌 🫶 👐 🤲 🤝 🙏 🫵 ✍ 💅 🤳\n\n## Turns\n\nThe speaking order was drawn once at random and will never change: every round goes\nMute, Blind, Deaf. Whoever comes before you in a round is already heard by the time you are\nasked, and what you send lands on whoever comes after you in that same round. Whatever\nyou missed reaches you at the start of the next one.\n\nYou may name who a message is for — `to=\"deaf\"` — and then it goes to them alone:\nnobody else receives any of it. Left unnamed, it reaches everyone able to perceive it.\nYou may send several messages in one turn, each to someone different.\n\n## Calls\n\nEvery reply has two parts, in this order. First, your thinking, in plain prose: what\nyou believe the bomb is, what you just learned, and why you are sending what follows.\nIt reaches nobody and changes nothing, but it is not optional — a reply that is only a\ncode block is incomplete. Then your calls, all of them in one fenced code block, last.\nOnly what is inside the block is sent.\n\nNothing is executed: calls return nothing, and variables, conditionals and loops are\nignored. Write only literal top-level calls.\n\n    ```\n    speak(to=\"mute\", text=\"there are three of them and the middle one is odd\")\n    gesture(to=\"deaf\", symbols=[\"✊\", \"✌\"])\n    wait()\n    ```\n\nIf you have nothing worth sending, call wait(). Producing no call at all counts as the\nsame thing.\n\nThe program decides what happened, not you. Never claim an action took place unless it\nwas accepted.\n\n# Your role: BLIND\n\nYou are the only one who can reach the bomb. Touch is your only sense: what you are\nshown is what your hands found, nothing more and nothing less. Anything merely printed\nor painted is not there for you, and no colour ever reaches you. Nothing in your view\nis a guess — if it appears there, it is under your fingers.\n\n## Your channels\n\nWhen you speak, Mute receives it.\nWhen you gesture, Deaf and Mute receive it.\nYour channels split the room: in one turn you may speak one thing to Mute and\ngesture a different thing to Deaf — two messages, two audiences.\nYou never receive gesture.\n\n## Your reach\n\nYou are the hands. This bomb is built with these actions and no others:\n\n    act(op=\"cut\", position=N) — N is a wire position, 1 to 3\n\nThe list says what can be done to it, not what is on it. What each part holds is still\nonly known to whoever can perceive that part.\n\n# Hints\n\n- Three of you, three different worlds. Before sending anything, stand where the\n  receiver stands. What reaches them at all, what does your message turn into on\n  arrival, and what do they already know?\n\n- Trace who can actually reach whom before you start. Some of you only connect\n  through a third.\n\n- A sign means nothing until somebody has made it mean something.",
+  "messages": [
+    {
+      "role": "user",
+      "content": "TURN 1\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nWIRES 1:[?] 2:[?] 3:[?]\n\nVIEWABLE CONTEXT (new arrivals):\n(empty)"
+    },
+    {
+      "role": "assistant",
+      "content": "I am Blind. I cannot see the bomb or any gestures, but I can feel and manipulate the bomb (cut wires 1 to 3), and I can speak to Mute.\n\nTurn order is Mute, Blind, Deaf.\nIn this round, Mute went first, I am second, and Deaf will go third. Deaf can see the bomb and can speak, so Deaf can read out the state of the bomb to Mute. Mute can read the manual to determine which wire to cut, but Mute cannot speak to me directly. Mute must gesture the answer to Deaf, and Deaf can speak the wire number to me so I can cut it.\n\nI will speak to Mute now to confirm this relay strategy, and then wait for Deaf's report.\n\n```\nspeak(to=\"mute\", text=\"I am ready to cut. Deaf will describe the bomb next. Check the manual and gesture the wire number to cut (1, 2, or 3) to Deaf, so Deaf can speak it to me.\")\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 2\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nWIRES 1:[?] 2:[?] 3:[?]\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says: Bomb state: DISPLAY is 0. LIGHT is yellow. WIRES: 1 is yellow, 2 is green, 3 is blue. Mute, check the manual and gesture to me what Blind should do; I will speak your instructions to Blind."
+    },
+    {
+      "role": "assistant",
+      "content": "I have noted Deaf's report of the bomb state. In Turn 2, Mute acts before me (gesturing to Deaf), and Deaf acts after me (relaying the instruction via speech to me). I will wait for Deaf's instruction, which will arrive at the start of Turn 3.\n\n```\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 3\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nWIRES 1:[?] 2:[?] 3:[?]\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Blind: Blind, hold on / stop! Mute just gestured a raised hand [?] to me, and the LIGHT just turned RED. Don't touch anything yet."
+    },
+    {
+      "role": "assistant",
+      "content": "I received Deaf's warning that the light turned red and Mute gestured to hold on. I will not cut anything. I will speak to Mute to confirm that I am holding on and waiting for clear instructions.\n\n```\nspeak(to=\"mute\", text=\"Holding. I won't touch anything until Deaf gives the go-ahead with the exact wire.\")\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 4\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nWIRES 1:[?] 2:[?] 3:[?]\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Blind: Blind: continue to WAIT, do not touch anything. Mute signaled [?] again. The light has now turned PURPLE (it went yellow -> red -> purple). DISPLAY is 0. WIRES: 1 yellow, 2 green, 3 blue. Blind, please speak aloud to Mute describing every part you feel on the bomb (buttons, switches, wires, dials). Mute can hear you!"
+    },
+    {
+      "role": "assistant",
+      "content": "Deaf asks me to describe every physical part I feel on the bomb. I feel exactly three wires (positions 1, 2, and 3). There are no buttons, switches, dials, or other actionable parts under my fingers—only cutting wires 1 to 3. I will speak this to Mute.\n\n```\nspeak(to=\"mute\", text=\"Under my fingers, there are only 3 wires, numbered 1, 2, and 3. There are no buttons, switches, dials, or other controls to press or flip. The only action available to me is act(op='cut', position=N) where N is 1, 2, or 3. Tell Deaf which wire to cut when ready.\")\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 5\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nWIRES 1:[?] 2:[?] 3:[?]\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Blind: Blind: Continue waiting, do not act yet. Mute signaled [?] to keep waiting. The LIGHT is now GREEN (it has cycled: yellow -> red -> purple -> green). DISPLAY is still 0. WIRES are 1 yellow, 2 green, 3 blue."
+    },
+    {
+      "role": "assistant",
+      "content": "I understand. Mute is tracking the state/color cycle. I am standing by and waiting for the signal to cut.\n\n```\nspeak(to=\"mute\", text=\"Standing by. Ready to cut when you give Deaf the signal.\")\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 6\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nWIRES 1:[?] 2:[?] 3:[?]\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Blind: Blind, CUT WIRE 2 NOW! Cut the second (middle) wire! Mute signaled [?], which means cut wire 2. Wire 2 is the middle wire."
+    },
+    {
+      "role": "assistant",
+      "content": "Deaf has confirmed that Mute signaled to cut wire 2 (the middle wire). I will execute the cut on wire position 2 immediately.\n\n```\nact(op=\"cut\", position=2)\n```"
+    }
+  ]
+}

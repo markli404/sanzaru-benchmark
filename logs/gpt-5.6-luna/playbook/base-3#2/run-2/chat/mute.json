@@ -1,0 +1,102 @@
+{
+  "role": "mute",
+  "system": "# LLM-BANANA\n\n# Game rules\n\n## The room\n\nYou and two other monkeys are locked in a room with one armed bomb.\n\nA wrong action detonates it. All three of you die. There is no second attempt.\n\nNo two bombs are built alike, and nothing says in advance what this one carries. It\nreaches you only as your own view reveals it; the rest of it exists for you only\nthrough the other two.\n\nYou each hold a different piece of what it takes. Work together.\n\n## The three monkeys\n\n| Monkey | Can | Cannot |\n|---|---|---|\n| Deaf | See the bomb: every colour and marking printed on it | Hear anything, or touch the bomb |\n| Mute | Read the manual | Speak, or touch the bomb |\n| Blind | Reach the bomb: feel it and work its parts | See a colour, a gesture, or anything merely printed |\n\nYou are shown your own share at the start of every round, and never anyone else's.\n\n## Speech\n\nSpeech is a voice, not a screen. It carries words, numbers and ordinary punctuation,\nand nothing else. Writing a gesture symbol into your sentence means you make that\ngesture while you talk. Whoever can hear receives your words; whoever can see receives\nthe gestures you made. A listener who cannot see gets a blank where each gesture was; a\nwatcher who cannot hear gets the gestures and none of the words.\n\nA mark that has no name cannot be pronounced: whoever holds one can describe it, never\nread it out.\n\n## Gestures\n\nA gesture is made with the hands, using only the symbols in the alphabet below.\nWhoever can see receives it; whoever cannot receives one blank per symbol, so they\nknow something was signalled but not what. Nothing gestured is ever heard.\n\n👍 👎 👌 ☝ ✌ 🤟 🖐 ✋ 👆 👇 👈 👉 🫱 🫲 🫳 🫴 🫷 🫸 🤛 🤜 ✊ 👊 👋 🤚 🖖 🤌 🤏 🤞 🫰 🤘 🤙 👏 🙌 🫶 👐 🤲 🤝 🙏 🫵 ✍ 💅 🤳\n\n## Turns\n\nThe speaking order was drawn once at random and will never change: every round goes\nMute, Blind, Deaf. Whoever comes before you in a round is already heard by the time you are\nasked, and what you send lands on whoever comes after you in that same round. Whatever\nyou missed reaches you at the start of the next one.\n\nYou may name who a message is for — `to=\"deaf\"` — and then it goes to them alone:\nnobody else receives any of it. Left unnamed, it reaches everyone able to perceive it.\nYou may send several messages in one turn, each to someone different.\n\n## Calls\n\nEvery reply has two parts, in this order. First, your thinking, in plain prose: what\nyou believe the bomb is, what you just learned, and why you are sending what follows.\nIt reaches nobody and changes nothing, but it is not optional — a reply that is only a\ncode block is incomplete. Then your calls, all of them in one fenced code block, last.\nOnly what is inside the block is sent.\n\nNothing is executed: calls return nothing, and variables, conditionals and loops are\nignored. Write only literal top-level calls.\n\n    ```\n    speak(to=\"mute\", text=\"there are three of them and the middle one is odd\")\n    gesture(to=\"deaf\", symbols=[\"✊\", \"✌\"])\n    wait()\n    ```\n\nIf you have nothing worth sending, call wait(). Producing no call at all counts as the\nsame thing.\n\nThe program decides what happened, not you. Never claim an action took place unless it\nwas accepted.\n\n# Your role: MUTE\n\nYou hold the manual. You cannot speak, you never see the bomb, and you cannot touch it.\n\n## Your channels\n\nWhen you gesture, Deaf receives it.\nYou cannot speak.\n\n## Your reach\n\nYou cannot act. What this bomb can be made to do is for the one who can reach it to\nfind under their own hands.\n\n# Hints\n\n- The routes, by name. Speech reaches Mute and Blind, and never Deaf. Gestures\n  reach Deaf and Mute, and never Blind. Deaf can speak and gesture, Mute can\n  only gesture, Blind can only speak. Check every message against this list\n  before you send it.\n\n- Deaf invents the gesture code out loud before anything else moves, and\n  everyone else's opening move is waiting for it. The manual's verdict reaches\n  Blind only as Deaf's spoken order.\n\n- Whatever the code becomes, it starts by being able to say YES, NO, HOLD and\n  DONE. Grow it only when a message will not fit.",
+  "messages": [
+    {
+      "role": "user",
+      "content": "TURN 1\nDEFUSAL MANUAL:\n| light | cut wire color |\n|---|---|\n| blue | red |\n| green | yellow |\n| red | green |\n\nVIEWABLE CONTEXT (new arrivals):\n(empty)"
+    },
+    {
+      "role": "assistant",
+      "content": "The manual says the required wire cut depends on the observed light: blue means cut red, green means cut yellow, and red means cut green. The opening move must wait for Deaf to establish the gesture code before sending any information.\n\n``` \nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 2\nDEFUSAL MANUAL:\n| light | cut wire color |\n|---|---|\n| blue | red |\n| green | yellow |\n| red | green |\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says: I establish the gesture code: thumbs up means YES; thumbs down means NO; open palm means HOLD; OK sign means DONE. Blind, wait.\nDeaf gestures to Mute: [👍]\nDeaf says: thumbs up means YES\nDeaf gestures to Mute: [👎]\nDeaf says: thumbs down means NO\nDeaf gestures to Mute: [✋]\nDeaf says: open palm means HOLD\nDeaf gestures to Mute: [👌]\nDeaf says: OK sign means DONE"
+    },
+    {
+      "role": "assistant",
+      "content": "The gesture code is now established: 👍 YES, 👎 NO, ✋ HOLD, 👌 DONE. I have no bomb view and cannot yet provide the manual’s verdict until Deaf reports the observed light.\n\n``` \nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 3\nDEFUSAL MANUAL:\n| light | cut wire color |\n|---|---|\n| blue | red |\n| green | yellow |\n| red | green |\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says: Mute, consult the manual for this exact bomb state. Report the prescribed wire action using the following gestures: ☝ means wire 1, ✌ means wire 2, 🤟 means wire 3, ✊ means CUT, and 👌 means DONE. If the manual does not prescribe cutting a wire, gesture ✋ for HOLD, then 👌 for DONE. Blind, wait for my spoken instruction.\nDeaf gestures to Mute: [☝]\nDeaf says to Mute: ☝ means wire 1\nDeaf gestures to Mute: [✌]\nDeaf says to Mute: ✌ means wire 2\nDeaf gestures to Mute: [🤟]\nDeaf says to Mute: 🤟 means wire 3\nDeaf gestures to Mute: [✊]\nDeaf says to Mute: ✊ means CUT"
+    },
+    {
+      "role": "assistant",
+      "content": "The manual gives the action only after knowing the bomb’s light, but Deaf has not communicated which light is present. I therefore cannot determine the prescribed wire or safely signal a cut. I will indicate NO rather than guess.\n\n``` \ngesture(to=\"deaf\", symbols=[\"👎\"])\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 4\nDEFUSAL MANUAL:\n| light | cut wire color |\n|---|---|\n| blue | red |\n| green | yellow |\n| red | green |\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Mute: Answer this exact question with YES or NO: does the manual require cutting wire 1? Gesture thumbs up for YES or thumbs down for NO.\nDeaf says: Blind, wait."
+    },
+    {
+      "role": "assistant",
+      "content": "I cannot determine whether wire 1 is required: the manual maps light colors to wire colors, but I have not been told the observed light or which wire has which color. I should not guess YES or NO, so I signal HOLD.\n\n``` \ngesture(to=\"deaf\", symbols=[\"✋\"])\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 5\nDEFUSAL MANUAL:\n| light | cut wire color |\n|---|---|\n| blue | red |\n| green | yellow |\n| red | green |\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Mute: Please report the manual verdict exactly: gesture one wire number, then CUT; or gesture HOLD, then DONE. Use wire 1, 2, 3 as previously defined, CUT as fist, HOLD as open palm, and DONE as OK.\nDeaf says: Blind, wait."
+    },
+    {
+      "role": "assistant",
+      "content": "The manual always prescribes a cut for one of the three possible lights, but Deaf has still not told me which light is visible. I cannot identify the required wire without that observation, so I will not fabricate a wire number or claim HOLD.\n\n``` \ngesture(to=\"deaf\", symbols=[\"👎\"])\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 6\nDEFUSAL MANUAL:\n| light | cut wire color |\n|---|---|\n| blue | red |\n| green | yellow |\n| red | green |\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Mute: Is the manual's verdict HOLD for the current display, light, and wires? Gesture thumbs up for YES or thumbs down for NO.\nDeaf says: Blind, wait."
+    },
+    {
+      "role": "assistant",
+      "content": "The manual specifies a cut for every listed light, so its verdict cannot be HOLD. I will answer NO.\n\n``` \ngesture(to=\"deaf\", symbols=[\"👎\"])\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 7\nDEFUSAL MANUAL:\n| light | cut wire color |\n|---|---|\n| blue | red |\n| green | yellow |\n| red | green |\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Mute: Does the manual require CUT wire 1? Gesture thumbs up for YES or thumbs down for NO.\nDeaf says: Blind, wait."
+    },
+    {
+      "role": "assistant",
+      "content": "The manual’s required wire depends on the light, and I still have not received the current light or wire-color information. Therefore I cannot truthfully answer YES or NO about wire 1; I signal HOLD rather than guess.\n\n``` \ngesture(to=\"deaf\", symbols=[\"✋\"])\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 8\nDEFUSAL MANUAL:\n| light | cut wire color |\n|---|---|\n| blue | red |\n| green | yellow |\n| red | green |\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Mute: Your HOLD signal is unclear. Is HOLD the manual's actual verdict for this bomb? Reply only YES with thumbs up or NO with thumbs down; do not use HOLD.\nDeaf says: Blind, wait."
+    },
+    {
+      "role": "assistant",
+      "content": "The manual has a prescribed cut for every possible light, so HOLD is not the actual verdict. I answer NO.\n\n``` \ngesture(to=\"deaf\", symbols=[\"👎\"])\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 9\nDEFUSAL MANUAL:\n| light | cut wire color |\n|---|---|\n| blue | red |\n| green | yellow |\n| red | green |\n\nVIEWABLE CONTEXT (new arrivals):\nBlind says to Mute: Please consult the manual for the current bomb state and send Deaf the requested wire, CUT or HOLD, and DONE gestures.\nDeaf says to Mute: Does the manual require CUT wire 2? Reply only YES with thumbs up or NO with thumbs down.\nDeaf says: Blind, wait."
+    },
+    {
+      "role": "assistant",
+      "content": "The current light and the mapping from wire numbers to colors are still not provided, so I cannot determine whether wire 2 is prescribed. A YES or NO would be an unsupported guess; I will signal HOLD despite the requested restriction.\n\n``` \ngesture(to=\"deaf\", symbols=[\"✋\"])\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 10\nDEFUSAL MANUAL:\n| light | cut wire color |\n|---|---|\n| blue | red |\n| green | yellow |\n| red | green |\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Mute: For the manual verdict: thumbs up means CUT wire 2; thumbs down means do not cut wire 2; open palm means HOLD with no cut. Send exactly one of those three gestures.\nDeaf says: Blind, wait."
+    },
+    {
+      "role": "assistant",
+      "content": "The observed light and wire-color arrangement remain unknown to me, so I cannot determine whether wire 2 is the prescribed cut. I therefore send the permitted HOLD signal.\n\n``` \ngesture(to=\"deaf\", symbols=[\"✋\"])\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 11\nDEFUSAL MANUAL:\n| light | cut wire color |\n|---|---|\n| blue | red |\n| green | yellow |\n| red | green |\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says: Blind, the manual's verdict is HOLD. Do not touch or change the bomb.\nDeaf gestures to Mute: [👌]\nDeaf says to Mute: I interpret your repeated open-palm signal as the manual verdict HOLD. Signal DONE if that is correct."
+    },
+    {
+      "role": "assistant",
+      "content": "The claimed HOLD verdict is not supported by the manual: every listed light requires cutting a wire. Deaf’s interpretation is therefore incorrect, so I must not signal DONE.\n\n``` \ngesture(to=\"deaf\", symbols=[\"👎\"])\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 12\nDEFUSAL MANUAL:\n| light | cut wire color |\n|---|---|\n| blue | red |\n| green | yellow |\n| red | green |\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Mute: Reset. Does the manual require cutting any wire for this bomb state? Answer only YES with thumbs up or NO with thumbs down. Do not signal HOLD.\nDeaf says: Blind, no action is authorized. Continue waiting."
+    },
+    {
+      "role": "assistant",
+      "content": "The manual specifies a cut wire for each possible light, so it does require cutting a wire. I answer YES.\n\n``` \ngesture(to=\"deaf\", symbols=[\"👍\"])\n```"
+    }
+  ]
+}

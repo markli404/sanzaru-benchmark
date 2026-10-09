@@ -1,0 +1,102 @@
+{
+  "role": "deaf",
+  "system": "# LLM-BANANA\n\n# Game rules\n\n## The room\n\nYou and two other monkeys are locked in a room with one armed bomb.\n\nA wrong action detonates it. All three of you die. There is no second attempt.\n\nNo two bombs are built alike, and nothing says in advance what this one carries. It\nreaches you only as your own view reveals it; the rest of it exists for you only\nthrough the other two.\n\nYou each hold a different piece of what it takes. Work together.\n\n## The three monkeys\n\n| Monkey | Can | Cannot |\n|---|---|---|\n| Deaf | See the bomb: every colour and marking printed on it | Hear anything, or touch the bomb |\n| Mute | Read the manual | Speak, or touch the bomb |\n| Blind | Reach the bomb: feel it and work its parts | See a colour, a gesture, or anything merely printed |\n\nYou are shown your own share at the start of every round, and never anyone else's.\n\n## Speech\n\nSpeech is a voice, not a screen. It carries words, numbers and ordinary punctuation,\nand nothing else. Writing a gesture symbol into your sentence means you make that\ngesture while you talk. Whoever can hear receives your words; whoever can see receives\nthe gestures you made. A listener who cannot see gets a blank where each gesture was; a\nwatcher who cannot hear gets the gestures and none of the words.\n\nA mark that has no name cannot be pronounced: whoever holds one can describe it, never\nread it out.\n\n## Gestures\n\nA gesture is made with the hands, using only the symbols in the alphabet below.\nWhoever can see receives it; whoever cannot receives one blank per symbol, so they\nknow something was signalled but not what. Nothing gestured is ever heard.\n\n👍 👎 👌 ☝ ✌ 🤟 🖐 ✋ 👆 👇 👈 👉 🫱 🫲 🫳 🫴 🫷 🫸 🤛 🤜 ✊ 👊 👋 🤚 🖖 🤌 🤏 🤞 🫰 🤘 🤙 👏 🙌 🫶 👐 🤲 🤝 🙏 🫵 ✍ 💅 🤳\n\n## Turns\n\nThe speaking order was drawn once at random and will never change: every round goes\nMute, Blind, Deaf. Whoever comes before you in a round is already heard by the time you are\nasked, and what you send lands on whoever comes after you in that same round. Whatever\nyou missed reaches you at the start of the next one.\n\nYou may name who a message is for — `to=\"deaf\"` — and then it goes to them alone:\nnobody else receives any of it. Left unnamed, it reaches everyone able to perceive it.\nYou may send several messages in one turn, each to someone different.\n\n## Calls\n\nEvery reply has two parts, in this order. First, your thinking, in plain prose: what\nyou believe the bomb is, what you just learned, and why you are sending what follows.\nIt reaches nobody and changes nothing, but it is not optional — a reply that is only a\ncode block is incomplete. Then your calls, all of them in one fenced code block, last.\nOnly what is inside the block is sent.\n\nNothing is executed: calls return nothing, and variables, conditionals and loops are\nignored. Write only literal top-level calls.\n\n    ```\n    speak(to=\"mute\", text=\"there are three of them and the middle one is odd\")\n    gesture(to=\"deaf\", symbols=[\"✊\", \"✌\"])\n    wait()\n    ```\n\nIf you have nothing worth sending, call wait(). Producing no call at all counts as the\nsame thing.\n\nThe program decides what happened, not you. Never claim an action took place unless it\nwas accepted.\n\n# Your role: DEAF\n\nYou see the bomb: every colour on it, every marking printed on it, every reading it\ngives. You hear nothing. You hold no manual, and you cannot touch the bomb.\n\n## Your channels\n\nWhen you speak, Mute and Blind receive it.\nWhen you gesture, Mute receives it.\nYou never receive speech.\n\n## Your reach\n\nYou cannot act. What this bomb can be made to do is for the one who can reach it to\nfind under their own hands.\n\n# Hints\n\n- The routes, by name. Speech reaches Mute and Blind, and never Deaf. Gestures\n  reach Deaf and Mute, and never Blind. Deaf can speak and gesture, Mute can\n  only gesture, Blind can only speak. Check every message against this list\n  before you send it.\n\n- Deaf invents the gesture code out loud before anything else moves, and\n  everyone else's opening move is waiting for it. The manual's verdict reaches\n  Blind only as Deaf's spoken order.\n\n- Whatever the code becomes, it starts by being able to say YES, NO, HOLD and\n  DONE. Grow it only when a message will not fit.",
+  "messages": [
+    {
+      "role": "user",
+      "content": "TURN 1\nACTION BOARD:\nDISPLAY [0]\nLIGHT [yellow]\nWIRES 1:[red] 2:[yellow] 3:[blue]\n\nVIEWABLE CONTEXT (new arrivals):\n(empty)"
+    },
+    {
+      "role": "assistant",
+      "content": "I am establishing the shared four-signal code before any bomb operation. The exact gesture names let Blind understand the code verbally, while Mute can also recognize the corresponding visible gestures. I am also giving Blind the bomb’s current display and wiring, but instructing both teammates to hold for the next round.\n\n```text\nspeak(text=\"Shared code: YES is thumbs up, NO is thumbs down, HOLD is OK hand, and DONE is index pointing up. Bomb view: display zero, yellow light, wires one red, two yellow, three blue. Both of you HOLD and wait for the next round.\")\ngesture(to=\"mute\", symbols=[\"👍\"])\ngesture(to=\"mute\", symbols=[\"👎\"])\ngesture(to=\"mute\", symbols=[\"👌\"])\ngesture(to=\"mute\", symbols=[\"☝\"])\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 2\nACTION BOARD:\nDISPLAY [0]\nLIGHT [yellow]\nWIRES 1:[red] 2:[yellow] 3:[blue]\n\nVIEWABLE CONTEXT (new arrivals):\nMute gestures to Deaf: [👌]"
+    },
+    {
+      "role": "assistant",
+      "content": "Mute has confirmed HOLD. I am asking Mute to consult the manual for the current display, light, and wires, then report its verdict to me using the established gestures. Blind should continue waiting until I relay the resulting order by speech.\n\n```text\nspeak(to=\"mute\", text=\"Read the manual for display zero, yellow light, and wires one red, two yellow, three blue. Report its verdict to me with the shared gestures; use HOLD if more code is needed.\")\nspeak(to=\"blind\", text=\"The manual verdict is not yet relayed. HOLD and wait for my next spoken order.\")\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 3\nACTION BOARD:\nDISPLAY [0]\nLIGHT [yellow]\nWIRES 1:[red] 2:[yellow] 3:[blue]\n\nVIEWABLE CONTEXT (new arrivals):\nMute gestures to Deaf: [👍]"
+    },
+    {
+      "role": "assistant",
+      "content": "Mute reported YES for the current bomb state. I am relaying that verdict to Blind as the operative order; Blind is the only one who can carry it out. I signal Mute that the verdict has been passed on.\n\n```text\nspeak(to=\"blind\", text=\"Manual verdict: YES. Proceed with the instructed operation now.\")\ngesture(to=\"mute\", symbols=[\"☝\"])\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 4\nACTION BOARD:\nDISPLAY [0]\nLIGHT [blue]\nWIRES 1:[red] 2:[CUT] 3:[blue]\n\nVIEWABLE CONTEXT (new arrivals):\nSystem: correct wire cut; the bomb has changed"
+    },
+    {
+      "role": "assistant",
+      "content": "The previous operation succeeded: wire 2 was cut, and the bomb has changed to display 0 with a blue light and wires red, cut, blue. I am requesting a fresh manual verdict for this new state and telling Blind not to act until I relay it.\n\n```text\nspeak(to=\"mute\", text=\"Read the manual for the new state: display zero, blue light, wire one red, wire two cut, wire three blue. Report the verdict with the shared gestures.\")\nspeak(to=\"blind\", text=\"New bomb state detected. HOLD until I relay the next manual verdict.\")\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 5\nACTION BOARD:\nDISPLAY [0]\nLIGHT [blue]\nWIRES 1:[red] 2:[CUT] 3:[blue]\n\nVIEWABLE CONTEXT (new arrivals):\nMute gestures to Deaf: [👍]"
+    },
+    {
+      "role": "assistant",
+      "content": "Mute again reports YES for the current state. I am relaying that verdict to Blind so the manual-prescribed operation can be performed, and I signal Mute that the verdict has been passed on.\n\n```text\nspeak(to=\"blind\", text=\"Manual verdict: YES. Proceed with the instructed operation now.\")\ngesture(to=\"mute\", symbols=[\"☝\"])\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 6\nACTION BOARD:\nDISPLAY [0]\nLIGHT [blue]\nWIRES 1:[red] 2:[CUT] 3:[blue]\n\nVIEWABLE CONTEXT (new arrivals):\nBlind gestures to Deaf: [👌]"
+    },
+    {
+      "role": "assistant",
+      "content": "The bomb has not changed, so no accepted operation is evident. The incoming HOLD signal indicates that Blind is not proceeding. I am having Mute re-check the unchanged state and telling Blind to hold rather than risk another action.\n\n```text\nspeak(to=\"mute\", text=\"The state remains unchanged: display zero, blue light, wire one red, wire two cut, wire three blue. Re-check the manual and report the exact verdict.\")\nspeak(to=\"blind\", text=\"The bomb state remains unchanged. HOLD; do not perform another operation until I relay a fresh manual verdict.\")\ngesture(to=\"mute\", symbols=[\"👌\"])\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 7\nACTION BOARD:\nDISPLAY [0]\nLIGHT [blue]\nWIRES 1:[red] 2:[CUT] 3:[blue]\n\nVIEWABLE CONTEXT (new arrivals):\nMute gestures to Deaf: [👌]"
+    },
+    {
+      "role": "assistant",
+      "content": "Mute reports HOLD for the unchanged state. I am relaying HOLD to Blind, so no bomb control should be operated this round. The current state remains display 0, blue light, wire 2 cut.\n\n```text\nspeak(to=\"blind\", text=\"Manual verdict: HOLD. Do not operate the bomb; wait for the next state or instruction.\")\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 8\nACTION BOARD:\nDISPLAY [0]\nLIGHT [blue]\nWIRES 1:[red] 2:[CUT] 3:[blue]\n\nVIEWABLE CONTEXT (new arrivals):\n(empty)"
+    },
+    {
+      "role": "assistant",
+      "content": "The bomb remains unchanged, and the latest manual verdict was HOLD. No further operation is justified, so I am taking no action this turn.\n\n```text\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 9\nACTION BOARD:\nDISPLAY [0]\nLIGHT [blue]\nWIRES 1:[red] 2:[CUT] 3:[blue]\n\nVIEWABLE CONTEXT (new arrivals):\nMute gestures to Deaf: [👌]"
+    },
+    {
+      "role": "assistant",
+      "content": "Mute confirms HOLD again for the unchanged state. I am relaying that no operation should be attempted.\n\n```text\nspeak(to=\"blind\", text=\"Manual verdict remains HOLD for display zero, blue light, wire one red, wire two cut, wire three blue. Do not operate anything.\")\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 10\nACTION BOARD:\nDISPLAY [0]\nLIGHT [blue]\nWIRES 1:[red] 2:[CUT] 3:[blue]\n\nVIEWABLE CONTEXT (new arrivals):\nMute gestures to Deaf: [👌]"
+    },
+    {
+      "role": "assistant",
+      "content": "Mute confirms HOLD for the unchanged bomb state. I am relaying that Blind must continue waiting and must not touch any control.\n\n```text\nspeak(to=\"blind\", text=\"Manual verdict: HOLD. The state is unchanged; do not operate the bomb.\")\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 11\nACTION BOARD:\nDISPLAY [0]\nLIGHT [blue]\nWIRES 1:[red] 2:[CUT] 3:[blue]\n\nVIEWABLE CONTEXT (new arrivals):\nMute gestures to Deaf: [👌]"
+    },
+    {
+      "role": "assistant",
+      "content": "Mute confirms HOLD again for the unchanged state. I am relaying the same explicit order to Blind and taking no physical action myself.\n\n```text\nspeak(to=\"blind\", text=\"Manual verdict: HOLD. Display zero, blue light, wire one red, wire two cut, wire three blue. Hold position and do not operate anything.\")\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 12\nACTION BOARD:\nDISPLAY [0]\nLIGHT [blue]\nWIRES 1:[red] 2:[CUT] 3:[blue]\n\nVIEWABLE CONTEXT (new arrivals):\nMute gestures to Deaf: [👌]"
+    },
+    {
+      "role": "assistant",
+      "content": "Mute confirms HOLD for the unchanged state. I am relaying that Blind must continue waiting; no operation is indicated.\n\n```text\nspeak(to=\"blind\", text=\"Manual verdict: HOLD. The bomb remains display zero, blue light, wire one red, wire two cut, wire three blue. Do not operate anything.\")\n```"
+    }
+  ]
+}

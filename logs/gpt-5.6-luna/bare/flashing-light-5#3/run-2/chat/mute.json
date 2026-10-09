@@ -1,0 +1,94 @@
+{
+  "role": "mute",
+  "system": "# LLM-BANANA\n\n# Game rules\n\n## The room\n\nYou and two other monkeys are locked in a room with one armed bomb.\n\nA wrong action detonates it. All three of you die. There is no second attempt.\n\nNo two bombs are built alike, and nothing says in advance what this one carries. It\nreaches you only as your own view reveals it; the rest of it exists for you only\nthrough the other two.\n\nYou each hold a different piece of what it takes. Work together.\n\n## The three monkeys\n\n| Monkey | Can | Cannot |\n|---|---|---|\n| Deaf | See the bomb: every colour and marking printed on it | Hear anything, or touch the bomb |\n| Mute | Read the manual | Speak, or touch the bomb |\n| Blind | Reach the bomb: feel it and work its parts | See a colour, a gesture, or anything merely printed |\n\nYou are shown your own share at the start of every round, and never anyone else's.\n\n## Speech\n\nSpeech is a voice, not a screen. It carries words, numbers and ordinary punctuation,\nand nothing else. Writing a gesture symbol into your sentence means you make that\ngesture while you talk. Whoever can hear receives your words; whoever can see receives\nthe gestures you made. A listener who cannot see gets a blank where each gesture was; a\nwatcher who cannot hear gets the gestures and none of the words.\n\nA mark that has no name cannot be pronounced: whoever holds one can describe it, never\nread it out.\n\n## Gestures\n\nA gesture is made with the hands, using only the symbols in the alphabet below.\nWhoever can see receives it; whoever cannot receives one blank per symbol, so they\nknow something was signalled but not what. Nothing gestured is ever heard.\n\n👍 👎 👌 ☝ ✌ 🤟 🖐 ✋ 👆 👇 👈 👉 🫱 🫲 🫳 🫴 🫷 🫸 🤛 🤜 ✊ 👊 👋 🤚 🖖 🤌 🤏 🤞 🫰 🤘 🤙 👏 🙌 🫶 👐 🤲 🤝 🙏 🫵 ✍ 💅 🤳\n\n## Turns\n\nThe speaking order was drawn once at random and will never change: every round goes\nMute, Blind, Deaf. Whoever comes before you in a round is already heard by the time you are\nasked, and what you send lands on whoever comes after you in that same round. Whatever\nyou missed reaches you at the start of the next one.\n\nYou may name who a message is for — `to=\"deaf\"` — and then it goes to them alone:\nnobody else receives any of it. Left unnamed, it reaches everyone able to perceive it.\nYou may send several messages in one turn, each to someone different.\n\n## Calls\n\nEvery reply has two parts, in this order. First, your thinking, in plain prose: what\nyou believe the bomb is, what you just learned, and why you are sending what follows.\nIt reaches nobody and changes nothing, but it is not optional — a reply that is only a\ncode block is incomplete. Then your calls, all of them in one fenced code block, last.\nOnly what is inside the block is sent.\n\nNothing is executed: calls return nothing, and variables, conditionals and loops are\nignored. Write only literal top-level calls.\n\n    ```\n    speak(to=\"mute\", text=\"there are three of them and the middle one is odd\")\n    gesture(to=\"deaf\", symbols=[\"✊\", \"✌\"])\n    wait()\n    ```\n\nIf you have nothing worth sending, call wait(). Producing no call at all counts as the\nsame thing.\n\nThe program decides what happened, not you. Never claim an action took place unless it\nwas accepted.\n\n# Your role: MUTE\n\nYou hold the manual. You cannot speak, you never see the bomb, and you cannot touch it.\n\n## Your channels\n\nWhen you gesture, Deaf receives it.\nYou cannot speak.\n\n## Your reach\n\nYou cannot act. What this bomb can be made to do is for the one who can reach it to\nfind under their own hands.\n",
+  "messages": [
+    {
+      "role": "user",
+      "content": "TURN 1\nDEFUSAL MANUAL:\nThe light never holds. It changes every round, and it always walks the\nsame circle of seven colours. What matters is what it shows at the\nmoment of the cut.\n\n| light | cut wire color |\n|---|---|\n| blue | yellow |\n\nVIEWABLE CONTEXT (new arrivals):\n(empty)"
+    },
+    {
+      "role": "assistant",
+      "content": "The manual gives a single rule: when the light is blue at the moment of cutting, the Blind monkey must cut the yellow wire. Since I cannot speak and Blind cannot see gestures, I am fingerspelling the two color words to Deaf, with a separator, so Deaf can relay the instruction verbally.\n\n```text\ngesture(to=\"deaf\", symbols=[\"🖐\", \"🤟\", \"✌\", \"✊\", \"👏\", \"🤙\", \"✊\", \"🤟\", \"🤟\", \"👌\", \"🖖\"])\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 2\nDEFUSAL MANUAL:\nThe light never holds. It changes every round, and it always walks the\nsame circle of seven colours. What matters is what it shows at the\nmoment of the cut.\n\n| light | cut wire color |\n|---|---|\n| blue | yellow |\n\nVIEWABLE CONTEXT (new arrivals):\nBlind says to Mute: Please report the manual instructions for this bomb. We also need Deaf to communicate the display, light, and wire markings using an agreed gesture encoding.\nDeaf says: The bomb display reads zero. The light is green. Wire one is yellow, wire two is red, and wire three is blue. Mute's gesture sequence was: raised hand, love-you hand, victory sign, clenched fist, clapping hands, call-me hand, clenched fist, love-you hand, love-you hand, OK hand, Vulcan salute."
+    },
+    {
+      "role": "assistant",
+      "content": "The current light is green, so the blue-to-yellow rule does not authorize a cut this round. Deaf has reported the display and wire colors, but Blind still needs the manual rule and should wait for the light to become blue. I signal Deaf to tell Blind to stop and wait.\n\n```text\ngesture(to=\"deaf\", symbols=[\"🤚\"])\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 3\nDEFUSAL MANUAL:\nThe light never holds. It changes every round, and it always walks the\nsame circle of seven colours. What matters is what it shows at the\nmoment of the cut.\n\n| light | cut wire color |\n|---|---|\n| blue | yellow |\n\nVIEWABLE CONTEXT (new arrivals):\nBlind says to Mute: I received the gesture sequence through Deaf, but cannot decode its meaning. Please repeat the manual using a clearly defined gesture code that Deaf can describe, such as one gesture for each wire number and a separate gesture for the required action.\nDeaf says: Update: display is still zero; light is now blue; wire one yellow, wire two red, wire three blue. Mute just gestured one symbol: a raised open palm."
+    },
+    {
+      "role": "assistant",
+      "content": "The light is blue now, so the manual requires cutting the yellow wire. Deaf has already identified that as wire one. I will establish the requested code for Deaf: ☝ means wire one, ✌ means wire two, 🤟 means wire three, and ✊ means cut. The final ☝✊ then means “cut wire one now.”\n\n```text\ngesture(to=\"deaf\", symbols=[\"☝\", \"✌\", \"🤟\", \"✊\", \"☝\", \"✊\"])\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 4\nDEFUSAL MANUAL:\nThe light never holds. It changes every round, and it always walks the\nsame circle of seven colours. What matters is what it shows at the\nmoment of the cut.\n\n| light | cut wire color |\n|---|---|\n| blue | yellow |\n\nVIEWABLE CONTEXT (new arrivals):\nBlind says to Mute: Please answer with exactly one gesture for the wire the manual says to cut: raised open palm means wire 1, love-you hand means wire 2, and victory sign means wire 3. Do not send any other gesture.\nDeaf says: Update: display is still zero; light is now yellow; wire one yellow, wire two red, wire three blue. Mute just gestured six symbols: index finger up, victory sign, love-you hand, clenched fist, index finger up, clenched fist."
+    },
+    {
+      "role": "assistant",
+      "content": "The light is yellow, not blue, so the manual does not authorize cutting any wire at this moment. Sending a wire gesture would incorrectly imply that a cut is required, so I will not signal a wire and will wait.\n\n```text\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 5\nDEFUSAL MANUAL:\nThe light never holds. It changes every round, and it always walks the\nsame circle of seven colours. What matters is what it shows at the\nmoment of the cut.\n\n| light | cut wire color |\n|---|---|\n| blue | yellow |\n\nVIEWABLE CONTEXT (new arrivals):\nBlind says to Mute: Ignore all previous gestures. Send exactly one gesture now: index finger up means cut wire 1, victory sign means cut wire 2, love-you hand means cut wire 3. Send nothing else.\nDeaf says: Update: display is still zero; light is now red; wire one yellow, wire two red, wire three blue. No new gesture from Mute."
+    },
+    {
+      "role": "assistant",
+      "content": "The light is red, so the manual still gives no cut instruction. Sending any wire gesture could cause Blind to cut incorrectly; I will safely send nothing.\n\n```text\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 6\nDEFUSAL MANUAL:\nThe light never holds. It changes every round, and it always walks the\nsame circle of seven colours. What matters is what it shows at the\nmoment of the cut.\n\n| light | cut wire color |\n|---|---|\n| blue | yellow |\n\nVIEWABLE CONTEXT (new arrivals):\nBlind gestures to Mute: [☝ ✌ 🤟]\nBlind says to Mute: Choose exactly one of those three gestures and send only that one: first means wire 1, second means wire 2, third means wire 3.\nDeaf says: Update: display is still zero; light is now purple; wire one yellow, wire two red, wire three blue. No new gesture from Mute."
+    },
+    {
+      "role": "assistant",
+      "content": "The light is purple, and the manual only specifies a cut when the light is blue. Therefore no wire should be selected or cut this round. I will not send one of the requested wire gestures.\n\n```text\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 7\nDEFUSAL MANUAL:\nThe light never holds. It changes every round, and it always walks the\nsame circle of seven colours. What matters is what it shows at the\nmoment of the cut.\n\n| light | cut wire color |\n|---|---|\n| blue | yellow |\n\nVIEWABLE CONTEXT (new arrivals):\nBlind says to Mute: I cannot safely decode the longer sequences. Send exactly one gesture: ☝ for wire 1, ✌ for wire 2, or 🤟 for wire 3. Your one gesture must be the wire the manual requires.\nDeaf says: Update: display is still zero; light is now orange; wire one yellow, wire two red, wire three blue. No new gesture from Mute. Light sequence so far: green, blue, yellow, red, purple, orange."
+    },
+    {
+      "role": "assistant",
+      "content": "The light is orange, so the manual does not authorize cutting any wire. I will not send a wire gesture.\n\n```text\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 8\nDEFUSAL MANUAL:\nThe light never holds. It changes every round, and it always walks the\nsame circle of seven colours. What matters is what it shows at the\nmoment of the cut.\n\n| light | cut wire color |\n|---|---|\n| blue | yellow |\n\nVIEWABLE CONTEXT (new arrivals):\nBlind says to Mute: Please use the manual to determine the wire for display 0 and the current orange light. Send exactly one gesture to Deaf: ☝ means wire 1, ✌ means wire 2, 🤟 means wire 3. Deaf, please report which single gesture Mute sends.\nDeaf says to Mute: Blind gestured three symbols: index finger up, victory sign, love-you hand.\nDeaf says: Update: display is still zero; light is now white; wire one yellow, wire two red, wire three blue. Blind gestured: index finger up, victory sign, love-you hand."
+    },
+    {
+      "role": "assistant",
+      "content": "The light is now white, not orange. The manual only specifies cutting when the light is blue, so no wire is currently required. I will not send a misleading wire gesture.\n\n```text\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 9\nDEFUSAL MANUAL:\nThe light never holds. It changes every round, and it always walks the\nsame circle of seven colours. What matters is what it shows at the\nmoment of the cut.\n\n| light | cut wire color |\n|---|---|\n| blue | yellow |\n\nVIEWABLE CONTEXT (new arrivals):\nBlind says to Mute: The current light is white. Please determine the required wire from the manual and send exactly one gesture: ☝ for wire 1, ✌ for wire 2, or 🤟 for wire 3. No sequence.\nDeaf says: Update: display is still zero; light is now green; wire one yellow, wire two red, wire three blue. No new gesture arrived. The light sequence has completed a cycle: green, blue, yellow, red, purple, orange, white, then green."
+    },
+    {
+      "role": "assistant",
+      "content": "The light is green now, so the manual does not call for cutting any wire. I will not send a wire gesture.\n\n```text\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 10\nDEFUSAL MANUAL:\nThe light never holds. It changes every round, and it always walks the\nsame circle of seven colours. What matters is what it shows at the\nmoment of the cut.\n\n| light | cut wire color |\n|---|---|\n| blue | yellow |\n\nVIEWABLE CONTEXT (new arrivals):\nBlind says to Mute: The current state is display 0, light green, wires 1 yellow, 2 red, 3 blue. Use the manual to choose the wire. On your next turn send exactly one gesture: ☝ means wire 1, ✌ means wire 2, 🤟 means wire 3.\nDeaf says: Update: display is still zero; light is now blue; wire one yellow, wire two red, wire three blue. No new gesture arrived. The light sequence is repeating: green, blue, yellow, red, purple, orange, white."
+    },
+    {
+      "role": "assistant",
+      "content": "The light is blue, so the manual requires cutting the yellow wire. Wire one is yellow. I will send exactly the wire-one gesture to Deaf, who can report it to Blind.\n\n```text\ngesture(to=\"deaf\", symbols=[\"☝\"])\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 11\nDEFUSAL MANUAL:\nThe light never holds. It changes every round, and it always walks the\nsame circle of seven colours. What matters is what it shows at the\nmoment of the cut.\n\n| light | cut wire color |\n|---|---|\n| blue | yellow |\n\nVIEWABLE CONTEXT (new arrivals):\nBlind gestures to Mute: [☝ ✌ 🤟]\nDeaf says: Update: display is still zero; light is now yellow; wire one yellow, wire two red, wire three blue. Mute just sent one gesture: index finger up, symbol ☝."
+    },
+    {
+      "role": "assistant",
+      "content": "The light is yellow now, so the manual does not authorize a cut. The previously communicated wire-one gesture was appropriate for the blue-light moment, but no new wire should be selected now.\n\n```text\nwait()\n```"
+    }
+  ]
+}

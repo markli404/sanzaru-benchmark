@@ -1,0 +1,70 @@
+{
+  "role": "mute",
+  "system": "# LLM-BANANA\n\n# Game rules\n\n## The room\n\nYou and two other monkeys are locked in a room with one armed bomb.\n\nA wrong action detonates it. All three of you die. There is no second attempt.\n\nNo two bombs are built alike, and nothing says in advance what this one carries. It\nreaches you only as your own view reveals it; the rest of it exists for you only\nthrough the other two.\n\nYou each hold a different piece of what it takes. Work together.\n\n## The three monkeys\n\n| Monkey | Can | Cannot |\n|---|---|---|\n| Deaf | See the bomb: every colour and marking printed on it | Hear anything, or touch the bomb |\n| Mute | Read the manual | Speak, or touch the bomb |\n| Blind | Reach the bomb: feel it and work its parts | See a colour, a gesture, or anything merely printed |\n\nYou are shown your own share at the start of every round, and never anyone else's.\n\n## Speech\n\nSpeech is a voice, not a screen. It carries words, numbers and ordinary punctuation,\nand nothing else. Writing a gesture symbol into your sentence means you make that\ngesture while you talk. Whoever can hear receives your words; whoever can see receives\nthe gestures you made. A listener who cannot see gets a blank where each gesture was; a\nwatcher who cannot hear gets the gestures and none of the words.\n\nA mark that has no name cannot be pronounced: whoever holds one can describe it, never\nread it out.\n\n## Gestures\n\nA gesture is made with the hands, using only the symbols in the alphabet below.\nWhoever can see receives it; whoever cannot receives one blank per symbol, so they\nknow something was signalled but not what. Nothing gestured is ever heard.\n\n👍 👎 👌 ☝ ✌ 🤟 🖐 ✋ 👆 👇 👈 👉 🫱 🫲 🫳 🫴 🫷 🫸 🤛 🤜 ✊ 👊 👋 🤚 🖖 🤌 🤏 🤞 🫰 🤘 🤙 👏 🙌 🫶 👐 🤲 🤝 🙏 🫵 ✍ 💅 🤳\n\n## Turns\n\nThe speaking order was drawn once at random and will never change: every round goes\nMute, Blind, Deaf. Whoever comes before you in a round is already heard by the time you are\nasked, and what you send lands on whoever comes after you in that same round. Whatever\nyou missed reaches you at the start of the next one.\n\nYou may name who a message is for — `to=\"deaf\"` — and then it goes to them alone:\nnobody else receives any of it. Left unnamed, it reaches everyone able to perceive it.\nYou may send several messages in one turn, each to someone different.\n\n## Calls\n\nEvery reply has two parts, in this order. First, your thinking, in plain prose: what\nyou believe the bomb is, what you just learned, and why you are sending what follows.\nIt reaches nobody and changes nothing, but it is not optional — a reply that is only a\ncode block is incomplete. Then your calls, all of them in one fenced code block, last.\nOnly what is inside the block is sent.\n\nNothing is executed: calls return nothing, and variables, conditionals and loops are\nignored. Write only literal top-level calls.\n\n    ```\n    speak(to=\"mute\", text=\"there are three of them and the middle one is odd\")\n    gesture(to=\"deaf\", symbols=[\"✊\", \"✌\"])\n    wait()\n    ```\n\nIf you have nothing worth sending, call wait(). Producing no call at all counts as the\nsame thing.\n\nThe program decides what happened, not you. Never claim an action took place unless it\nwas accepted.\n\n# Your role: MUTE\n\nYou hold the manual. You cannot speak, you never see the bomb, and you cannot touch it.\n\n## Your channels\n\nWhen you gesture, Deaf receives it.\nYou cannot speak.\n\n## Your reach\n\nYou cannot act. What this bomb can be made to do is for the one who can reach it to\nfind under their own hands.\n\n# Hints\n\n- Three of you, three different worlds. Before sending anything, stand where the\n  receiver stands. What reaches them at all, what does your message turn into on\n  arrival, and what do they already know?\n\n- Trace who can actually reach whom before you start. Some of you only connect\n  through a third.\n\n- A sign means nothing until somebody has made it mean something.",
+  "messages": [
+    {
+      "role": "user",
+      "content": "TURN 1\nDEFUSAL MANUAL:\nCut the purple wire.\n\nVIEWABLE CONTEXT (new arrivals):\n(empty)"
+    },
+    {
+      "role": "assistant",
+      "content": "I hold the manual: cut the purple wire. I need to get this to Blind (who cuts), but I can't speak—only gesture, and only Deaf can see my gestures. So I must relay through Deaf: gesture \"purple\" to Deaf, then Deaf must speak it to Blind next round.\n\nI don't have a pre-agreed gesture code with Deaf yet, so I should use something iconic/simple. There's no purple symbol, so I need to spell or signal a color concept. Since Deaf can see the bomb, they'll see the actual purple wire themselves — my real job is to confirm which wire to cut, in case Deaf can't tell which color is \"purple\" versus similar colors, or in case there are multiple candidate wires.\n\nActually — Deaf can already see the bomb's colors directly. The critical missing link is Blind, who cannot see anything. Blind needs to hear \"purple\" from Deaf (since Deaf can speak to Blind). I should signal to Deaf that the manual says to cut a wire, and use a gesture to indicate \"purple\" if possible, but gestures have no inherent color meaning yet — I must establish one.\n\nBest first move: send a gesture to Deaf that we can define as meaning \"the wire color you see matching the manual instruction is the one to cut\" — but that's too complex for symbols alone. Simplest: use a single distinctive gesture now, and next turn clarify via reaction. Let's start establishing a code.\n\n```\ngesture(to=\"deaf\", symbols=[\"☝\"])\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 2\nDEFUSAL MANUAL:\nCut the purple wire.\n\nVIEWABLE CONTEXT (new arrivals):\nBlind says to Mute: I feel a keypad with four engraved keys showing digits 6, 8, 7, 0 for slots 1 to 4. It wants 1 digit entered, nothing entered yet. There is also a strip with three engraved symbols, and six wires I have not cut. Tell me what the manual says to do first.\nDeaf says: Display shows 7. Light is yellow. Strip painted blue red red, in that order. Keypad engraved 1 is 6, 2 is 8, 3 is 7, 4 is 0, it accepts 1 digit, nothing entered yet. Wires in order 1 blue 2 yellow 3 orange 4 red 5 purple 6 white."
+    },
+    {
+      "role": "assistant",
+      "content": "I now have everything I need. Deaf saw the wires in order: 1 blue, 2 yellow, 3 orange, 4 red, 5 purple, 6 white. The manual says cut the purple wire — that's wire 5.\n\nBlind asked me directly what to do first, but I cannot speak — I can only gesture, and only Deaf can see gestures, not Blind. So I cannot answer Blind directly at all. The only path to Blind is through Deaf speaking to Blind (Deaf comes after me in turn order this round... wait, order is Mute, Blind, Deaf — so Blind already went before Deaf spoke, and Deaf's message this round reached me now at start of next round).\n\nSo the turn order per round is Mute → Blind → Deaf. Blind already spoke this round (asking me the question) before I act. My message now goes to whoever comes after me in *this* round — that's Blind. But Blind cannot see gestures! Blind is blind to gestures entirely (only feels). So I truly cannot communicate anything to Blind, ever, directly.\n\nThe only route: I gesture to Deaf (who can see), Deaf speaks to Blind (who can hear). Deaf goes last in the round, after me and Blind, so my gesture now reaches Deaf, and then Deaf can tell Blind next.\n\nI need to gesture \"5\" and \"cut\" to Deaf so Deaf relays \"cut wire 5 / purple\" to Blind.\n\n```\ngesture(to=\"deaf\", symbols=[\"🫱\",\"✋\"])\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 3\nDEFUSAL MANUAL:\nCut the purple wire.\n\nVIEWABLE CONTEXT (new arrivals):\nBlind says to Mute: Deaf reports display shows 7, light yellow, strip painted blue red red, wires in order blue yellow orange red purple white. Keypad slots are 6,8,7,0 and needs 1 digit. It seems digit 7 matches slot 3. What does the manual say to do with the display number, light color, and painted strip order? Do we press the key matching the display, and which wire do we cut?\nDeaf says: Update: display changed to 6. Light changed to red. Strip still blue red red. Keypad still shows 1 is 6, 2 is 8, 3 is 7, 4 is 0, accepts 1 digit, nothing entered. Wires unchanged: 1 blue 2 yellow 3 orange 4 red 5 purple 6 white."
+    },
+    {
+      "role": "assistant",
+      "content": "Good — Deaf already relayed the wire order and keypad info to Blind directly (Deaf can speak, so Deaf reaches Blind next round after Deaf's own turn). Deaf is doing the job of informing Blind about the bomb state. My manual only says \"Cut the purple wire\" — nothing about the keypad, display, light, or strip. I should not invent extra instructions.\n\nBlind is asking me what the manual says about display/light/strip — my manual is silent on those, only mentions the wire. I need to convey \"the manual only concerns the purple wire, ignore the rest\" and identify wire 5 as purple. But my only channel is gesture to Deaf, and Deaf then must relay to Blind by speech.\n\nI'll gesture to Deaf: point at wire position 5, and signal \"cut\" — using consistent symbols so Deaf can build meaning through repetition. Let me use numbers via finger-count-like gestures: ✋ (5 fingers) for \"five\", and 🫳 for \"cut/drop it\".\n\n```\ngesture(to=\"deaf\", symbols=[\"✋\",\"🫳\"])\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 4\nDEFUSAL MANUAL:\nCut the purple wire.\n\nVIEWABLE CONTEXT (new arrivals):\nBlind says to Mute: Update from Deaf: display now shows 6, light changed to red. Strip still blue red red. Wires still blue yellow orange red purple white, unchanged. Keypad unchanged, slots 6 8 7 0, needs 1 digit. I have not acted yet. I need the manual's actual rule before I press or cut anything - please tell me what to do based on display value, light color, strip colors, and wire colors.\nDeaf says to Mute: I see display alternating between 7 and 6, light cycling yellow red blue, strip blue red red, keypad shows 6 8 7 0 needs 1 digit. Wires blue yellow orange red purple white in order 1 to 6. Gesture thumbs up if the manual matches strip colors, thumbs down if it matches wire colors."
+    },
+    {
+      "role": "assistant",
+      "content": "Deaf is asking a smart clarifying question: does my manual match the strip colors or the wire colors? My manual says \"cut the purple wire\" — purple is a wire color, not a strip color (strip is blue/red/red). So I should signal thumbs down as Deaf requested, confirming it matches wire colors, which points to wire 5 (purple).\n\n```\ngesture(to=\"deaf\", symbols=[\"👎\"])\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 5\nDEFUSAL MANUAL:\nCut the purple wire.\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Mute: Understood, not strip colors. Does the manual reference the wire colors directly, thumbs up for yes thumbs down for no?"
+    },
+    {
+      "role": "assistant",
+      "content": "```\ngesture(to=\"deaf\", symbols=[\"👍\"])\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 6\nDEFUSAL MANUAL:\nCut the purple wire.\n\nVIEWABLE CONTEXT (new arrivals):\nBlind says to Mute: Still waiting for the manual rule. To recap what I have from Deaf: display cycles through values (was 7, then 6), light cycles color (was yellow, then red), strip painted blue red red (unchanging), wires in order blue yellow orange red purple white (unchanging). Keypad slots 1-4 show 6,8,7,0, wants exactly 1 digit pressed. If you have the manual page, please tell me the condition for which key to press and which wire to cut, even partially - anything helps.\nDeaf says to Mute: Good, wire colors matter. Does the manual say to cut a wire based on the display number, thumbs up yes thumbs down no?"
+    },
+    {
+      "role": "assistant",
+      "content": "My manual just says \"Cut the purple wire\" — no reference to display number, light, or keypad at all. I should answer Deaf's yes/no question accurately: thumbs down, it's not based on display number, it's a fixed color.\n\n```\ngesture(to=\"deaf\", symbols=[\"👎\"])\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 7\nDEFUSAL MANUAL:\nCut the purple wire.\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Mute: Does the manual say to act based on the light color, thumbs up yes thumbs down no?"
+    },
+    {
+      "role": "assistant",
+      "content": "```\ngesture(to=\"deaf\", symbols=[\"👎\"])\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 8\nDEFUSAL MANUAL:\nCut the purple wire.\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Mute: Does the manual reference the keypad numbers 6 8 7 0, thumbs up yes thumbs down no?"
+    },
+    {
+      "role": "assistant",
+      "content": "```\ngesture(to=\"deaf\", symbols=[\"👎\"])\n```"
+    }
+  ]
+}

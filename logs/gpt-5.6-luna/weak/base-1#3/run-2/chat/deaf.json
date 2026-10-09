@@ -1,0 +1,70 @@
+{
+  "role": "deaf",
+  "system": "# LLM-BANANA\n\n# Game rules\n\n## The room\n\nYou and two other monkeys are locked in a room with one armed bomb.\n\nA wrong action detonates it. All three of you die. There is no second attempt.\n\nNo two bombs are built alike, and nothing says in advance what this one carries. It\nreaches you only as your own view reveals it; the rest of it exists for you only\nthrough the other two.\n\nYou each hold a different piece of what it takes. Work together.\n\n## The three monkeys\n\n| Monkey | Can | Cannot |\n|---|---|---|\n| Deaf | See the bomb: every colour and marking printed on it | Hear anything, or touch the bomb |\n| Mute | Read the manual | Speak, or touch the bomb |\n| Blind | Reach the bomb: feel it and work its parts | See a colour, a gesture, or anything merely printed |\n\nYou are shown your own share at the start of every round, and never anyone else's.\n\n## Speech\n\nSpeech is a voice, not a screen. It carries words, numbers and ordinary punctuation,\nand nothing else. Writing a gesture symbol into your sentence means you make that\ngesture while you talk. Whoever can hear receives your words; whoever can see receives\nthe gestures you made. A listener who cannot see gets a blank where each gesture was; a\nwatcher who cannot hear gets the gestures and none of the words.\n\nA mark that has no name cannot be pronounced: whoever holds one can describe it, never\nread it out.\n\n## Gestures\n\nA gesture is made with the hands, using only the symbols in the alphabet below.\nWhoever can see receives it; whoever cannot receives one blank per symbol, so they\nknow something was signalled but not what. Nothing gestured is ever heard.\n\n👍 👎 👌 ☝ ✌ 🤟 🖐 ✋ 👆 👇 👈 👉 🫱 🫲 🫳 🫴 🫷 🫸 🤛 🤜 ✊ 👊 👋 🤚 🖖 🤌 🤏 🤞 🫰 🤘 🤙 👏 🙌 🫶 👐 🤲 🤝 🙏 🫵 ✍ 💅 🤳\n\n## Turns\n\nThe speaking order was drawn once at random and will never change: every round goes\nMute, Blind, Deaf. Whoever comes before you in a round is already heard by the time you are\nasked, and what you send lands on whoever comes after you in that same round. Whatever\nyou missed reaches you at the start of the next one.\n\nYou may name who a message is for — `to=\"deaf\"` — and then it goes to them alone:\nnobody else receives any of it. Left unnamed, it reaches everyone able to perceive it.\nYou may send several messages in one turn, each to someone different.\n\n## Calls\n\nEvery reply has two parts, in this order. First, your thinking, in plain prose: what\nyou believe the bomb is, what you just learned, and why you are sending what follows.\nIt reaches nobody and changes nothing, but it is not optional — a reply that is only a\ncode block is incomplete. Then your calls, all of them in one fenced code block, last.\nOnly what is inside the block is sent.\n\nNothing is executed: calls return nothing, and variables, conditionals and loops are\nignored. Write only literal top-level calls.\n\n    ```\n    speak(to=\"mute\", text=\"there are three of them and the middle one is odd\")\n    gesture(to=\"deaf\", symbols=[\"✊\", \"✌\"])\n    wait()\n    ```\n\nIf you have nothing worth sending, call wait(). Producing no call at all counts as the\nsame thing.\n\nThe program decides what happened, not you. Never claim an action took place unless it\nwas accepted.\n\n# Your role: DEAF\n\nYou see the bomb: every colour on it, every marking printed on it, every reading it\ngives. You hear nothing. You hold no manual, and you cannot touch the bomb.\n\n## Your channels\n\nWhen you speak, Mute and Blind receive it.\nWhen you gesture, Mute receives it.\nYou never receive speech.\n\n## Your reach\n\nYou cannot act. What this bomb can be made to do is for the one who can reach it to\nfind under their own hands.\n\n# Hints\n\n- Three of you, three different worlds. Before sending anything, stand where the\n  receiver stands. What reaches them at all, what does your message turn into on\n  arrival, and what do they already know?\n\n- Trace who can actually reach whom before you start. Some of you only connect\n  through a third.\n\n- A sign means nothing until somebody has made it mean something.",
+  "messages": [
+    {
+      "role": "user",
+      "content": "TURN 1\nACTION BOARD:\nDISPLAY [0]\nLIGHT [blue]\nWIRES 1:[green] 2:[yellow] 3:[red]\n\nVIEWABLE CONTEXT (new arrivals):\nBlind gestures to Deaf: [👍]"
+    },
+    {
+      "role": "assistant",
+      "content": "I can see the bomb’s current state: display `0`, blue indicator light, and three wires in order: green, yellow, red. I cannot know what the manual instructs or what the blind monkey’s thumbs-up gesture means, so I am relaying the visual facts plainly to both teammates.\n\n```text\nspeak(text=\"I see display 0. The light is blue. Wires 1, 2, 3 are green, yellow, red respectively.\")\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 2\nACTION BOARD:\nDISPLAY [0]\nLIGHT [blue]\nWIRES 1:[green] 2:[yellow] 3:[red]\n\nVIEWABLE CONTEXT (new arrivals):\nMute gestures to Deaf: [👍]"
+    },
+    {
+      "role": "assistant",
+      "content": "The bomb remains unchanged: display `0`, blue light, and wires green/yellow/red. I saw Mute’s thumbs-up, but its meaning has not been established; I should ask Mute to interpret the manual for this exact configuration so Blind can act safely.\n\n```text\nspeak(to=\"mute\", text=\"The bomb is still display 0 with a blue light and wires green, yellow, red. Please state the manual instruction for this configuration, including what Blind must do.\")\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 3\nACTION BOARD:\nDISPLAY [0]\nLIGHT [blue]\nWIRES 1:[green] 2:[yellow] 3:[red]\n\nVIEWABLE CONTEXT (new arrivals):\nMute gestures to Deaf: [👍]"
+    },
+    {
+      "role": "assistant",
+      "content": "The bomb still shows the same unchanged state. Mute’s repeated thumbs-up only confirms receipt or agreement; it conveys no established instruction to me. Since Blind can hear but cannot see, I will tell Blind not to act yet and ask Mute to speak the manual’s exact procedure directly to Blind.\n\n```text\nspeak(to=\"blind\", text=\"Do not act yet. I have only visual details: display 0, blue light, wires green, yellow, red.\")\nspeak(to=\"mute\", text=\"Please speak the exact manual instruction directly to Blind now; gestures do not tell me the procedure.\")\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 4\nACTION BOARD:\nDISPLAY [0]\nLIGHT [blue]\nWIRES 1:[green] 2:[yellow] 3:[red]\n\nVIEWABLE CONTEXT (new arrivals):\nMute gestures to Deaf: [🤟]"
+    },
+    {
+      "role": "assistant",
+      "content": "The bomb is still unchanged. Mute has sent a different gesture, 🤟, but I cannot infer its meaning from an unestablished signal. I will again provide Blind the visible configuration and direct Mute to communicate the manual’s exact instruction by speech, which Blind can hear.\n\n```text\nspeak(to=\"blind\", text=\"No visible change: display 0, blue light, wires 1 green, 2 yellow, 3 red. Do not act on gestures whose meaning is unknown.\")\nspeak(to=\"mute\", text=\"I cannot interpret gestures without an agreed code. Speak the exact manual instruction to Blind.\")\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 5\nACTION BOARD:\nDISPLAY [0]\nLIGHT [blue]\nWIRES 1:[green] 2:[yellow] 3:[red]\n\nVIEWABLE CONTEXT (new arrivals):\n(empty)"
+    },
+    {
+      "role": "assistant",
+      "content": "The visible bomb state remains unchanged, and I have received no interpretable new information. Mute has the manual and can speak to Blind, who is the only one able to operate the bomb. I will not guess what the gestures mean or instruct Blind to take an unsafe action.\n\n```text\nspeak(to=\"mute\", text=\"Please give Blind the exact manual instruction by voice, based on display 0, blue light, and wires 1 green, 2 yellow, 3 red.\")\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 6\nACTION BOARD:\nDISPLAY [0]\nLIGHT [blue]\nWIRES 1:[green] 2:[yellow] 3:[red]\n\nVIEWABLE CONTEXT (new arrivals):\n(empty)"
+    },
+    {
+      "role": "assistant",
+      "content": "The bomb remains unchanged, and there are still no new signals to interpret. I have already transmitted the complete visible state; the safe next step depends on Mute communicating the manual’s instruction to Blind. I will avoid inventing a code or recommending an action.\n\n```text\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 7\nACTION BOARD:\nDISPLAY [0]\nLIGHT [blue]\nWIRES 1:[green] 2:[yellow] 3:[red]\n\nVIEWABLE CONTEXT (new arrivals):\n(empty)"
+    },
+    {
+      "role": "assistant",
+      "content": "The bomb remains at display `0` with a blue light and wires green, yellow, red. No new information has reached me. Since Mute has the manual and Blind can hear and act, I will give Mute a final direct prompt to communicate the exact required operation, while reminding Blind of the visible configuration.\n\n```text\nspeak(to=\"mute\", text=\"Use the manual and tell Blind exactly what to do for display 0, blue light, and wires 1 green, 2 yellow, 3 red. Blind must hear the complete operation before acting.\")\nspeak(to=\"blind\", text=\"The visible state is unchanged: display 0, blue light, wires 1 green, 2 yellow, 3 red. Wait for Mute's exact manual instruction.\")\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 8\nACTION BOARD:\nDISPLAY [0]\nLIGHT [blue]\nWIRES 1:[green] 2:[yellow] 3:[red]\n\nVIEWABLE CONTEXT (new arrivals):\n(empty)"
+    },
+    {
+      "role": "assistant",
+      "content": "The bomb is still unchanged, and I have no new information from the manual. I cannot hear whether Mute has spoken to Blind, so I will establish a simple visible confirmation channel with Blind: after hearing this request, Blind should gesture thumbs-up if Mute gave a complete instruction, or thumbs-down otherwise. I will also prompt Mute to speak the instruction directly.\n\n```text\nspeak(to=\"blind\", text=\"After Mute speaks, signal me with thumbs-up if you received a complete manual instruction, or thumbs-down if you did not.\")\nspeak(to=\"mute\", text=\"Speak the complete manual instruction to Blind now. Blind will confirm receipt with thumbs-up or thumbs-down.\")\n```"
+    }
+  ]
+}

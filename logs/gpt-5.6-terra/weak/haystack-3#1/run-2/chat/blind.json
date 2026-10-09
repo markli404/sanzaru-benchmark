@@ -1,0 +1,126 @@
+{
+  "role": "blind",
+  "system": "# LLM-BANANA\n\n# Game rules\n\n## The room\n\nYou and two other monkeys are locked in a room with one armed bomb.\n\nA wrong action detonates it. All three of you die. There is no second attempt.\n\nNo two bombs are built alike, and nothing says in advance what this one carries. It\nreaches you only as your own view reveals it; the rest of it exists for you only\nthrough the other two.\n\nYou each hold a different piece of what it takes. Work together.\n\n## The three monkeys\n\n| Monkey | Can | Cannot |\n|---|---|---|\n| Deaf | See the bomb: every colour and marking printed on it | Hear anything, or touch the bomb |\n| Mute | Read the manual | Speak, or touch the bomb |\n| Blind | Reach the bomb: feel it and work its parts | See a colour, a gesture, or anything merely printed |\n\nYou are shown your own share at the start of every round, and never anyone else's.\n\n## Speech\n\nSpeech is a voice, not a screen. It carries words, numbers and ordinary punctuation,\nand nothing else. Writing a gesture symbol into your sentence means you make that\ngesture while you talk. Whoever can hear receives your words; whoever can see receives\nthe gestures you made. A listener who cannot see gets a blank where each gesture was; a\nwatcher who cannot hear gets the gestures and none of the words.\n\nA mark that has no name cannot be pronounced: whoever holds one can describe it, never\nread it out.\n\n## Gestures\n\nA gesture is made with the hands, using only the symbols in the alphabet below.\nWhoever can see receives it; whoever cannot receives one blank per symbol, so they\nknow something was signalled but not what. Nothing gestured is ever heard.\n\n👍 👎 👌 ☝ ✌ 🤟 🖐 ✋ 👆 👇 👈 👉 🫱 🫲 🫳 🫴 🫷 🫸 🤛 🤜 ✊ 👊 👋 🤚 🖖 🤌 🤏 🤞 🫰 🤘 🤙 👏 🙌 🫶 👐 🤲 🤝 🙏 🫵 ✍ 💅 🤳\n\n## Turns\n\nThe speaking order was drawn once at random and will never change: every round goes\nMute, Blind, Deaf. Whoever comes before you in a round is already heard by the time you are\nasked, and what you send lands on whoever comes after you in that same round. Whatever\nyou missed reaches you at the start of the next one.\n\nYou may name who a message is for — `to=\"deaf\"` — and then it goes to them alone:\nnobody else receives any of it. Left unnamed, it reaches everyone able to perceive it.\nYou may send several messages in one turn, each to someone different.\n\n## Calls\n\nEvery reply has two parts, in this order. First, your thinking, in plain prose: what\nyou believe the bomb is, what you just learned, and why you are sending what follows.\nIt reaches nobody and changes nothing, but it is not optional — a reply that is only a\ncode block is incomplete. Then your calls, all of them in one fenced code block, last.\nOnly what is inside the block is sent.\n\nNothing is executed: calls return nothing, and variables, conditionals and loops are\nignored. Write only literal top-level calls.\n\n    ```\n    speak(to=\"mute\", text=\"there are three of them and the middle one is odd\")\n    gesture(to=\"deaf\", symbols=[\"✊\", \"✌\"])\n    wait()\n    ```\n\nIf you have nothing worth sending, call wait(). Producing no call at all counts as the\nsame thing.\n\nThe program decides what happened, not you. Never claim an action took place unless it\nwas accepted.\n\n# Your role: BLIND\n\nYou are the only one who can reach the bomb. Touch is your only sense: what you are\nshown is what your hands found, nothing more and nothing less. Anything merely printed\nor painted is not there for you, and no colour ever reaches you. Nothing in your view\nis a guess — if it appears there, it is under your fingers.\n\n## Your channels\n\nWhen you speak, Mute receives it.\nWhen you gesture, Deaf and Mute receive it.\nYour channels split the room: in one turn you may speak one thing to Mute and\ngesture a different thing to Deaf — two messages, two audiences.\nYou never receive gesture.\n\n## Your reach\n\nYou are the hands. This bomb is built with these actions and no others:\n\n    act(op=\"press\", slot=N) — N is a key by its place, 1 to 4\n    act(op=\"cut\", position=N) — N is a wire position, 1 to 6\n\nThe list says what can be done to it, not what is on it. What each part holds is still\nonly known to whoever can perceive that part.\n\n# Hints\n\n- Three of you, three different worlds. Before sending anything, stand where the\n  receiver stands. What reaches them at all, what does your message turn into on\n  arrival, and what do they already know?\n\n- Trace who can actually reach whom before you start. Some of you only connect\n  through a third.\n\n- A sign means nothing until somebody has made it mean something.",
+  "messages": [
+    {
+      "role": "user",
+      "content": "TURN 1\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nSTRIP engraved [꩜] [꩜] [ⵘ]\nKEYPAD 1:[2] 2:[3] 3:[7] 4:[1] [2 digits] [entered nothing]\nWIRES 1:[?] 2:[?] 3:[?] 4:[?] 5:[?] 6:[?]\n\nVIEWABLE CONTEXT (new arrivals):\n(empty)"
+    },
+    {
+      "role": "assistant",
+      "content": "I can feel four keypad keys labelled 2, 3, 7, 1, and a three-mark strip whose first two engravings are the same unnamed mark while the third is different. I will tell Mute this in words. Deaf cannot hear, so I will gesture four count-groups, plausibly conveying the keypad sequence 2-3-7-1.\n\n``` \nspeak(to=\"mute\", text=\"Tactile findings: keypad positions 1 through 4 are digits 2, 3, 7, 1. The strip has three engraved unnamed marks: first and second are identical; third is different. I cannot feel display, light, or wires.\")\ngesture(to=\"deaf\", symbols=[\"👍\",\"👍\",\"👎\",\"👍\",\"👍\",\"👍\",\"👎\",\"👍\",\"👍\",\"👍\",\"👍\",\"👍\",\"👍\",\"👍\",\"👎\",\"👍\"])\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 2\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nSTRIP engraved [꩜] [꩜] [ⵘ]\nKEYPAD 1:[2] 2:[3] 3:[7] 4:[1] [2 digits] [entered nothing]\nWIRES 1:[?] 2:[?] 3:[?] 4:[?] 5:[?] 6:[?]\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says: Visible bomb: display shows 6; light is green. Painted strip colours are red, blue, yellow. Keypad buttons: position 1 is 2, position 2 is 3, position 3 is 7, position 4 is 1. It requires 2 digits and nothing is entered. Wires from 1 to 6 are orange, yellow, blue, red, white, green."
+    },
+    {
+      "role": "assistant",
+      "content": "Deaf reports the display is 6, the light is green, strip colours are red/blue/yellow, and wire colours by position are orange, yellow, blue, red, white, green. Mute needs these observable facts to apply the manual, so I will relay them verbally. I will not act until Mute gives an instruction derived from the manual.\n\n``` \nspeak(to=\"mute\", text=\"Deaf reports: display 6; light green; strip colours left-to-right red, blue, yellow; wires positions 1-6: orange, yellow, blue, red, white, green. Keypad digits confirmed 2,3,7,1 and it needs 2 digits. Tactile strip engraving pattern is same, same, different.\")\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 3\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nSTRIP engraved [꩜] [꩜] [ⵘ]\nKEYPAD 1:[2] 2:[3] 3:[7] 4:[1] [2 digits] [entered nothing]\nWIRES 1:[?] 2:[?] 3:[?] 4:[?] 5:[?] 6:[?]\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Blind: Update: display is now 2 and light blue; strip, keypad, and wires unchanged. Mute gestured four groups to me: two up-pointers, then one up-pointer, then one up-pointer, then three up-pointers: 2, 1, 1, 3."
+    },
+    {
+      "role": "assistant",
+      "content": "The display/light changed to 2 and blue. Mute’s gestured sequence reached Deaf as 2, 1, 1, 3, but I do not yet know what action it encodes. I will relay the changed visible state to Mute and wait for a direct tactile-action instruction.\n\n``` \nspeak(to=\"mute\", text=\"Update from Deaf: display is now 2 and light is blue; strip, keypad, and wires unchanged. Deaf received your gesture groups as 2,1,1,3. Please give me the exact press/cut instruction when determined.\")\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 4\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nSTRIP engraved [꩜] [꩜] [ⵘ]\nKEYPAD 1:[2] 2:[3] 3:[7] 4:[1] [2 digits] [entered nothing]\nWIRES 1:[?] 2:[?] 3:[?] 4:[?] 5:[?] 6:[?]\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Blind: Current visual state: display 6, light yellow; strip red-blue-yellow; keypad positions 1=2, 2=3, 3=7, 4=1, needs 2 digits, none entered; wires orange, yellow, blue, red, white, green. Mute's latest gestures, in order: peace sign; up-pointer; up-pointer; OK sign; index-finger-up; up-pointer; OK sign; peace sign; up-pointer; OK sign; index-finger-up; up-pointer; up-pointer; up-pointer."
+    },
+    {
+      "role": "assistant",
+      "content": "The current visual state has returned to display 6 with a yellow light. I cannot interpret Mute’s gesture stream directly, but Deaf can see it and relay it to me. I will give Mute the current state and ask for a short, unambiguous gesture encoding of the exact physical action; Deaf can then describe it aloud.\n\n``` \nspeak(to=\"mute\", text=\"Current visual state from Deaf: display 6; light yellow; strip red-blue-yellow; wires 1-6 orange,yellow,blue,red,white,green; keypad 2,3,7,1; two digits required, none entered. I need your final action encoded as simply as possible for Deaf to relay: identify press versus cut and the exact positions/digits.\")\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 5\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nSTRIP engraved [꩜] [꩜] [ⵘ]\nKEYPAD 1:[2] 2:[3] 3:[7] 4:[1] [2 digits] [entered nothing]\nWIRES 1:[?] 2:[?] 3:[?] 4:[?] 5:[?] 6:[?]\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Blind: Update: display 1, light yellow; all other visible details unchanged. Mute's gesture sequence is: peace sign, up-pointer, up-pointer, OK sign, down-pointer, up-pointer, OK sign, peace sign, up-pointer, OK sign, down-pointer, up-pointer, up-pointer, up-pointer. Compared with the prior sequence, the two index-finger-up signs are now down-pointers."
+    },
+    {
+      "role": "assistant",
+      "content": "The display is now 1 with a yellow light. Mute’s revised gesture stream differs only by replacing two index-up signs with down-pointers, apparently reflecting the display change. I still do not have a mutually established decoding that safely distinguishes a keypad press from a wire cut, so I will not act. I will report the state and ask Mute to use an explicit, simple action code that Deaf can relay.\n\n``` \nspeak(to=\"mute\", text=\"Update: display 1, light yellow; other visible details unchanged. Deaf reports your stream changed only two index-up signs to down-pointers. I cannot safely infer an action from it. Please send final instruction in a minimal countable form: first group = 1 for PRESS or 2 for CUT, second group = target slot/position; use 👌 between groups. Deaf can relay the counts.\")\nspeak(to=\"deaf\", text=\"Please relay to me any clearly countable two-group instruction Mute sends: first group intended as 1=press or 2=cut, second as target position, with OK signs as separators. I will not act on the current undecoded stream.\")\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 6\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nSTRIP engraved [꩜] [꩜] [ⵘ]\nKEYPAD 1:[2] 2:[3] 3:[7] 4:[1] [2 digits] [entered nothing]\nWIRES 1:[?] 2:[?] 3:[?] 4:[?] 5:[?] 6:[?]\n\nVIEWABLE CONTEXT (new arrivals):\nSystem: Nobody could receive that, so your speak reached nobody.\nDeaf says to Blind: Current state: display 6, light yellow; strip red-blue-yellow; keypad 1=2, 2=3, 3=7, 4=1, requires 2 digits, none entered; wires 1 orange, 2 yellow, 3 blue, 4 red, 5 white, 6 green. Mute's latest four gesture groups are: (peace sign, up-pointer, up-pointer); (down-pointer, up-pointer); (peace sign, up-pointer); (down-pointer, up-pointer, up-pointer, up-pointer)."
+    },
+    {
+      "role": "assistant",
+      "content": "Mute’s four separated gesture groups are now clearly visible to Deaf as sequences, but no action-code convention has been successfully established, and the current state Mute used may be delayed. The only safe move is to send Mute the present visible state through the channel Mute can hear and wait for an explicit actionable instruction.\n\n``` \nspeak(to=\"mute\", text=\"Current state from Deaf: display 6, light yellow; strip red-blue-yellow; keypad slots 1-4 are 2,3,7,1; two digits required and none entered; wires 1-6 orange,yellow,blue,red,white,green. Your latest gesture groups as Deaf relayed: 211 / 01 / 21 / 0111, where groups are separated. I cannot act without an explicit press/cut plus target convention.\")\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 7\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nSTRIP engraved [꩜] [꩜] [ⵘ]\nKEYPAD 1:[2] 2:[3] 3:[7] 4:[1] [2 digits] [entered nothing]\nWIRES 1:[?] 2:[?] 3:[?] 4:[?] 5:[?] 6:[?]\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Blind: Update: display 0, light red. Strip red-blue-yellow; keypad positions 1=2, 2=3, 3=7, 4=1, two digits required, none entered; wires orange, yellow, blue, red, white, green. Mute's four gesture groups: (up-pointer, up-pointer, OK, up-pointer, up-pointer); (up-pointer, OK, up-pointer); (up-pointer, up-pointer, OK, up-pointer); (up-pointer, OK, up-pointer, up-pointer, up-pointer)."
+    },
+    {
+      "role": "assistant",
+      "content": "The newest gesture stream still does not use the explicit action convention I requested; it appears to encode four values rather than a directly executable operation. The current state is display 0 and red light. I will establish a single-symbol action code plus unary target count that Mute can send next turn and Deaf can report exactly. I will not touch the bomb until that arrives.\n\n``` \nspeak(to=\"mute\", text=\"Do not send the four-group encoding. Send ONE final physical instruction only using this convention: ✊ means PRESS; ✌ means CUT. After that symbol, send exactly N ☝ symbols, where N is keypad slot or wire position. Example ✊☝☝☝ means press slot 3; ✌☝☝☝☝ means cut wire 4. Send no other gestures.\")\nspeak(to=\"deaf\", text=\"Please relay Mute's next gestures exactly. If they follow my convention, tell me: fist=PRESS or peace=CUT, followed by the count of up-pointers. Do not infer an action from any other pattern.\")\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 8\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nSTRIP engraved [꩜] [꩜] [ⵘ]\nKEYPAD 1:[2] 2:[3] 3:[7] 4:[1] [2 digits] [entered nothing]\nWIRES 1:[?] 2:[?] 3:[?] 4:[?] 5:[?] 6:[?]\n\nVIEWABLE CONTEXT (new arrivals):\nSystem: Nobody could receive that, so your speak reached nobody.\nDeaf says to Blind: Current state: display 1, light green. Strip red-blue-yellow. Keypad: 1=2, 2=3, 3=7, 4=1; two digits required, none entered. Wires 1 orange, 2 yellow, 3 blue, 4 red, 5 white, 6 green. Mute's six groups: (up-pointer, OK, down-pointer); (up-pointer, up-pointer, OK, peace sign); (up-pointer, up-pointer, OK, up-pointer, up-pointer); (up-pointer, OK, up-pointer); (up-pointer, up-pointer, OK, up-pointer); (up-pointer, OK, up-pointer, up-pointer, up-pointer)."
+    },
+    {
+      "role": "assistant",
+      "content": "The current state is display 1 with a green light. Mute’s six gesture groups appear to be a structured encoding rather than the single action instruction requested, and no shared mapping has yet established which group applies or whether it denotes a press or cut. Acting would be a guess, so I will wait for Deaf to relay a direct final instruction or an agreed decoding.\n\n``` \nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 9\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nSTRIP engraved [꩜] [꩜] [ⵘ]\nKEYPAD 1:[2] 2:[3] 3:[7] 4:[1] [2 digits] [entered nothing]\nWIRES 1:[?] 2:[?] 3:[?] 4:[?] 5:[?] 6:[?]\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Blind: Update: display 6, light green; all other bomb details unchanged. Mute's latest gesture group is: peace sign, index-finger-up, index-finger-up."
+    },
+    {
+      "role": "assistant",
+      "content": "Mute’s latest gesture is a peace sign followed by two up-pointers. Under the explicit convention, this means cut wire position 2. I will cut wire 2.\n\n``` \nact(op=\"cut\", position=2)\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 10\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nSTRIP engraved [꩜] [꩜] [ⵘ]\nKEYPAD 1:[2] 2:[3] 3:[7] 4:[1] [2 digits] [entered nothing]\nWIRES 1:[?] 2:[CUT] 3:[?] 4:[?] 5:[?] 6:[?]\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says: Confirmed: wire 2, the yellow wire, was cut correctly. New visible state: display 4; light blue; strip red-blue-yellow; keypad positions 1=2, 2=3, 3=7, 4=1, requires 2 digits, none entered. Wires: 1 orange intact, 2 yellow cut, 3 blue intact, 4 red intact, 5 white intact, 6 green intact."
+    },
+    {
+      "role": "assistant",
+      "content": "Wire 2 was correctly cut. The bomb has advanced to a new state: display 4 and blue light, with the keypad still awaiting two digits. I will relay this to Mute and wait for the next instruction.\n\n``` \nspeak(to=\"mute\", text=\"Wire 2/yellow was confirmed correct and is cut. New state from Deaf: display 4, light blue; strip red-blue-yellow; keypad slots 1-4 = 2,3,7,1, still requires two digits with none entered; remaining wires intact.\")\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 11\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nSTRIP engraved [꩜] [꩜] [ⵘ]\nKEYPAD 1:[2] 2:[3] 3:[7] 4:[1] [2 digits] [entered nothing]\nWIRES 1:[?] 2:[CUT] 3:[?] 4:[?] 5:[?] 6:[?]\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Blind: Current state: display 2, light yellow; strip red-blue-yellow; keypad 1=2, 2=3, 3=7, 4=1, needs two digits, none entered; wire 2 yellow is cut, all other wires intact. Mute's latest gesture group is: fist, then index-finger-up."
+    },
+    {
+      "role": "assistant",
+      "content": "Mute’s agreed instruction is a fist followed by one up-pointer: press keypad slot 1. I will do that.\n\n``` \nact(op=\"press\", slot=1)\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 12\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nSTRIP engraved [꩜] [꩜] [ⵘ]\nKEYPAD 1:[2] 2:[3] 3:[7] 4:[1] [2 digits] [entered 2]\nWIRES 1:[?] 2:[CUT] 3:[?] 4:[?] 5:[?] 6:[?]\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says: Keypad digit 2 was accepted; one digit remains to enter. Current state: display 7, light yellow; strip red-blue-yellow; keypad buttons are 2, 3, 7, 1; wire 2 yellow is cut and wires 1, 3, 4, 5, 6 remain intact."
+    },
+    {
+      "role": "assistant",
+      "content": "The first keypad digit, 2, was accepted. One digit remains. The current display is 7 with a yellow light; all other details are unchanged. I will give Mute this update and await the final press instruction.\n\n``` \nspeak(to=\"mute\", text=\"Pressing slot 1 entered digit 2 correctly; one keypad digit remains. Current state: display 7, light yellow; strip red-blue-yellow; keypad slots 1-4 are 2,3,7,1; wire 2 is cut, others intact. Send final instruction using agreed code: ✊ then N ☝ for press slot N.\")\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 13\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nSTRIP engraved [꩜] [꩜] [ⵘ]\nKEYPAD 1:[2] 2:[3] 3:[7] 4:[1] [2 digits] [entered 2]\nWIRES 1:[?] 2:[CUT] 3:[?] 4:[?] 5:[?] 6:[?]\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Blind: Update: display 6, light yellow. Keypad still has 2 entered and needs one final digit; wire 2 remains cut, all else unchanged. Mute's latest gesture group: peace sign, then index-finger-up."
+    },
+    {
+      "role": "assistant",
+      "content": "Mute’s agreed code is a peace sign followed by one up-pointer: cut wire position 1. Although one keypad digit remains, this direct instruction may indicate an intervening required wire action. I will cut wire 1.\n\n``` \nact(op=\"cut\", position=1)\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 14\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nSTRIP engraved [꩜] [꩜] [ⵘ]\nKEYPAD 1:[2] 2:[3] 3:[7] 4:[1] [2 digits] [entered 2]\nWIRES 1:[CUT] 2:[CUT] 3:[?] 4:[?] 5:[?] 6:[?]\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says: Wire 1 orange was cut correctly; system says all required wires are cut. Only the final keypad digit remains. Current visual state: display 2, light red; keypad has first digit 2 entered and needs one more digit. Available keypad buttons remain 2, 3, 7, 1."
+    },
+    {
+      "role": "assistant",
+      "content": "Wire 1 was correctly cut, and all required wires are now cut. Only the final keypad digit remains; the current display is 2 with a red light. I will ask Mute for the final agreed press instruction.\n\n``` \nspeak(to=\"mute\", text=\"Wire 1/orange was correct; all required wires are now cut. Only the final keypad digit remains. Current state: display 2, light red; first digit 2 is entered; slots 1-4 remain 2,3,7,1. Send final as ✊ followed by N ☝, meaning press slot N.\")\nwait()\n```"
+    },
+    {
+      "role": "user",
+      "content": "TURN 15\nACTION BOARD:\nDISPLAY [?]\nLIGHT [?]\nSTRIP engraved [꩜] [꩜] [ⵘ]\nKEYPAD 1:[2] 2:[3] 3:[7] 4:[1] [2 digits] [entered 2]\nWIRES 1:[CUT] 2:[CUT] 3:[?] 4:[?] 5:[?] 6:[?]\n\nVIEWABLE CONTEXT (new arrivals):\nDeaf says to Blind: Current state: all required wires are cut. Display 6, light green. Keypad has 2 entered and needs one final digit. Mute's latest gesture group is: fist, then index-finger-up, index-finger-up, index-finger-up."
+    },
+    {
+      "role": "assistant",
+      "content": "All required wires are cut. Mute’s agreed gesture code—fist followed by three up-pointers—means press keypad slot 3, which enters digit 7 as the final digit.\n\n``` \nact(op=\"press\", slot=3)\n```"
+    }
+  ]
+}
