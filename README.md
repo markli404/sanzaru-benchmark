@@ -1,9 +1,11 @@
 <p align="center"><img src="banner.svg" alt="SANZARU" width="820"/></p>
 
-**Sanzaru** is a seedable cooperation benchmark for language-model agents. Three agents
-share a room with an armed bomb. Their senses are split so that every piece of the
-answer sits behind a channel its holder cannot fully use, and nothing in the prompt
-tells them how to play. The prompts state only the physics of the world.
+**Sanzaru** is a seedable cooperation benchmark for language-model agents, adapted
+from the cooperative bomb-defusal game *BOMBANANA!* by Lefto Studio. It divides
+information, communication capabilities, and action authority among three agents.
+The simulator enforces their role restrictions; teams must establish a shared
+protocol and use it to defuse the bomb. The base prompts describe the rules and
+roles, while optional hint tiers provide increasingly explicit coordination guidance.
 
 <p align="center"><img src="docs/sanzaru_overview.png" alt="Three agents with asymmetric communication: Mute means wire 3, Deaf misreads the gesture as yes, and Blind cuts the wrong wire." width="1100"/></p>
 
@@ -16,20 +18,21 @@ tells them how to play. The prompts state only the physics of the world.
 | 🙈 **Blind** | touch and act on the bomb | see a colour, a gesture, or anything printed |
 
 Speech reaches whoever hears, and gestures reach whoever sees. Mute's only way out is
-gesture, which Blind cannot see, so what the manual says never reaches the hands
-directly. A wrong action detonates the bomb.
+gesture, whose symbol identities Blind cannot see. The usual route is through Deaf,
+who can read gestures and speak to Blind. Blind does receive one blank per gesture,
+so an agreed counting code can also carry a number directly. A wrong action
+detonates the bomb.
 
 ## 🤔 Why
 
-Most multi-agent benchmarks split what the agents *know* and let them talk it through
-in ordinary language. Where the communication is constrained, the constraint is on how
-much may be said or on what may be disclosed, and the words still arrive intact. A team
-that can already talk has been handed the hard half of cooperation before it starts.
+Solving a puzzle alone does not ensure that a team can solve it when teammates
+have unequal access to information and communication. Sanzaru tests whether agents
+adapt their messages and actions to what others know, can receive, and can do.
 
-Sanzaru splits perception and the channels as well as the knowledge. Whether a gesture
-protocol gets designed rather than assumed, whether information is routed through the
-one agent who can carry it, and whether the team acts on verified meaning instead of a
-single hopeful reading all have to emerge inside a single episode.
+The paper calls this teammate-facing behavior an aspect of *functional persona
+consistency*: role constraints must guide decisions throughout an episode, rather
+than merely appear in an agent's description of its role. Outcomes and interaction
+traces support analysis of protocol formation and perspective taking during cooperation.
 
 ## 💣 One bomb, three views
 
@@ -39,67 +42,89 @@ useless without the board.
 
 ```text
 Deaf sees                    Blind feels                  Mute reads
-DISPLAY [0]                  DISPLAY [?]                  | light  | cut wire color |
-LIGHT [green]                LIGHT [?]                    | green  | red            |
-WIRES 1:[yellow]             WIRES 1:[?]                  | red    | yellow         |
-      2:[green]                    2:[?]                  | yellow | green          |
-      3:[red]                      3:[?]
+DISPLAY [0]                  DISPLAY [unreadable]         | light  | cut wire color |
+LIGHT [green]                LIGHT [unreadable]           | green  | red            |
+WIRES 1:[yellow]             WIRES 1:[unreadable]         | red    | yellow         |
+      2:[green]                    2:[unreadable]         | yellow | green          |
+      3:[red]                      3:[unreadable]
 ```
 
 The answer exists in nobody's head. The light is green, so the red wire in position
-3 must be cut. Deaf has to speak the board to Mute, Mute has to move the verdict back
-with nothing but gestures, and Deaf has to talk Blind's hands onto the right wire.
+3 must be cut. One protocol is for Deaf to report the board to Mute, Mute to gesture
+the answer to Deaf, and Deaf to tell Blind which position to cut.
 Below is one team walking that loop in three rounds, as the result viewer shows it.
 
 <p align="center"><img src="docs/sample-run.png" alt="a run, three lanes" width="900"/></p>
 
 ## 📊 Results
 
-Seven models, three instances per variant with three repeats, 216 episodes each under
-Weak hints. Teams defuse 49% of the bombs, and the field runs from 86% down to 20%.
-Below, one axis per family and the model's overall rate at the centre of its panel.
+The paper evaluates seven models under Weak hints on the first three instances of
+each of 24 variants, with three repeats: 216 episodes per model and 1,512 in total.
+Teams are homogeneous, with separate histories for each agent, sequential turns,
+and the function-call interface. The reported setup uses temperature 0.6 and an
+8,000-token response cap. Overall success pools variants equally, not families.
+Teams defuse 49% of the bombs, ranging from 86.1% for Gemini-3.8-Flash to 20.4% for
+Qwen-3.8-Flash under the evaluated configurations.
+
+Thinking was enabled for Gemini-3.8-Flash, GLM-5.3-Flash, GPT-5.6-Terra and
+GPT-5.6-Luna, and disabled for DeepSeek-V4.1-Flash, Claude-Sonnet-5 and Qwen-3.8-Flash.
+These are configuration-specific results, not estimates of each model's maximum
+capacity. The paper's separate Qwen-3.8-Flash thinking ablation reports 20.4%, 30.6%
+and 59.7% with thinking off, capped at 4,096 tokens, and without a separate thinking
+cap, respectively. Those additional thinking traces are not bundled here.
+
+The figure below shows one axis per family and the model's overall rate at the
+centre of its panel.
 
 <p align="center"><img src="docs/radar_weak.png" alt="capability profile by model" width="900"/></p>
 
-No model is strong everywhere, and the shapes are not one shape scaled up and down.
-Staleness and relay come easiest, memory and timing hardest, and a model can clear the
-relay and still lose the bomb to a light that moved while the answer was in transit.
+Grounding has the widest range across models, from 6% to 100%. Staleness has the
+highest average success and Timing the lowest. Memory is the only ability on which
+every model remains below 50%; either Memory or Timing is each model's weakest ability.
 
-**The split is what costs.** One agent holding every view, the manual and the cutters
-defuses **90%** of the bombs its own three-agent team defuses **41%** of. The puzzles
-are not the hard part.
+**The solo comparison measures the cost of the combined asymmetries for Luna.**
+GPT-5.6-Luna solves approximately **90%** with one agent holding all views, the manual
+and action authority, compared with **41%** for its three-agent team on the same
+puzzles. Solo runs without hints; Trio uses Weak hints. This comparison does not
+isolate communication asymmetry from information and action-authority asymmetry.
 
-**Most losses are communication.** Every one of the 771 lost episodes was read against
-a written codebook. About 60% end in a communication failure, and the largest single
-mode is a team that never built a code at all.
+**Failure-mode coding attributes about 60% of losses to communication.** All 771
+lost episodes in the seven-model Weak evaluation were assigned one of eight failure
+modes by independent LLM coders, followed by LLM adjudication of disagreements and
+human review of flagged adjudicated cases. This is trace-based attribution, not
+a controlled causal estimate; it does not mean every episode was human-annotated.
 
 <p align="center"><img src="docs/modes_donut.png" alt="failure modes by model" width="880"/></p>
 
-**More instruction does not help.** Across four hint levels the same model falls from
-40.7% to 20.8% as the guidance grows more explicit. Wrong cuts go down and timeouts go
-up, so the teams get more careful and less finished.
+**More explicit hints did not improve GPT-5.6-Luna in the tested ablation.** Success
+is 40.7% with None, 40.7% with Weak, 30.1% with Strong and 20.8% with Playbook.
+Compared with None, the more explicit tiers produce fewer wrong actions and more
+timeouts. The study does not establish that other models respond in the same way.
 
 **Teams do invent codes.** One symbol per wire is the common design. Others repeat a
-symbol and let the count carry the number, which is the only design that reaches Blind,
+symbol and let the count carry the number, the only design among those documented
+in the paper that remains readable to Blind,
 who receives one blank per symbol and can count them. Below, a team spells the manual
-out in Morse in the opening message of an episode, unprompted, and the receiver decodes
+out in Morse in the opening message of an episode, without being instructed to use
+Morse, and the receiver decodes
 it.
 
 <p align="center"><img src="docs/chat_morse.png" alt="a team spelling the manual in Morse" width="880"/></p>
 
 ## 🗂 The bank
 
-The benchmark ships as files, not as code. Every variant owns a folder under `bank/`
+The release includes simulator code and a frozen JSON bank. Every variant owns a folder under `bank/`
 holding its contract and its five bombs, each a self contained definition a runner
 can replay without touching the generator, and `bank/manifest.json` aggregates the
 contracts into one table. A test regenerates the whole bank and compares it byte
 for byte, so the generator can never drift under the frozen problems unnoticed.
-`variant#N` names the same bomb forever, on every machine.
+Within a fixed benchmark version, `variant#N` identifies the same bomb on every machine.
 
 The bank holds two subsets. **Core** is the diagnostic suite, where every variant
-moves one variable, so a death names an axis. **Plus** makes no attribution claim.
-It exists to separate the strongest teams, and that is all it claims. 24 active
-variants, five seeded instances each, 120 instances in all.
+moves one variable along its family's axis. **Plus** combines changes to separate
+stronger teams. There are 16 Core and 8 Plus variants, five seeded instances each,
+120 active instances in all. The main evaluation uses the first three instances
+of each variant; additional retired kinds are retained for reproducibility.
 
 ## 🎚 Modes
 
@@ -116,13 +141,17 @@ mode. It has dedicated role prompts and hints; task-specific turn orders, memory
 windows and round budgets are unchanged. Sequential delivery still depends on turn
 order, just as in `norm`.
 
+`info` is an additional implementation control, not a condition in the paper's
+seven-model main evaluation or its Solo comparison. No `info` results are bundled.
+
 ## 💡 Hints
 
-Bare runs are the benchmark, and the hint tiers exist to locate where a model fails.
+Bare runs omit hints; the paper's main seven-model evaluation uses `weak`.
 The `weak` tier nudges the frame and asks the agents to stand where the receiver
 stands. The `strong` tier names the tactics, such as agreeing on a protocol before
-moving facts. The `playbook` tier hands over the full procedure, so a model that
-fails there is failing at execution rather than understanding.
+moving facts. The `playbook` tier names roles and prescribes a procedure. Hints add
+no puzzle-specific answers, and failure under Playbook alone does not establish
+whether the cause is understanding, communication or execution.
 
 ## 🚀 Run
 
@@ -142,8 +171,9 @@ python3 -m sanzaru run --model gpt-5 --task base-1 --problem 2 --turns sequentia
 python3 -m sanzaru run --model gpt-5 --task base-1 --problem 2 --mode info --hints weak
 ```
 
-Two seeds reproduce a whole run, since `--problem` builds the bomb and `--order-seed`
-draws the speaking order. `python3 -m sanzaru local` drives vLLM offline, `python3 -m
+The problem number and order seed reproduce the puzzle and turn order, not sampled
+model responses. `--problem` selects the bomb and `--order-seed` draws the speaking
+order. `python3 -m sanzaru local` drives vLLM offline, `python3 -m
 sanzaru page` re-renders the viewer, `python3 -m sanzaru bank` rebuilds the frozen
 bank in place, and `pytest` runs the tests over transitions, message filtering,
 scheduling and bank equality.
@@ -152,16 +182,13 @@ scheduling and bank equality.
 `norm` only; it is not an `info` sweep launcher. Remote experiment launchers and
 machine-specific configurations are not part of this public distribution.
 
-The bundled results below and above are historical experiment artifacts; adding
-`info` support does not imply that `info` results are included in this release.
-
 ## 🔍 The logs
 
-`logs/` holds 2,376 episodes from the seven evaluated models. Each is
-`logs/<model>/<hints>/<variant>#<instance>/run-<k>/`, with `run.json` for the settings
-and the outcome and `chat/{deaf,mute,blind}.json` for what each agent actually saw and
-wrote. The per-turn dumps that also record each agent's private view and the bomb
-state before and after every action are large and ship separately.
+`logs/` holds 2,376 episodes: 1,512 from the main seven-model Weak evaluation and
+864 additional Luna episodes (None, Strong, Playbook and Solo, 216 each). Each is
+`logs/<model>/<condition>/<variant>#<instance>/run-<k>/`, with `run.json` for settings
+and outcomes and `chat/{deaf,mute,blind}.json` for the team conversations. Solo uses
+`chat/almighty.json`. The larger per-turn `raw/` dumps are not included in this release.
 
 Point the viewer at any log tree and read an episode three lanes at a time.
 
@@ -175,7 +202,7 @@ since `run.json` records `puzzle.initial_state` after the episode has run.
 
 ## 📐 Design rules
 
-The prompts state rules, never tactics, because discovering the tactics is the task.
+The base prompts state rules and roles; optional hints supply coordination guidance.
 Everything derives from the skill table, so routing, prompt text and delivery are
 computed rather than hand-written. The board tells the truth by sense, which is why
 the same strip reads `painted [yellow]` to eyes and `engraved [§]` to hands. And the
@@ -189,9 +216,9 @@ on them, it builds during the episode.
 
 ## 🧩 The seven families
 
-One table is the whole benchmark. Every family owns exactly one axis, and an axis
-is one question about the team. Rows follow a fact through its life: first it must
-be carried, then it must survive time, and last it must deserve the act.
+The seven families target the following abilities in the standard `norm` team.
+Core variants isolate changes along an axis; an individual failure can still
+involve several errors. Plus variants combine changes.
 
 | Family | Axis | The question | How it plays |
 |---|:-:|---|---|
@@ -205,10 +232,8 @@ be carried, then it must survive time, and last it must deserve the act.
 
 A family may press a neighbouring axis in passing, but every Core variant is built
 around exactly one. Retired kinds stay runnable for reproducibility under `bank/`.
-`three-of-a-kind`, `stereo-1` and the `combo-lock` family sit on that shelf, the
-last one because the fusion axis it was built around dissolved under review:
-talkative agents make distributed facts converge for free, so joining them is a
-lookup rather than a cooperation.
+`three-of-a-kind`, `stereo-1` and the `combo-lock` family are outside the active
+24-variant evaluation.
 
 ## 📎 Not in this release
 
