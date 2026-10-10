@@ -1,5 +1,11 @@
 <p align="center"><img src="banner.svg" alt="SANZARU" width="820"/></p>
 
+<p align="center">
+  <a href="https://yipingli.dev/sanzaru/"><img src="https://img.shields.io/badge/Website-SANZARU-d9b84a?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Website"/></a>
+  <a href="https://yipingli.dev/sanzaru/assets/sanzaru-preprint.pdf"><img src="https://img.shields.io/badge/Paper-PDF-b31b1b?style=for-the-badge&logo=arxiv&logoColor=white" alt="Paper PDF"/></a>
+  <a href="https://github.com/markli404/sanzaru-benchmark#-run"><img src="https://img.shields.io/badge/Code-Get_started-24292f?style=for-the-badge&logo=github&logoColor=white" alt="Code and setup"/></a>
+</p>
+
 **Sanzaru** is a seedable cooperation benchmark for language-model agents, adapted
 from the cooperative bomb-defusal game *BOMBANANA!* by Lefto Studio. It divides
 information, communication capabilities, and action authority among three agents.
