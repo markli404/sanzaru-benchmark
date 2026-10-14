@@ -2,7 +2,7 @@
 
 <p align="center">
   <a href="https://yipingli.dev/sanzaru/"><img src="https://img.shields.io/badge/Website-SANZARU-d9b84a?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Website"/></a>
-  <a href="https://yipingli.dev/sanzaru/assets/sanzaru-preprint.pdf"><img src="https://img.shields.io/badge/Paper-PDF-b31b1b?style=for-the-badge&logo=arxiv&logoColor=white" alt="Paper PDF"/></a>
+  <a href="https://arxiv.org/abs/2610.15163"><img src="https://img.shields.io/badge/arXiv-2610.15163-b31b1b?style=for-the-badge&logo=arxiv&logoColor=white" alt="arXiv paper 2610.15163"/></a>
   <a href="https://github.com/markli404/sanzaru-benchmark#-run"><img src="https://img.shields.io/badge/Code-Get_started-24292f?style=for-the-badge&logo=github&logoColor=white" alt="Code and setup"/></a>
 </p>
 
